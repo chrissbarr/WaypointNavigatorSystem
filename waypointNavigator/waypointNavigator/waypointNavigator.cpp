@@ -2,7 +2,7 @@
  * waypointNavigator.cpp
  *
  * Created: 29/08/2014 09:23:13
- *  Author: Chris Barr
+ *  Author: Group 12
  */ 
 
 
