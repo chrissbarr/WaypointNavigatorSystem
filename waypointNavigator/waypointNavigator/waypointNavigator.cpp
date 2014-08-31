@@ -3,9 +3,27 @@
  *
  * Created: 29/08/2014 09:23:13
  *  Author: Group 12
+ * 
+ * More detailed description from Max and Nur to go here.
  */ 
 
-#define F_CPU  16000000L		//16MHz clock rate
+#define F_CPU  16000000L		//16MHz clock rate, needed for timing functions
+
+
+//defining ports different components will use.
+//I believe inputs use PINx for their name, 
+//whereas outputs use PORTx. I have had this
+//in mind with the following definitions.
+//If I'm wrong, we can change it later easily here.
+
+#define RX_PORT PINA	//port RX is connected to
+#define GPS_PORT PINB	
+#define BARO_PORT PINC	
+#define COMP_PORT PIND	
+#define LCD_PORT PORTE	
+#define KEY_PORT PINF	
+#define FC_PORT PORTG	
+
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -34,7 +52,7 @@ float get_compass_heading();	//returns current heading, formatted as degrees rel
 void init_rx_input();
 
 //-------------RX Input Variables-----------------------//
-#define RX_PORT PINB	//port RX is connected to
+
 
 #define THROTTLE_IN_PIN PB0		//Which RX channels map to which pins in port
 #define AILERON_IN_PIN PB1
