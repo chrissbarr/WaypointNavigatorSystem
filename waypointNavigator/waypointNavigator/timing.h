@@ -1,4 +1,8 @@
-
+//NOTE:
+//At the moment, this code is heavily lifted from the Arduino "Wiring" library.
+//I've removed most of the code unrelated to the timing functionality we need,
+//but there's probably still more tidying up to do here. Currently, everything
+//compiles and it works like it should, so for now I'm leaving it alone.
 #include <avr/io.h>
 
 #define PD0 0
