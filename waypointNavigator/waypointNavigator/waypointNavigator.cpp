@@ -97,6 +97,11 @@ ISR(PCINT0_vect)
 	
 }
 
+//---------------WAYPOINT CORE PROTOTYPES---------------//
+void init_waypoint_core();	//initialises arrays for long and lat, and sets waypoint index to zero
+float waypoint_get_distance(float lat1, float long1, float lat2, float long2);	//returns the straight-line distance between two coordinates
+float waypoint_get_angle(float lat1, float long1, float lat2, float long2);	//return an angle or heading from first pair to second pair of coordinates
+
 int main(void)
 {
 	init_rx_input();
