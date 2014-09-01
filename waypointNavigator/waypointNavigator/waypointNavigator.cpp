@@ -1,10 +1,13 @@
 /*
  * waypointNavigator.cpp
  *
- * Created: 29/08/2014 09:23:13
- *  Author: Group 12
+ * Author: Group 12
+ * Group Members: Christopher Scott Barr - barcs003; Muhaini Harun - harmy045; Noor Fatin Amira Hasri - noofy001; Nur Faeza Zulkafli - zulny008, Stephen John Weatherley - weasj001; Megat Aiman Abu Bakar, axzqy008
  * 
- * More detailed description from Max and Nur to go here.
+ * Group Project: Waypoint Based Vehicle Control
+ *
+ * Project Overview: Designing a GPS guided flying vehicle that could carry a GoPro camera. 
+ *
  */ 
 
 #define F_CPU  16000000L		//16MHz clock rate, needed for timing functions
