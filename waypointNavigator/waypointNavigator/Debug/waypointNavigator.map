@@ -2,6 +2,8 @@ Archive member included because of file (symbol)
 
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
                               c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o (exit)
+c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+                              waypointNavigator.o (__do_copy_data)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_clear_bss.o)
                               waypointNavigator.o (__do_clear_bss)
 
@@ -14,6 +16,8 @@ Discarded input sections
                 0x00000000       0x18 waypointNavigator.o
  .text._Z13init_rx_inputv
                 0x00000000        0x6 waypointNavigator.o
+ .text._Z13USART_receivev
+                0x00000000       0x10 waypointNavigator.o
  .bss.lastIRTime
                 0x00000000        0x4 waypointNavigator.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
@@ -31,6 +35,21 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_clear_bss.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_clear_bss.o)
  .text.libgcc.mul
@@ -165,7 +184,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x2ee
+.text           0x00000000      0x38c
  *(.vectors)
  .vectors       0x00000000       0xe4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vector_default
@@ -204,8 +223,10 @@ END GROUP
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x000000f4       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_clear_bss.o)
-                0x000000f4                __do_clear_bss
+ .init4         0x000000f4       0x1a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+                0x000000f4                __do_copy_data
+ .init4         0x0000010e       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_clear_bss.o)
+                0x0000010e                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -216,86 +237,95 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00000104        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
+ .init9         0x0000011e        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
  *(.init9)
  *(.text)
- .text          0x00000108        0x2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
-                0x00000108                __vector_38
-                0x00000108                __vector_22
-                0x00000108                __vector_28
-                0x00000108                __vector_1
-                0x00000108                __vector_32
-                0x00000108                __vector_34
-                0x00000108                __vector_24
-                0x00000108                __vector_12
-                0x00000108                __vector_55
-                0x00000108                __vector_46
-                0x00000108                __bad_interrupt
-                0x00000108                __vector_6
-                0x00000108                __vector_31
-                0x00000108                __vector_35
-                0x00000108                __vector_39
-                0x00000108                __vector_3
-                0x00000108                __vector_30
-                0x00000108                __vector_45
-                0x00000108                __vector_25
-                0x00000108                __vector_11
-                0x00000108                __vector_54
-                0x00000108                __vector_13
-                0x00000108                __vector_17
-                0x00000108                __vector_19
-                0x00000108                __vector_56
-                0x00000108                __vector_7
-                0x00000108                __vector_49
-                0x00000108                __vector_41
-                0x00000108                __vector_43
-                0x00000108                __vector_27
-                0x00000108                __vector_5
-                0x00000108                __vector_33
-                0x00000108                __vector_47
-                0x00000108                __vector_52
-                0x00000108                __vector_37
-                0x00000108                __vector_4
-                0x00000108                __vector_44
-                0x00000108                __vector_51
-                0x00000108                __vector_2
-                0x00000108                __vector_21
-                0x00000108                __vector_15
-                0x00000108                __vector_36
-                0x00000108                __vector_29
-                0x00000108                __vector_40
-                0x00000108                __vector_8
-                0x00000108                __vector_26
-                0x00000108                __vector_48
-                0x00000108                __vector_14
-                0x00000108                __vector_53
-                0x00000108                __vector_10
-                0x00000108                __vector_50
-                0x00000108                __vector_16
-                0x00000108                __vector_18
-                0x00000108                __vector_20
-                0x00000108                __vector_42
-                0x0000010a                . = ALIGN (0x2)
+ .text          0x00000122        0x2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
+                0x00000122                __vector_38
+                0x00000122                __vector_22
+                0x00000122                __vector_28
+                0x00000122                __vector_1
+                0x00000122                __vector_32
+                0x00000122                __vector_34
+                0x00000122                __vector_24
+                0x00000122                __vector_12
+                0x00000122                __vector_55
+                0x00000122                __vector_46
+                0x00000122                __bad_interrupt
+                0x00000122                __vector_6
+                0x00000122                __vector_31
+                0x00000122                __vector_35
+                0x00000122                __vector_39
+                0x00000122                __vector_3
+                0x00000122                __vector_30
+                0x00000122                __vector_45
+                0x00000122                __vector_25
+                0x00000122                __vector_11
+                0x00000122                __vector_54
+                0x00000122                __vector_13
+                0x00000122                __vector_17
+                0x00000122                __vector_19
+                0x00000122                __vector_56
+                0x00000122                __vector_7
+                0x00000122                __vector_49
+                0x00000122                __vector_41
+                0x00000122                __vector_43
+                0x00000122                __vector_27
+                0x00000122                __vector_5
+                0x00000122                __vector_33
+                0x00000122                __vector_47
+                0x00000122                __vector_52
+                0x00000122                __vector_37
+                0x00000122                __vector_4
+                0x00000122                __vector_44
+                0x00000122                __vector_51
+                0x00000122                __vector_2
+                0x00000122                __vector_21
+                0x00000122                __vector_15
+                0x00000122                __vector_36
+                0x00000122                __vector_29
+                0x00000122                __vector_40
+                0x00000122                __vector_8
+                0x00000122                __vector_26
+                0x00000122                __vector_48
+                0x00000122                __vector_14
+                0x00000122                __vector_53
+                0x00000122                __vector_10
+                0x00000122                __vector_50
+                0x00000122                __vector_16
+                0x00000122                __vector_18
+                0x00000122                __vector_20
+                0x00000122                __vector_42
+                0x00000124                . = ALIGN (0x2)
  *(.text.*)
  .text.__vector_23
-                0x0000010a       0x94 waypointNavigator.o
-                0x0000010a                __vector_23
+                0x00000124       0x94 waypointNavigator.o
+                0x00000124                __vector_23
  .text._Z6microsv
-                0x0000019e       0x4e waypointNavigator.o
-                0x0000019e                _Z6microsv
+                0x000001b8       0x4e waypointNavigator.o
+                0x000001b8                _Z6microsv
  .text._Z10initTimersv
-                0x000001ec       0x76 waypointNavigator.o
-                0x000001ec                _Z10initTimersv
+                0x00000206       0x76 waypointNavigator.o
+                0x00000206                _Z10initTimersv
  .text.__vector_9
-                0x00000262       0x84 waypointNavigator.o
-                0x00000262                __vector_9
- .text.main     0x000002e6        0x4 waypointNavigator.o
-                0x000002e6                main
-                0x000002ea                . = ALIGN (0x2)
+                0x0000027c       0x84 waypointNavigator.o
+                0x0000027c                __vector_9
+ .text._Z10USART_initv
+                0x00000300       0x18 waypointNavigator.o
+                0x00000300                _Z10USART_initv
+ .text._Z10USART_sendh
+                0x00000318       0x10 waypointNavigator.o
+                0x00000318                _Z10USART_sendh
+ .text._Z15USART_putstringPc
+                0x00000328       0x1c waypointNavigator.o
+                0x00000328                _Z15USART_putstringPc
+ .text.main     0x00000344       0x44 waypointNavigator.o
+                0x00000344                main
+                0x00000388                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000002ea        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
-                0x000002ea                _exit
-                0x000002ea                exit
+ .fini9         0x00000388        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+                0x00000388                _exit
+                0x00000388                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -314,57 +344,61 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000002ea        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+ .fini0         0x00000388        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x000002ee                _etext = .
+                0x0000038c                _etext = .
 
-.data           0x00800200        0x0 load address 0x000002ee
+.data           0x00800200        0xe load address 0x0000038c
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
  .data          0x00800200        0x0 waypointNavigator.o
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+ .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_clear_bss.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
+ .rodata.str1.1
+                0x00800200        0xd waypointNavigator.o
  *(.gnu.linkonce.d*)
-                0x00800200                . = ALIGN (0x2)
-                0x00800200                _edata = .
-                0x00800200                PROVIDE (__data_end, .)
+                0x0080020e                . = ALIGN (0x2)
+ *fill*         0x0080020d        0x1 
+                0x0080020e                _edata = .
+                0x0080020e                PROVIDE (__data_end, .)
 
-.bss            0x00800200       0x10
-                0x00800200                PROVIDE (__bss_start, .)
+.bss            0x0080020e       0x10
+                0x0080020e                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.ulThrottleStart
-                0x00800200        0x4 waypointNavigator.o
-                0x00800200                ulThrottleStart
+                0x0080020e        0x4 waypointNavigator.o
+                0x0080020e                ulThrottleStart
  .bss.rxUpdateFlagsShared
-                0x00800204        0x1 waypointNavigator.o
-                0x00800204                rxUpdateFlagsShared
+                0x00800212        0x1 waypointNavigator.o
+                0x00800212                rxUpdateFlagsShared
  .bss.unThrottleInShared
-                0x00800205        0x2 waypointNavigator.o
-                0x00800205                unThrottleInShared
+                0x00800213        0x2 waypointNavigator.o
+                0x00800213                unThrottleInShared
  .bss._ZL12timer0_fract
-                0x00800207        0x1 waypointNavigator.o
+                0x00800215        0x1 waypointNavigator.o
  .bss.timer0_millis
-                0x00800208        0x4 waypointNavigator.o
-                0x00800208                timer0_millis
+                0x00800216        0x4 waypointNavigator.o
+                0x00800216                timer0_millis
  .bss.timer0_overflow_count
-                0x0080020c        0x4 waypointNavigator.o
-                0x0080020c                timer0_overflow_count
+                0x0080021a        0x4 waypointNavigator.o
+                0x0080021a                timer0_overflow_count
  *(COMMON)
-                0x00800210                PROVIDE (__bss_end, .)
-                0x000002ee                __data_load_start = LOADADDR (.data)
-                0x000002ee                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0080021e                PROVIDE (__bss_end, .)
+                0x0000038c                __data_load_start = LOADADDR (.data)
+                0x0000039a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800210        0x0
-                0x00800210                PROVIDE (__noinit_start, .)
+.noinit         0x0080021e        0x0
+                0x0080021e                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800210                PROVIDE (__noinit_end, .)
-                0x00800210                _end = .
-                0x00800210                PROVIDE (__heap_start, .)
+                0x0080021e                PROVIDE (__noinit_end, .)
+                0x0080021e                _end = .
+                0x0080021e                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -423,38 +457,38 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x50
+.debug_aranges  0x00000000       0x70
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x50 waypointNavigator.o
+                0x00000000       0x70 waypointNavigator.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x2a1
+.debug_info     0x00000000      0x427
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x2a1 waypointNavigator.o
+ .debug_info    0x00000000      0x427 waypointNavigator.o
 
-.debug_abbrev   0x00000000      0x13a
+.debug_abbrev   0x00000000      0x23a
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x13a waypointNavigator.o
+ .debug_abbrev  0x00000000      0x23a waypointNavigator.o
 
-.debug_line     0x00000000      0x25e
+.debug_line     0x00000000      0x3a7
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000      0x25e waypointNavigator.o
+ .debug_line    0x00000000      0x3a7 waypointNavigator.o
 
-.debug_frame    0x00000000       0xf4
+.debug_frame    0x00000000      0x150
  *(.debug_frame)
- .debug_frame   0x00000000       0xf4 waypointNavigator.o
+ .debug_frame   0x00000000      0x150 waypointNavigator.o
 
-.debug_str      0x00000000      0x28a
+.debug_str      0x00000000      0x368
  *(.debug_str)
- .debug_str     0x00000000      0x28a waypointNavigator.o
-                                0x2c5 (size before relaxing)
+ .debug_str     0x00000000      0x368 waypointNavigator.o
+                                0x3a8 (size before relaxing)
 
-.debug_loc      0x00000000      0x234
+.debug_loc      0x00000000      0x2fc
  *(.debug_loc)
- .debug_loc     0x00000000      0x234 waypointNavigator.o
+ .debug_loc     0x00000000      0x2fc waypointNavigator.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -474,9 +508,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x40
+.debug_ranges   0x00000000       0x60
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x40 waypointNavigator.o
+ .debug_ranges  0x00000000       0x60 waypointNavigator.o
 
 .debug_macro
  *(.debug_macro)

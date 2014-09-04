@@ -11,6 +11,10 @@
  */ 
 
 #define F_CPU  16000000L		//16MHz clock rate, needed for timing functions
+#define BAUD 9600		//baud rate for serial communications, needed for serial to PC
+#define BAUD_PRESCALLER (((F_CPU / (BAUD * 16UL))) - 1)    //The formula that does all the required maths
+
+
 
 
 //defining ports different components will use.
@@ -32,6 +36,10 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <util/atomic.h>
+#include <util/setbaud.h>
+#include <stdio.h>
+
+//our included files
 
 #include "timing.h"		//mash up of timing stuff borrowed from Arduino source files
 
@@ -97,18 +105,33 @@ ISR(PCINT0_vect)
 	
 }
 
+//USART Functions
+void USART_init(void);
+unsigned char USART_receive(void);
+void USART_send( unsigned char data);
+void USART_putstring(char* StringPtr);
+
+
+
 //---------------WAYPOINT CORE PROTOTYPES---------------//
 void init_waypoint_core();	//initialises arrays for long and lat, and sets waypoint index to zero
 float waypoint_get_distance(float lat1, float long1, float lat2, float long2);	//returns the straight-line distance between two coordinates
 float waypoint_get_angle(float lat1, float long1, float lat2, float long2);	//return an angle or heading from first pair to second pair of coordinates
 
+
 int main(void)
 {
+	char String[]="Test string.";
+
+	USART_init();
+	
+	//Initialise Reading Radio Receiver 
 	init_rx_input();
 
     while(1)
     {
-        //TODO:: Please write your application code 
+		 USART_putstring(String);    //Pass the string to the USART_putstring function and sends it over the serial
+		 _delay_ms(5000);
     }
 }
 
@@ -119,3 +142,35 @@ void init_rx_input()
 		
 	initTimers();
 } 
+
+
+//USART FUNCTIONS
+void USART_init(void){
+
+	UBRR0H = (uint8_t)(BAUD_PRESCALLER>>8);
+	UBRR0L = (uint8_t)(BAUD_PRESCALLER);
+	UCSR0B = (1<<RXEN0)|(1<<TXEN0);
+	UCSR0C = ((1<<UCSZ00)|(1<<UCSZ01));
+}
+
+void USART_send( unsigned char data){
+	
+	while(!(UCSR0A & (1<<UDRE0)));
+	UDR0 = data;
+	
+}
+
+unsigned char USART_receive(void){
+	
+	while(!(UCSR0A & (1<<RXC0)));
+	return UDR0;
+	
+}
+
+void USART_putstring(char* StringPtr){
+	
+	while(*StringPtr != 0x00){    //Here we check if there is still more chars to send, this is done checking the actual char and see if it is different from the null char
+		USART_send(*StringPtr);    //Using the simple send function we send one char at a time
+	StringPtr++;}        //We increment the pointer so we can read the next char
+	
+}
