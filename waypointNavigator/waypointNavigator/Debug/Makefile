@@ -36,6 +36,8 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../timing.cpp \
+../usart.cpp \
 ../waypointNavigator.cpp
 
 
@@ -46,15 +48,23 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+timing.o \
+usart.o \
 waypointNavigator.o
 
 OBJS_AS_ARGS +=  \
+timing.o \
+usart.o \
 waypointNavigator.o
 
 C_DEPS +=  \
+timing.d \
+usart.d \
 waypointNavigator.d
 
 C_DEPS_AS_ARGS +=  \
+timing.d \
+usart.d \
 waypointNavigator.d
 
 OUTPUT_FILE_PATH +=waypointNavigator.elf
@@ -68,6 +78,10 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 
