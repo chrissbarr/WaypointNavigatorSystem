@@ -96,12 +96,12 @@ float waypoint_get_angle(float lat1, float long1, float lat2, float long2);	//re
 
 int main(void)
 {
-	USART_init();
+	USART_init(USART_PC,9600);
 
 
     while(1)
     {
-		USART_putstring("test");    //Pass the string to the USART_putstring function and sends it over the serial
+		USART_putstring(USART_PC,"test");    //Pass the string to the USART_putstring function and sends it over the serial
 		_delay_ms(5000);
     }
 }

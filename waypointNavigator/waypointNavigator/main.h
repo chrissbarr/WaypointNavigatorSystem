@@ -17,3 +17,5 @@
 #define LCD_PORT PORTE
 #define KEY_PORT PINF
 #define FC_PORT PORTG
+
+
