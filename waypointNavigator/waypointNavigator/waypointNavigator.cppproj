@@ -125,7 +125,19 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="debug.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="debug.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rx.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rx.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timing.cpp">

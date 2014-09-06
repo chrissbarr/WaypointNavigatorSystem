@@ -42,7 +42,6 @@ void USART_init(int usartNum, int baudRate)
 	
 }
 
-
 void USART_send(int usartNum, unsigned char data){
 	
 	if(usartNum == 0)

@@ -8,6 +8,9 @@
 
 #define F_CPU  16000000L		//16MHz clock rate, needed for timing functions
 
+//enable or disable debug features
+#define DEBUG_ENABLE true
+
 
 //defining ports different components will use.
 #define RX_PORT PINA	//port RX is connected to
