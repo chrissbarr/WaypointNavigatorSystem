@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include <avr/io.h>
+#include "timing.h"
 
 
 //--------------RX INPUT FUNCTION PROTOTYPES---------------//

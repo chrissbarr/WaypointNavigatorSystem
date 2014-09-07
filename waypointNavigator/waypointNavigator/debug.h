@@ -7,5 +7,7 @@
 
 #include "usart.h"
 #include "main.h"
+#include <stdio.h>
 
 void debug_print(const char* debugString);
+void debug_print(double debugNum);

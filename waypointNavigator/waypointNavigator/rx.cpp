@@ -23,20 +23,19 @@ void rx_init()
 
 
 
-/*
+
 //Pin Change Interrupt for reading Throttle Value//
 ISR(PCINT0_vect)
 {
 	//if pin input is attached to is high
 	if(RX_PORT & _BV(THROTTLE_IN_PIN))
 	{
-		//ulThrottleStart = micros();
+		ulThrottleStart = micros();
 	}
 	else
 	{
-		//unThrottleInShared = (uint16_t)(micros()-ulThrottleStart);
+		unThrottleInShared = (uint16_t)(micros()-ulThrottleStart);
 		rxUpdateFlagsShared |= THROTTLE_FLAG;
 	}
 	
 }
-*/

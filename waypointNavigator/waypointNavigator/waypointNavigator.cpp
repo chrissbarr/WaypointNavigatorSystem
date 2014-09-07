@@ -54,6 +54,7 @@ int main(void)
     while(1)
     {
 		debug_print("Testing debug functionality...");
+		debug_print(millis());
 		_delay_ms(5000);
     }
 }
