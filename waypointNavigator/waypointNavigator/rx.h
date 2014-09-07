@@ -12,6 +12,7 @@
 
 //--------------RX INPUT FUNCTION PROTOTYPES---------------//
 void rx_init();
+void rx_update();
 
 //-------------RX Input Variables-----------------------//
 #define THROTTLE_IN_PIN PB0		//Which RX channels map to which pins in port
