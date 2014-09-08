@@ -2,7 +2,7 @@
  * waypoint.h
  *
  * Created: 8/09/2014 9:00:55 PM
- *  Author: Chris Barr
+ *  Author: Stephen John Weatherley
  */ 
 
 #include <math.h>
