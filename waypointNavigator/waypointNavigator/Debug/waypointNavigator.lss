@@ -11,21 +11,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   3 .comment      0000005c  00000000  00000000  00000b5c  2**0
                   CONTENTS, READONLY
-  4 .debug_aranges 000000e0  00000000  00000000  00000bb8  2**0
+  4 .debug_aranges 00000110  00000000  00000000  00000bb8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000007d8  00000000  00000000  00000c98  2**0
+  5 .debug_info   000008ed  00000000  00000000  00000cc8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000004af  00000000  00000000  00001470  2**0
+  6 .debug_abbrev 00000531  00000000  00000000  000015b5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000784  00000000  00000000  0000191f  2**0
+  7 .debug_line   00000807  00000000  00000000  00001ae6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000001e0  00000000  00000000  000020a4  2**2
+  8 .debug_frame  00000224  00000000  00000000  000022f0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000003f6  00000000  00000000  00002284  2**0
+  9 .debug_str    000004cc  00000000  00000000  00002514  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000555  00000000  00000000  0000267a  2**0
+ 10 .debug_loc    0000060d  00000000  00000000  000029e0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000090  00000000  00000000  00002bcf  2**0
+ 11 .debug_ranges 000000b0  00000000  00000000  00002fed  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -191,12 +191,6 @@ Disassembly of section .text:
  122:	6e cf       	rjmp	.-292    	; 0x0 <__vectors>
 
 00000124 <_Z11debug_printPKc>:
-#include "debug.h"
-
-void debug_print(const char* debugString)
-{
-	if(DEBUG == true)	//only print debug messages if debugging is enabled.
-		USART_putstring(USART_PC,debugString);		//Just in case USART calls add overhead or slow system down too much later on, easy to disable all debug messages.
  124:	bc 01       	movw	r22, r24
  126:	80 e0       	ldi	r24, 0x00	; 0
  128:	90 e0       	ldi	r25, 0x00	; 0
@@ -204,10 +198,6 @@ void debug_print(const char* debugString)
  12c:	08 95       	ret
 
 0000012e <_Z11debug_printd>:
-}
-
-void debug_print(double debugNum)
-{
  12e:	0f 93       	push	r16
  130:	1f 93       	push	r17
  132:	cf 93       	push	r28
@@ -220,10 +210,6 @@ void debug_print(double debugNum)
  140:	de bf       	out	0x3e, r29	; 62
  142:	0f be       	out	0x3f, r0	; 63
  144:	cd bf       	out	0x3d, r28	; 61
-	if(DEBUG == true)	//only print debug messages if debugging is enabled.
-	{
-		char string[10]; 
-		sprintf(string,"%f",debugNum);
  146:	9f 93       	push	r25
  148:	8f 93       	push	r24
  14a:	7f 93       	push	r23
@@ -238,7 +224,6 @@ void debug_print(double debugNum)
  15c:	1f 93       	push	r17
  15e:	0f 93       	push	r16
  160:	de d1       	rcall	.+956    	; 0x51e <sprintf>
-		USART_putstring(USART_PC,string);		
  162:	b8 01       	movw	r22, r16
  164:	80 e0       	ldi	r24, 0x00	; 0
  166:	90 e0       	ldi	r25, 0x00	; 0
@@ -248,7 +233,6 @@ void debug_print(double debugNum)
  16e:	de bf       	out	0x3e, r29	; 62
  170:	0f be       	out	0x3f, r0	; 63
  172:	cd bf       	out	0x3d, r28	; 61
-	}
  174:	2a 96       	adiw	r28, 0x0a	; 10
  176:	0f b6       	in	r0, 0x3f	; 63
  178:	f8 94       	cli
@@ -262,12 +246,6 @@ void debug_print(double debugNum)
  188:	08 95       	ret
 
 0000018a <__vector_9>:
-
-
-
-//Pin Change Interrupt for reading Throttle Value//
-ISR(PCINT0_vect)
-{
  18a:	1f 92       	push	r1
  18c:	0f 92       	push	r0
  18e:	0f b6       	in	r0, 0x3f	; 63
@@ -287,22 +265,14 @@ ISR(PCINT0_vect)
  1aa:	bf 93       	push	r27
  1ac:	ef 93       	push	r30
  1ae:	ff 93       	push	r31
-	//if pin input is attached to is high
-	if(RX_PORT & _BV(THROTTLE_IN_PIN))
  1b0:	00 9b       	sbis	0x00, 0	; 0
  1b2:	0a c0       	rjmp	.+20     	; 0x1c8 <__vector_9+0x3e>
-	{
-		ulThrottleStart = micros();
  1b4:	82 d0       	rcall	.+260    	; 0x2ba <_Z6microsv>
  1b6:	60 93 22 02 	sts	0x0222, r22
  1ba:	70 93 23 02 	sts	0x0223, r23
  1be:	80 93 24 02 	sts	0x0224, r24
  1c2:	90 93 25 02 	sts	0x0225, r25
  1c6:	10 c0       	rjmp	.+32     	; 0x1e8 <__vector_9+0x5e>
-	}
-	else
-	{
-		unThrottleInShared = (uint16_t)(micros()-ulThrottleStart);
  1c8:	78 d0       	rcall	.+240    	; 0x2ba <_Z6microsv>
  1ca:	20 91 22 02 	lds	r18, 0x0222
  1ce:	30 91 23 02 	lds	r19, 0x0223
@@ -310,13 +280,9 @@ ISR(PCINT0_vect)
  1d4:	73 0b       	sbc	r23, r19
  1d6:	70 93 28 02 	sts	0x0228, r23
  1da:	60 93 27 02 	sts	0x0227, r22
-		rxUpdateFlagsShared |= THROTTLE_FLAG;
  1de:	80 91 26 02 	lds	r24, 0x0226
  1e2:	81 60       	ori	r24, 0x01	; 1
  1e4:	80 93 26 02 	sts	0x0226, r24
-	}
-	
-}
  1e8:	ff 91       	pop	r31
  1ea:	ef 91       	pop	r30
  1ec:	bf 91       	pop	r27
@@ -338,12 +304,6 @@ ISR(PCINT0_vect)
  20c:	18 95       	reti
 
 0000020e <__vector_23>:
-
-long lastIRTime = 0;
-
-
-ISR(TIMER0_OVF_vect)
-{
  20e:	1f 92       	push	r1
  210:	0f 92       	push	r0
  212:	0f b6       	in	r0, 0x3f	; 63
@@ -355,52 +315,29 @@ ISR(TIMER0_OVF_vect)
  21e:	9f 93       	push	r25
  220:	af 93       	push	r26
  222:	bf 93       	push	r27
-	// copy these to local variables so they can be stored in registers
-	// (volatile variables must be read from memory on every access)
-	unsigned long m = timer0_millis;
  224:	80 91 2a 02 	lds	r24, 0x022A
  228:	90 91 2b 02 	lds	r25, 0x022B
  22c:	a0 91 2c 02 	lds	r26, 0x022C
  230:	b0 91 2d 02 	lds	r27, 0x022D
-	unsigned char f = timer0_fract;
  234:	30 91 29 02 	lds	r19, 0x0229
-
-	m += MILLIS_INC;
-	f += FRACT_INC;
  238:	23 e0       	ldi	r18, 0x03	; 3
  23a:	23 0f       	add	r18, r19
-	if (f >= FRACT_MAX) {
  23c:	2d 37       	cpi	r18, 0x7D	; 125
  23e:	20 f4       	brcc	.+8      	; 0x248 <__vector_23+0x3a>
-	// copy these to local variables so they can be stored in registers
-	// (volatile variables must be read from memory on every access)
-	unsigned long m = timer0_millis;
-	unsigned char f = timer0_fract;
-
-	m += MILLIS_INC;
  240:	01 96       	adiw	r24, 0x01	; 1
  242:	a1 1d       	adc	r26, r1
  244:	b1 1d       	adc	r27, r1
  246:	05 c0       	rjmp	.+10     	; 0x252 <__vector_23+0x44>
-	f += FRACT_INC;
-	if (f >= FRACT_MAX) {
-		f -= FRACT_MAX;
  248:	26 e8       	ldi	r18, 0x86	; 134
  24a:	23 0f       	add	r18, r19
-		m += 1;
  24c:	02 96       	adiw	r24, 0x02	; 2
  24e:	a1 1d       	adc	r26, r1
  250:	b1 1d       	adc	r27, r1
-	}
-
-	timer0_fract = f;
  252:	20 93 29 02 	sts	0x0229, r18
-	timer0_millis = m;
  256:	80 93 2a 02 	sts	0x022A, r24
  25a:	90 93 2b 02 	sts	0x022B, r25
  25e:	a0 93 2c 02 	sts	0x022C, r26
  262:	b0 93 2d 02 	sts	0x022D, r27
-	timer0_overflow_count++;
  266:	80 91 2e 02 	lds	r24, 0x022E
  26a:	90 91 2f 02 	lds	r25, 0x022F
  26e:	a0 91 30 02 	lds	r26, 0x0230
@@ -412,7 +349,6 @@ ISR(TIMER0_OVF_vect)
  280:	90 93 2f 02 	sts	0x022F, r25
  284:	a0 93 30 02 	sts	0x0230, r26
  288:	b0 93 31 02 	sts	0x0231, r27
-}
  28c:	bf 91       	pop	r27
  28e:	af 91       	pop	r26
  290:	9f 91       	pop	r25
@@ -426,62 +362,28 @@ ISR(TIMER0_OVF_vect)
  2a0:	18 95       	reti
 
 000002a2 <_Z6millisv>:
-
-long  millis()
-{
-	unsigned long m;
-	uint8_t oldSREG = SREG;
  2a2:	2f b7       	in	r18, 0x3f	; 63
-
-	// disable interrupts while we read timer0_millis or we might get an
-	// inconsistent value (e.g. in the middle of a write to timer0_millis)
-	cli();
  2a4:	f8 94       	cli
-	m = timer0_millis;
  2a6:	60 91 2a 02 	lds	r22, 0x022A
  2aa:	70 91 2b 02 	lds	r23, 0x022B
  2ae:	80 91 2c 02 	lds	r24, 0x022C
  2b2:	90 91 2d 02 	lds	r25, 0x022D
-	SREG = oldSREG;
  2b6:	2f bf       	out	0x3f, r18	; 63
-
-	return m;
-}
  2b8:	08 95       	ret
 
 000002ba <_Z6microsv>:
-
-long  micros() {
-
-	unsigned long m;
-	uint8_t oldSREG = SREG, t;
  2ba:	3f b7       	in	r19, 0x3f	; 63
-	
-	cli();
  2bc:	f8 94       	cli
-	m = timer0_overflow_count;
  2be:	80 91 2e 02 	lds	r24, 0x022E
  2c2:	90 91 2f 02 	lds	r25, 0x022F
  2c6:	a0 91 30 02 	lds	r26, 0x0230
  2ca:	b0 91 31 02 	lds	r27, 0x0231
-	t = TCNT0;
  2ce:	26 b5       	in	r18, 0x26	; 38
-  
-#ifdef TIFR0
-	if ((TIFR0 & _BV(TOV0)) && (t < 255))
  2d0:	a8 9b       	sbis	0x15, 0	; 21
  2d2:	02 c0       	rjmp	.+4      	; 0x2d8 <_Z6microsv+0x1e>
  2d4:	2f 3f       	cpi	r18, 0xFF	; 255
  2d6:	a1 f4       	brne	.+40     	; 0x300 <_Z6microsv+0x46>
-#else
-	if ((TIFR & _BV(TOV0)) && (t < 255))
-		m++;
-#endif
-
-	SREG = oldSREG;
  2d8:	3f bf       	out	0x3f, r19	; 63
-	
-	return ((m << 8) + t) * (64 / clockCyclesPerMicrosecond());
  2da:	ba 2f       	mov	r27, r26
  2dc:	a9 2f       	mov	r26, r25
  2de:	98 2f       	mov	r25, r24
@@ -501,24 +403,12 @@ long  micros() {
  2fa:	88 1f       	adc	r24, r24
  2fc:	99 1f       	adc	r25, r25
  2fe:	08 95       	ret
-	m = timer0_overflow_count;
-	t = TCNT0;
-  
-#ifdef TIFR0
-	if ((TIFR0 & _BV(TOV0)) && (t < 255))
-		m++;
  300:	01 96       	adiw	r24, 0x01	; 1
  302:	a1 1d       	adc	r26, r1
  304:	b1 1d       	adc	r27, r1
  306:	e8 cf       	rjmp	.-48     	; 0x2d8 <_Z6microsv+0x1e>
 
 00000308 <_Z10USART_initii>:
-	{
-		while(!(UCSR3A & (1<<RXC3)));
-		return UDR3;
-	}
-	
-}
  308:	cf 93       	push	r28
  30a:	df 93       	push	r29
  30c:	ec 01       	movw	r28, r24
@@ -634,36 +524,21 @@ long  micros() {
  40c:	08 95       	ret
 
 0000040e <_Z15USART_putstringiPKc>:
-
-void USART_putstring(int usartNum, const char* StringPtr){
  40e:	0f 93       	push	r16
  410:	1f 93       	push	r17
  412:	cf 93       	push	r28
  414:	df 93       	push	r29
  416:	8c 01       	movw	r16, r24
  418:	eb 01       	movw	r28, r22
-	
-	while(*StringPtr != 0x00){    //Here we check if there is still more chars to send, this is done checking the actual char and see if it is different from the null char
  41a:	68 81       	ld	r22, Y
  41c:	66 23       	and	r22, r22
  41e:	31 f0       	breq	.+12     	; 0x42c <_Z15USART_putstringiPKc+0x1e>
  420:	21 96       	adiw	r28, 0x01	; 1
-		USART_send(usartNum, *StringPtr);    //Using the simple send function we send one char at a time
  422:	c8 01       	movw	r24, r16
  424:	ca df       	rcall	.-108    	; 0x3ba <_Z10USART_sendih>
-	
-}
-
-void USART_putstring(int usartNum, const char* StringPtr){
-	
-	while(*StringPtr != 0x00){    //Here we check if there is still more chars to send, this is done checking the actual char and see if it is different from the null char
  426:	69 91       	ld	r22, Y+
  428:	61 11       	cpse	r22, r1
  42a:	fb cf       	rjmp	.-10     	; 0x422 <_Z15USART_putstringiPKc+0x14>
-		USART_send(usartNum, *StringPtr);    //Using the simple send function we send one char at a time
-	StringPtr++;}        //We increment the pointer so we can read the next char
-	
-}
  42c:	df 91       	pop	r29
  42e:	cf 91       	pop	r28
  430:	1f 91       	pop	r17
@@ -671,7 +546,7 @@ void USART_putstring(int usartNum, const char* StringPtr){
  434:	08 95       	ret
 
 00000436 <main>:
-float waypoint_get_angle(float lat1, float long1, float lat2, float long2);	//return an angle or heading from first pair to second pair of coordinates
+float compass_get_heading();	//returns current heading, formatted as degrees relative to North (0-360)
 
 
 int main(void)

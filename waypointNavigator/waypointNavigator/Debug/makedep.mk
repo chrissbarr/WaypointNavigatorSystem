@@ -10,5 +10,7 @@ timing.cpp
 
 usart.cpp
 
+waypoint.cpp
+
 waypointNavigator.cpp
 

@@ -40,6 +40,7 @@ C_SRCS +=  \
 ../rx.cpp \
 ../timing.cpp \
 ../usart.cpp \
+../waypoint.cpp \
 ../waypointNavigator.cpp
 
 
@@ -54,6 +55,7 @@ debug.o \
 rx.o \
 timing.o \
 usart.o \
+waypoint.o \
 waypointNavigator.o
 
 OBJS_AS_ARGS +=  \
@@ -61,6 +63,7 @@ debug.o \
 rx.o \
 timing.o \
 usart.o \
+waypoint.o \
 waypointNavigator.o
 
 C_DEPS +=  \
@@ -68,6 +71,7 @@ debug.d \
 rx.d \
 timing.d \
 usart.d \
+waypoint.d \
 waypointNavigator.d
 
 C_DEPS_AS_ARGS +=  \
@@ -75,6 +79,7 @@ debug.d \
 rx.d \
 timing.d \
 usart.d \
+waypoint.d \
 waypointNavigator.d
 
 OUTPUT_FILE_PATH +=waypointNavigator.elf
@@ -88,6 +93,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

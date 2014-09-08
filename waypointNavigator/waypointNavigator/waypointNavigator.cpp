@@ -18,6 +18,7 @@
 #include "usart.h"
 #include "debug.h"
 #include "rx.h"
+#include "waypoint.h"
 
 //other includes
 #include <avr/io.h>
@@ -39,11 +40,6 @@ float baro_get_height();	//calculates height from barometer value
 //-----------COMPASS INPUT FUNCTION PROTOTYPES-------------//
 void compass_init();	//initializes compass module
 float compass_get_heading();	//returns current heading, formatted as degrees relative to North (0-360)
-
-//---------------WAYPOINT CORE PROTOTYPES---------------//
-void waypoint_init_core();	//initializes arrays for long and lat, and sets waypoint index to zero
-float waypoint_get_distance(float lat1, float long1, float lat2, float long2);	//returns the straight-line distance between two coordinates
-float waypoint_get_angle(float lat1, float long1, float lat2, float long2);	//return an angle or heading from first pair to second pair of coordinates
 
 
 int main(void)
