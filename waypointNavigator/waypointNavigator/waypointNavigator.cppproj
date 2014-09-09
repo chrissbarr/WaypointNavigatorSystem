@@ -125,6 +125,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="benchmark.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="benchmark.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="debug.cpp">
       <SubType>compile</SubType>
     </Compile>

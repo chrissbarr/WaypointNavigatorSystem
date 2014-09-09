@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+benchmark.cpp
+
 debug.cpp
 
 rx.cpp

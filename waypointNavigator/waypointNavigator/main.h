@@ -13,8 +13,8 @@
 
 
 //defining ports different components will use.
-#define RX_PORT PINA	//port RX is connected to
-#define GPS_PORT PINB
+#define GPS_PORT PINA
+#define RX_PORT PINB	//port RX is connected to
 #define BARO_PORT PINC
 #define COMP_PORT PIND
 #define LCD_PORT PORTE

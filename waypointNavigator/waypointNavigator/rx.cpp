@@ -20,6 +20,11 @@ volatile uint8_t rxUpdateFlagsShared;
 
 //variables used outside of interrupts (non-volatile)
 uint32_t ulThrottleStart;
+uint32_t ulAileronStart;
+uint32_t ulElevatorStart;
+uint32_t ulRudderStart;
+uint32_t ulGearStart;
+uint32_t ulAuxStart;
 
 //Pin Change Interrupt for reading Throttle Value//
 ISR(PCINT0_vect)
@@ -37,12 +42,68 @@ ISR(PCINT0_vect)
 	
 }
 
+//Pin Change Interrupt for reading Aileron Value//
+ISR(PCINT1_vect)
+{
+	//if pin input is attached to is high
+	if(RX_PORT & _BV(AILERON_IN_PIN))
+	{
+		ulAileronStart = micros();
+	}
+	else
+	{
+		unAileronInShared = (uint16_t)(micros()-ulAileronStart);
+		rxUpdateFlagsShared |= AILERON_FLAG;
+	}
+	
+}
+
+//Pin Change Interrupt for reading Elevator Value//
+ISR(PCINT2_vect)
+{
+	//if pin input is attached to is high
+	if(RX_PORT & _BV(ELEVATOR_IN_PIN))
+	{
+		ulElevatorStart = micros();
+	}
+	else
+	{
+		unElevatorInShared = (uint16_t)(micros()-ulElevatorStart);
+		rxUpdateFlagsShared |= ELEVATOR_FLAG;
+	}
+	
+}
+
+//Pin Change Interrupt for reading Rudder Value//
+ISR(PCINT)
+{
+	//if pin input is attached to is high
+	if(RX_PORT & _BV(RUDDER_IN_PIN))
+	{
+		ulRudderStart = micros();
+	}
+	else
+	{
+		unRudderInShared = (uint16_t)(micros()-ulRudderStart);
+		rxUpdateFlagsShared |= RUDDER_FLAG;
+	}
+	
+}
 
 
 
 void rx_init()
 {
-	//
+	//create variables to be accessed later by other functions
+	uint16_t rxInputThrottle;
+	uint16_t rxInputAileron;
+	uint16_t rxInputElevator;
+	uint16_t rxInputRudder;
+	uint16_t rxInputGear;
+	uint16_t rxInputAux;
+	
+	sei(); //enable interrupts
+	
 }
 
 
@@ -101,5 +162,12 @@ void rx_update()
 		sei();	//all needed data is now in local variables. We can safely re-enable interrupts!
 		
 		rxUpdateFlags = 0;
+		
+		rxInputThrottle = unThrottleIn;
+		rxInputAileron = unAileronIn;
+		rxInputElevator = unElevatorIn;
+		rxInputRudder = unRudderIn;
+		rxInputGear = unGearIn;
+		rxInputAux = unAuxIn;
 	}
 }

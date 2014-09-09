@@ -19,6 +19,7 @@
 #include "debug.h"
 #include "rx.h"
 #include "waypoint.h"
+#include "benchmark.h"
 
 //other includes
 #include <avr/io.h>
@@ -45,12 +46,18 @@ float compass_get_heading();	//returns current heading, formatted as degrees rel
 int main(void)
 {
 	USART_init(USART_PC,9600);
+	
+	debug_print("Testing debug functionality...");
+	debug_print(millis());
 
+	//test how fast distance function is
+	benchmark_waypoint_get_distance();
 
     while(1)
     {
-		debug_print("Testing debug functionality...");
+		debug_print("Looping, time is... ");
 		debug_print(millis());
 		_delay_ms(5000);
     }
 }
+

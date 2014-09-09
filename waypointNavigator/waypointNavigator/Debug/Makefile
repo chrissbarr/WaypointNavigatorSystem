@@ -36,6 +36,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../benchmark.cpp \
 ../debug.cpp \
 ../rx.cpp \
 ../timing.cpp \
@@ -51,6 +52,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+benchmark.o \
 debug.o \
 rx.o \
 timing.o \
@@ -59,6 +61,7 @@ waypoint.o \
 waypointNavigator.o
 
 OBJS_AS_ARGS +=  \
+benchmark.o \
 debug.o \
 rx.o \
 timing.o \
@@ -67,6 +70,7 @@ waypoint.o \
 waypointNavigator.o
 
 C_DEPS +=  \
+benchmark.d \
 debug.d \
 rx.d \
 timing.d \
@@ -75,6 +79,7 @@ waypoint.d \
 waypointNavigator.d
 
 C_DEPS_AS_ARGS +=  \
+benchmark.d \
 debug.d \
 rx.d \
 timing.d \
@@ -93,6 +98,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
