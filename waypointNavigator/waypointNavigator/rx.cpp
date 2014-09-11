@@ -26,6 +26,14 @@ uint32_t ulRudderStart;
 uint32_t ulGearStart;
 uint32_t ulAuxStart;
 
+//create variables to be accessed later by other functions
+uint16_t rxInputThrottle;
+uint16_t rxInputAileron;
+uint16_t rxInputElevator;
+uint16_t rxInputRudder;
+uint16_t rxInputGear;
+uint16_t rxInputAux;
+
 //Pin Change Interrupt for reading Throttle Value//
 ISR(PCINT0_vect)
 {
@@ -75,7 +83,7 @@ ISR(PCINT2_vect)
 }
 
 //Pin Change Interrupt for reading Rudder Value//
-ISR(PCINT)
+/*ISR(PCINT2_vect)
 {
 	//if pin input is attached to is high
 	if(RX_PORT & _BV(RUDDER_IN_PIN))
@@ -88,19 +96,13 @@ ISR(PCINT)
 		rxUpdateFlagsShared |= RUDDER_FLAG;
 	}
 	
-}
+}*/
 
 
 
 void rx_init()
 {
-	//create variables to be accessed later by other functions
-	uint16_t rxInputThrottle;
-	uint16_t rxInputAileron;
-	uint16_t rxInputElevator;
-	uint16_t rxInputRudder;
-	uint16_t rxInputGear;
-	uint16_t rxInputAux;
+	
 	
 	sei(); //enable interrupts
 	

@@ -48,7 +48,7 @@ int main(void)
 	USART_init(USART_PC,9600);
 	
 	debug_print("Testing debug functionality...");
-	debug_print(millis());
+	debug_print(1000);
 
 	//test how fast distance function is
 	benchmark_waypoint_get_distance();
@@ -56,8 +56,8 @@ int main(void)
     while(1)
     {
 		debug_print("Looping, time is... ");
-		debug_print(millis());
-		_delay_ms(5000);
+		debug_print((int)round(millis()/1000));
+		_delay_ms(1000);
     }
 }
 
