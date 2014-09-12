@@ -7,6 +7,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include "gps.h"
 
 //define constants
 #define PI 3.1415926535		//pi

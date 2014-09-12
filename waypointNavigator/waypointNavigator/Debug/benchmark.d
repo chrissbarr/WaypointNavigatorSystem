@@ -7,7 +7,7 @@ benchmark.d benchmark.o: .././benchmark.cpp .././benchmark.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\stdint.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
- .././timing.h \
+ .././gps.h .././timing.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\avr\iom2560.h \
@@ -19,7 +19,9 @@ benchmark.d benchmark.o: .././benchmark.cpp .././benchmark.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\avr\lock.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  .././main.h .././debug.h .././usart.h \
- c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\stdlib.h
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\stdlib.h \
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay.h \
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay_basic.h
 
 .././benchmark.h:
 
@@ -38,6 +40,8 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-g
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h:
+
+.././gps.h:
 
 .././timing.h:
 
@@ -68,3 +72,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-g
 .././usart.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\stdlib.h:
+
+c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay.h:
+
+c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay_basic.h:

@@ -38,6 +38,7 @@ SUBDIRS :=
 C_SRCS +=  \
 ../benchmark.cpp \
 ../debug.cpp \
+../gps.cpp \
 ../rx.cpp \
 ../timing.cpp \
 ../usart.cpp \
@@ -54,6 +55,7 @@ ASM_SRCS +=
 OBJS +=  \
 benchmark.o \
 debug.o \
+gps.o \
 rx.o \
 timing.o \
 usart.o \
@@ -63,6 +65,7 @@ waypointNavigator.o
 OBJS_AS_ARGS +=  \
 benchmark.o \
 debug.o \
+gps.o \
 rx.o \
 timing.o \
 usart.o \
@@ -72,6 +75,7 @@ waypointNavigator.o
 C_DEPS +=  \
 benchmark.d \
 debug.d \
+gps.d \
 rx.d \
 timing.d \
 usart.d \
@@ -81,6 +85,7 @@ waypointNavigator.d
 C_DEPS_AS_ARGS +=  \
 benchmark.d \
 debug.d \
+gps.d \
 rx.d \
 timing.d \
 usart.d \
@@ -98,6 +103,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

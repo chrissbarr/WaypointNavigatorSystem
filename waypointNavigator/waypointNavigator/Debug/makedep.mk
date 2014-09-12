@@ -6,6 +6,8 @@ benchmark.cpp
 
 debug.cpp
 
+gps.cpp
+
 rx.cpp
 
 timing.cpp

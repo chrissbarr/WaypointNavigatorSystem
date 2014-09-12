@@ -11,4 +11,5 @@
 #include <stdlib.h>
 
 void debug_print(const char* debugString);
-void debug_print(int debugNum);
+void debug_printi(int debugNum);
+void debug_printf(float debugNum);

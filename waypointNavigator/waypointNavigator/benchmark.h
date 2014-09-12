@@ -8,5 +8,9 @@
 #include "waypoint.h"
 #include "timing.h"
 #include "debug.h"
+#include <util/delay.h>
 
 void benchmark_waypoint_get_distance();
+void benchmark_gps_conv_coords();
+void benchmark_millis();
+void benchmark_micros();
