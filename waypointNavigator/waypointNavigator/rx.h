@@ -16,6 +16,11 @@ void rx_init();
 void rx_update();
 
 float rx_get_throttle();
+float rx_get_aileron();
+float rx_get_elevator();
+float rx_get_rudder();
+float rx_get_gear();
+float rx_get_aux();
 
 //-------------RX Input Variables-----------------------//
 #define THROTTLE_IN_PIN PB0		//Which RX channels map to which pins in port
