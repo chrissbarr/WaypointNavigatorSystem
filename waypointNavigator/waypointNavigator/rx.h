@@ -8,11 +8,14 @@
 #include "main.h"
 #include <avr/io.h>
 #include "timing.h"
+#include "debug.h"
 
 
 //--------------RX INPUT FUNCTION PROTOTYPES---------------//
 void rx_init();
 void rx_update();
+
+float rx_get_throttle();
 
 //-------------RX Input Variables-----------------------//
 #define THROTTLE_IN_PIN PB0		//Which RX channels map to which pins in port

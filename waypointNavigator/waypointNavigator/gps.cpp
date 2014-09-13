@@ -5,8 +5,15 @@
  *  Author: Chris Barr
  */ 
 
-#import "gps.h"
+#include "gps.h"
 
+bool gps_init()			//initializes GPS system, begins communication
+{
+	//enable GPS module
+	//confirm communication
+	//return true if successful
+	return false;
+}
 
 float gps_conv_coords(float in_coords)
 {

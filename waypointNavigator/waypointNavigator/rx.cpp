@@ -37,8 +37,10 @@ uint16_t rxInputAux;
 //Pin Change Interrupt for reading Throttle Value//
 ISR(PCINT0_vect)
 {
+	//debug_print("interrupt!");
+	
 	//if pin input is attached to is high
-	if(RX_PORT & _BV(THROTTLE_IN_PIN))
+	if(RX_PORT & (1<<THROTTLE_IN_PIN))
 	{
 		ulThrottleStart = micros();
 	}
@@ -51,7 +53,8 @@ ISR(PCINT0_vect)
 }
 
 //Pin Change Interrupt for reading Aileron Value//
-ISR(PCINT1_vect)
+/*
+ISR(PCINT0_vect)
 {
 	//if pin input is attached to is high
 	if(RX_PORT & _BV(AILERON_IN_PIN))
@@ -67,7 +70,7 @@ ISR(PCINT1_vect)
 }
 
 //Pin Change Interrupt for reading Elevator Value//
-ISR(PCINT2_vect)
+ISR(PCINT0_vect)
 {
 	//if pin input is attached to is high
 	if(RX_PORT & _BV(ELEVATOR_IN_PIN))
@@ -80,7 +83,7 @@ ISR(PCINT2_vect)
 		rxUpdateFlagsShared |= ELEVATOR_FLAG;
 	}
 	
-}
+}*/
 
 //Pin Change Interrupt for reading Rudder Value//
 /*ISR(PCINT2_vect)
@@ -102,8 +105,8 @@ ISR(PCINT2_vect)
 
 void rx_init()
 {
-	
-	
+	PCMSK0 |= (1<<PCINT0);	//enable PCINT0
+	PCICR |= (1<<PCIE0);	//enable pin change interrupts 0:7
 	sei(); //enable interrupts
 	
 }
@@ -113,15 +116,15 @@ void rx_init()
 void rx_update()
 {
 		
-	  static uint16_t unThrottleIn;
-	  static uint16_t unAileronIn;
-	  static uint16_t unElevatorIn;
-	  static uint16_t unRudderIn;
-	  static uint16_t unGearIn;
-	  static uint16_t unAuxIn;
+	static uint16_t unThrottleIn;
+	static uint16_t unAileronIn;
+	static uint16_t unElevatorIn;
+	static uint16_t unRudderIn;
+	static uint16_t unGearIn;
+	static uint16_t unAuxIn;
 	  
-	  // local copy of update flags
-	  static uint8_t rxUpdateFlags;
+	// local copy of update flags
+	static uint8_t rxUpdateFlags;
 	  
 	if(rxUpdateFlagsShared)
 	{
@@ -171,5 +174,12 @@ void rx_update()
 		rxInputRudder = unRudderIn;
 		rxInputGear = unGearIn;
 		rxInputAux = unAuxIn;
+		
+		debug_printf(rxInputThrottle);
 	}
+}
+
+float rx_get_throttle()
+{
+	return rxInputThrottle;
 }

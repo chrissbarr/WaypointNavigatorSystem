@@ -45,13 +45,15 @@ int main(void)
 {
 	initialise();
 
-	_delay_ms(1000);
-	benchmark_waypoint_get_distance();
-	_delay_ms(10000);
+	//_delay_ms(1000);
+	//benchmark_waypoint_get_distance();
+	//_delay_ms(10000);
+	debug_print("Starting...");
 
     while(1)
     {
-		//
+		rx_update();
+		//debug_printf(rx_get_throttle());
     }
 }
 
@@ -60,4 +62,5 @@ void initialise()
 	USART_init(USART_PC,9600);
 	initTimers();
 	gps_init();
+	rx_init();
 }

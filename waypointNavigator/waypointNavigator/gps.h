@@ -4,9 +4,11 @@
  * Created: 12/09/2014 9:22:37 AM
  *  Author: Chris Barr
  */ 
+#include "main.h"
+#include <stdlib.h>
 
 //-------------GPS INPUT FUNCTION PROTOTYPES---------------//
-void gps_init();			//initializes GPS system, begins communication
+bool gps_init();			//initializes GPS system, begins communication
 bool gps_locked();			//checks if GPS is locked and data is available
 void gps_update_values();	//gets data from GPS and stores relevant data in variables
 
