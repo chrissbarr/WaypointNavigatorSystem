@@ -47,6 +47,7 @@ ISR(PCINT0_vect)
 	
 	
 	//Now, operate for that pin:
+	
 	if(changedBits & (1 << THROTTLE_IN_PIN))
 	{
 		if(RX_PORT & (1<<THROTTLE_IN_PIN))
@@ -60,62 +61,80 @@ ISR(PCINT0_vect)
 		}
 	}
 	
+	if(changedBits & (1 << AILERON_IN_PIN))
+	{
+		if(RX_PORT & (1<<AILERON_IN_PIN))
+		{
+			ulAileronStart = micros();
+		}
+		else
+		{
+			unAileronInShared = (uint16_t)(micros()-ulAileronStart);
+			rxUpdateFlagsShared |= AILERON_FLAG;
+		}
+	}
+	
+	if(changedBits & (1 << ELEVATOR_IN_PIN))
+	{
+		if(RX_PORT & (1<<ELEVATOR_IN_PIN))
+		{
+			ulElevatorStart = micros();
+		}
+		else
+		{
+			unElevatorInShared = (uint16_t)(micros()-ulElevatorStart);
+			rxUpdateFlagsShared |= ELEVATOR_FLAG;
+		}
+	}
+	
+	if(changedBits & (1 << RUDDER_IN_PIN))
+	{
+		if(RX_PORT & (1<<RUDDER_IN_PIN))
+		{
+			ulRudderStart = micros();
+		}
+		else
+		{
+			unRudderInShared = (uint16_t)(micros()-ulRudderStart);
+			rxUpdateFlagsShared |= RUDDER_FLAG;
+		}
+	}
+	
+	if(changedBits & (1 << GEAR_IN_PIN))
+	{
+		if(RX_PORT & (1<<GEAR_IN_PIN))
+		{
+			ulGearStart = micros();
+		}
+		else
+		{
+			unGearInShared = (uint16_t)(micros()-ulGearStart);
+			rxUpdateFlagsShared |= GEAR_FLAG;
+		}
+	}
+	
+	if(changedBits & (1 << AUX_IN_PIN))
+	{
+		if(RX_PORT & (1<<AUX_IN_PIN))
+		{
+			ulAuxStart = micros();
+		}
+		else
+		{
+			unAuxInShared = (uint16_t)(micros()-ulAuxStart);
+			rxUpdateFlagsShared |= AUX_FLAG;
+		}
+	}
 }
-
-//Pin Change Interrupt for reading Aileron Value//
-/*
-ISR(PCINT0_vect)
-{
-	//if pin input is attached to is high
-	if(RX_PORT & _BV(AILERON_IN_PIN))
-	{
-		ulAileronStart = micros();
-	}
-	else
-	{
-		unAileronInShared = (uint16_t)(micros()-ulAileronStart);
-		rxUpdateFlagsShared |= AILERON_FLAG;
-	}
-	
-}
-
-//Pin Change Interrupt for reading Elevator Value//
-ISR(PCINT0_vect)
-{
-	//if pin input is attached to is high
-	if(RX_PORT & _BV(ELEVATOR_IN_PIN))
-	{
-		ulElevatorStart = micros();
-	}
-	else
-	{
-		unElevatorInShared = (uint16_t)(micros()-ulElevatorStart);
-		rxUpdateFlagsShared |= ELEVATOR_FLAG;
-	}
-	
-}*/
-
-//Pin Change Interrupt for reading Rudder Value//
-/*ISR(PCINT2_vect)
-{
-	//if pin input is attached to is high
-	if(RX_PORT & _BV(RUDDER_IN_PIN))
-	{
-		ulRudderStart = micros();
-	}
-	else
-	{
-		unRudderInShared = (uint16_t)(micros()-ulRudderStart);
-		rxUpdateFlagsShared |= RUDDER_FLAG;
-	}
-	
-}*/
-
-
 
 void rx_init()
 {
 	PCMSK0 |= (1<<PCINT0);	//enable PCINT0
+	PCMSK0 |= (1<<PCINT1);	//enable PCINT1
+	PCMSK0 |= (1<<PCINT2);	//enable PCINT2
+	PCMSK0 |= (1<<PCINT3);	//enable PCINT3
+	PCMSK0 |= (1<<PCINT4);	//enable PCINT4
+	PCMSK0 |= (1<<PCINT5);	//enable PCINT5
 	PCICR |= (1<<PCIE0);	//enable pin change interrupts 0:7
 	sei(); //enable interrupts
 	
@@ -176,20 +195,62 @@ void rx_update()
 		
 		sei();	//all needed data is now in local variables. We can safely re-enable interrupts!
 		
-		rxUpdateFlags = 0;
+		}
 		
-		rxInputThrottle = unThrottleIn;
-		rxInputAileron = unAileronIn;
-		rxInputElevator = unElevatorIn;
-		rxInputRudder = unRudderIn;
-		rxInputGear = unGearIn;
-		rxInputAux = unAuxIn;
+		if(rxUpdateFlags)
+		{
+			rxInputThrottle = unThrottleIn;
+			rxInputAileron = unAileronIn;
+			rxInputElevator = unElevatorIn;
+			rxInputRudder = unRudderIn;
+			rxInputGear = unGearIn;
+			rxInputAux = unAuxIn;
+			
+			debug_printf(rx_get_throttle());
+			debug_print("\t");
+			debug_printf(rx_get_aileron());
+			debug_print("\t");
+			debug_printf(rx_get_elevator());
+			debug_print("\t");
+			debug_printf(rx_get_rudder());
+			debug_print("\t");
+			debug_printf(rx_get_gear());
+			debug_print("\t");
+			debug_printf(rx_get_aux());
+			debug_print("\n\r");
+			
+			rxUpdateFlags = 0;
+		}
 		
-		debug_printf(rxInputThrottle);
-	}
+	
 }
 
 float rx_get_throttle()
 {
 	return rxInputThrottle;
+}
+
+float rx_get_aileron()
+{
+	return rxInputAileron;
+}
+
+float rx_get_elevator()
+{
+	return rxInputElevator;
+}
+
+float rx_get_rudder()
+{
+	return rxInputRudder;
+}
+
+float rx_get_gear()
+{
+	return rxInputGear;
+}
+
+float rx_get_aux()
+{
+	return rxInputAux;
 }

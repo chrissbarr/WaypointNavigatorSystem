@@ -44,16 +44,11 @@ float compass_get_heading();	//returns current heading, formatted as degrees rel
 int main(void)
 {
 	initialise();
-
-	//_delay_ms(1000);
-	//benchmark_waypoint_get_distance();
-	//_delay_ms(10000);
-	debug_print("Starting...");
+	debug_println("Starting...");
 
     while(1)
     {
 		rx_update();
-		//debug_printf(rx_get_throttle());
     }
 }
 

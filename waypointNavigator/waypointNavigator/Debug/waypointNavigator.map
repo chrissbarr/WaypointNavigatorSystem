@@ -110,16 +110,16 @@ Discarded input sections
  .bss           0x00000000        0x0 rx.o
  .text._Z15rx_get_throttlev
                 0x00000000       0x12 rx.o
- .bss.ulAuxStart
-                0x00000000        0x4 rx.o
- .bss.ulGearStart
-                0x00000000        0x4 rx.o
- .bss.ulRudderStart
-                0x00000000        0x4 rx.o
- .bss.ulElevatorStart
-                0x00000000        0x4 rx.o
- .bss.ulAileronStart
-                0x00000000        0x4 rx.o
+ .text._Z14rx_get_aileronv
+                0x00000000       0x12 rx.o
+ .text._Z15rx_get_elevatorv
+                0x00000000       0x12 rx.o
+ .text._Z13rx_get_rudderv
+                0x00000000       0x12 rx.o
+ .text._Z11rx_get_gearv
+                0x00000000       0x12 rx.o
+ .text._Z10rx_get_auxv
+                0x00000000       0x12 rx.o
  .text          0x00000000        0x0 timing.o
  .bss           0x00000000        0x0 timing.o
  .text._Z6millisv
@@ -496,7 +496,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xc0c
+.text           0x00000000      0xde2
  *(.vectors)
  .vectors       0x00000000       0xe4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vector_default
@@ -612,67 +612,70 @@ END GROUP
                 0x0000021e                . = ALIGN (0x2)
  *(.text.*)
  .text._Z11debug_printPKc
-                0x0000021e       0x14 debug.o
+                0x0000021e        0xa debug.o
                 0x0000021e                _Z11debug_printPKc
+ .text._Z13debug_printlnPKc
+                0x00000228       0x14 debug.o
+                0x00000228                _Z13debug_printlnPKc
  .text._Z12debug_printff
-                0x00000232       0x3e debug.o
-                0x00000232                _Z12debug_printff
+                0x0000023c       0x3e debug.o
+                0x0000023c                _Z12debug_printff
  .text._Z8gps_initv
-                0x00000270        0x4 gps.o
-                0x00000270                _Z8gps_initv
+                0x0000027a        0x4 gps.o
+                0x0000027a                _Z8gps_initv
  .text.__vector_9
-                0x00000274       0x96 rx.o
-                0x00000274                __vector_9
+                0x0000027e      0x1c6 rx.o
+                0x0000027e                __vector_9
  .text._Z7rx_initv
-                0x0000030a       0x18 rx.o
-                0x0000030a                _Z7rx_initv
+                0x00000444       0x36 rx.o
+                0x00000444                _Z7rx_initv
  .text._Z9rx_updatev
-                0x00000322      0x100 rx.o
-                0x00000322                _Z9rx_updatev
+                0x0000047a      0x17e rx.o
+                0x0000047a                _Z9rx_updatev
  .text.__vector_23
-                0x00000422       0x94 timing.o
-                0x00000422                __vector_23
+                0x000005f8       0x94 timing.o
+                0x000005f8                __vector_23
  .text._Z6microsv
-                0x000004b6       0x50 timing.o
-                0x000004b6                _Z6microsv
+                0x0000068c       0x50 timing.o
+                0x0000068c                _Z6microsv
  .text._Z10initTimersv
-                0x00000506        0xe timing.o
-                0x00000506                _Z10initTimersv
+                0x000006dc        0xe timing.o
+                0x000006dc                _Z10initTimersv
  .text._Z10USART_initii
-                0x00000514       0xb2 usart.o
-                0x00000514                _Z10USART_initii
+                0x000006ea       0xb2 usart.o
+                0x000006ea                _Z10USART_initii
  .text._Z10USART_sendih
-                0x000005c6       0x54 usart.o
-                0x000005c6                _Z10USART_sendih
+                0x0000079c       0x54 usart.o
+                0x0000079c                _Z10USART_sendih
  .text._Z15USART_putstringiPKc
-                0x0000061a       0x28 usart.o
-                0x0000061a                _Z15USART_putstringiPKc
+                0x000007f0       0x28 usart.o
+                0x000007f0                _Z15USART_putstringiPKc
  .text._Z10initialisev
-                0x00000642       0x12 waypointNavigator.o
-                0x00000642                _Z10initialisev
- .text.main     0x00000654        0xc waypointNavigator.o
-                0x00000654                main
+                0x00000818       0x12 waypointNavigator.o
+                0x00000818                _Z10initialisev
+ .text.main     0x0000082a        0xc waypointNavigator.o
+                0x0000082a                main
  .text.avr-libc.fplib
-                0x00000660       0x7a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(floatsisf.o)
-                0x00000660                __floatunsisf
-                0x00000664                __floatsisf
+                0x00000836       0x7a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(floatsisf.o)
+                0x00000836                __floatunsisf
+                0x0000083a                __floatsisf
  .text.libgcc.div
-                0x000006da       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_udivmodsi4.o)
-                0x000006da                __udivmodsi4
+                0x000008b0       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_udivmodsi4.o)
+                0x000008b0                __udivmodsi4
  .text.avr-libc
-                0x0000071e       0x40 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtostrf.o)
-                0x0000071e                dtostrf
+                0x000008f4       0x40 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtostrf.o)
+                0x000008f4                dtostrf
  .text.avr-libc
-                0x0000075e      0x2fa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtoa_prf.o)
-                0x0000075e                dtoa_prf
+                0x00000934      0x2fa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtoa_prf.o)
+                0x00000934                dtoa_prf
  .text.avr-libc
-                0x00000a58      0x1b0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
-                0x00000a58                __ftoa_engine
-                0x00000c08                . = ALIGN (0x2)
+                0x00000c2e      0x1b0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
+                0x00000c2e                __ftoa_engine
+                0x00000dde                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000c08        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
-                0x00000c08                _exit
-                0x00000c08                exit
+ .fini9         0x00000dde        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+                0x00000dde                _exit
+                0x00000dde                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -691,11 +694,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000c08        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+ .fini0         0x00000dde        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000c0c                _etext = .
+                0x00000de2                _etext = .
 
-.data           0x00800200       0x10 load address 0x00000c0c
+.data           0x00800200       0x12 load address 0x00000de2
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
@@ -754,95 +757,113 @@ END GROUP
  .rodata.str1.1
                 0x00800200        0x3 debug.o
  .rodata.str1.1
-                0x00800203        0xc waypointNavigator.o
+                0x00800203        0x2 rx.o
+                                  0x5 (size before relaxing)
+ .rodata.str1.1
+                0x00800205        0xc waypointNavigator.o
  *(.gnu.linkonce.d*)
-                0x00800210                . = ALIGN (0x2)
- *fill*         0x0080020f        0x1 
-                0x00800210                _edata = .
-                0x00800210                PROVIDE (__data_end, .)
+                0x00800212                . = ALIGN (0x2)
+ *fill*         0x00800211        0x1 
+                0x00800212                _edata = .
+                0x00800212                PROVIDE (__data_end, .)
 
-.bss            0x00800210       0x34
-                0x00800210                PROVIDE (__bss_start, .)
+.bss            0x00800212       0x48
+                0x00800212                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss._ZZ9rx_updatevE7unAuxIn
-                0x00800210        0x2 rx.o
- .bss._ZZ9rx_updatevE8unGearIn
                 0x00800212        0x2 rx.o
- .bss._ZZ9rx_updatevE10unRudderIn
+ .bss._ZZ9rx_updatevE8unGearIn
                 0x00800214        0x2 rx.o
- .bss._ZZ9rx_updatevE12unElevatorIn
+ .bss._ZZ9rx_updatevE10unRudderIn
                 0x00800216        0x2 rx.o
- .bss._ZZ9rx_updatevE11unAileronIn
+ .bss._ZZ9rx_updatevE12unElevatorIn
                 0x00800218        0x2 rx.o
- .bss._ZZ9rx_updatevE12unThrottleIn
+ .bss._ZZ9rx_updatevE11unAileronIn
                 0x0080021a        0x2 rx.o
+ .bss._ZZ9rx_updatevE12unThrottleIn
+                0x0080021c        0x2 rx.o
  .bss._ZZ9rx_updatevE13rxUpdateFlags
-                0x0080021c        0x1 rx.o
+                0x0080021e        0x1 rx.o
  .bss.portHistory
-                0x0080021d        0x1 rx.o
-                0x0080021d                portHistory
+                0x0080021f        0x1 rx.o
+                0x0080021f                portHistory
  .bss.rxInputAux
-                0x0080021e        0x2 rx.o
-                0x0080021e                rxInputAux
- .bss.rxInputGear
                 0x00800220        0x2 rx.o
-                0x00800220                rxInputGear
- .bss.rxInputRudder
+                0x00800220                rxInputAux
+ .bss.rxInputGear
                 0x00800222        0x2 rx.o
-                0x00800222                rxInputRudder
- .bss.rxInputElevator
+                0x00800222                rxInputGear
+ .bss.rxInputRudder
                 0x00800224        0x2 rx.o
-                0x00800224                rxInputElevator
- .bss.rxInputAileron
+                0x00800224                rxInputRudder
+ .bss.rxInputElevator
                 0x00800226        0x2 rx.o
-                0x00800226                rxInputAileron
- .bss.rxInputThrottle
+                0x00800226                rxInputElevator
+ .bss.rxInputAileron
                 0x00800228        0x2 rx.o
-                0x00800228                rxInputThrottle
+                0x00800228                rxInputAileron
+ .bss.rxInputThrottle
+                0x0080022a        0x2 rx.o
+                0x0080022a                rxInputThrottle
+ .bss.ulAuxStart
+                0x0080022c        0x4 rx.o
+                0x0080022c                ulAuxStart
+ .bss.ulGearStart
+                0x00800230        0x4 rx.o
+                0x00800230                ulGearStart
+ .bss.ulRudderStart
+                0x00800234        0x4 rx.o
+                0x00800234                ulRudderStart
+ .bss.ulElevatorStart
+                0x00800238        0x4 rx.o
+                0x00800238                ulElevatorStart
+ .bss.ulAileronStart
+                0x0080023c        0x4 rx.o
+                0x0080023c                ulAileronStart
  .bss.ulThrottleStart
-                0x0080022a        0x4 rx.o
-                0x0080022a                ulThrottleStart
+                0x00800240        0x4 rx.o
+                0x00800240                ulThrottleStart
  .bss.rxUpdateFlagsShared
-                0x0080022e        0x1 rx.o
-                0x0080022e                rxUpdateFlagsShared
+                0x00800244        0x1 rx.o
+                0x00800244                rxUpdateFlagsShared
  .bss.unAuxInShared
-                0x0080022f        0x2 rx.o
-                0x0080022f                unAuxInShared
+                0x00800245        0x2 rx.o
+                0x00800245                unAuxInShared
  .bss.unGearInShared
-                0x00800231        0x2 rx.o
-                0x00800231                unGearInShared
+                0x00800247        0x2 rx.o
+                0x00800247                unGearInShared
  .bss.unRudderInShared
-                0x00800233        0x2 rx.o
-                0x00800233                unRudderInShared
+                0x00800249        0x2 rx.o
+                0x00800249                unRudderInShared
  .bss.unElevatorInShared
-                0x00800235        0x2 rx.o
-                0x00800235                unElevatorInShared
+                0x0080024b        0x2 rx.o
+                0x0080024b                unElevatorInShared
  .bss.unAileronInShared
-                0x00800237        0x2 rx.o
-                0x00800237                unAileronInShared
+                0x0080024d        0x2 rx.o
+                0x0080024d                unAileronInShared
  .bss.unThrottleInShared
-                0x00800239        0x2 rx.o
-                0x00800239                unThrottleInShared
+                0x0080024f        0x2 rx.o
+                0x0080024f                unThrottleInShared
  .bss._ZL12timer0_fract
-                0x0080023b        0x1 timing.o
+                0x00800251        0x1 timing.o
  .bss.timer0_millis
-                0x0080023c        0x4 timing.o
-                0x0080023c                timer0_millis
+                0x00800252        0x4 timing.o
+                0x00800252                timer0_millis
  .bss.timer0_overflow_count
-                0x00800240        0x4 timing.o
-                0x00800240                timer0_overflow_count
+                0x00800256        0x4 timing.o
+                0x00800256                timer0_overflow_count
  *(COMMON)
-                0x00800244                PROVIDE (__bss_end, .)
-                0x00000c0c                __data_load_start = LOADADDR (.data)
-                0x00000c1c                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0080025a                PROVIDE (__bss_end, .)
+                0x00000de2                __data_load_start = LOADADDR (.data)
+                0x00000df4                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800244        0x0
-                0x00800244                PROVIDE (__noinit_start, .)
+.noinit         0x0080025a        0x0
+                0x0080025a                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800244                PROVIDE (__noinit_end, .)
-                0x00800244                _end = .
-                0x00800244                PROVIDE (__heap_start, .)
+                0x0080025a                PROVIDE (__noinit_end, .)
+                0x0080025a                _end = .
+                0x0080025a                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -910,100 +931,100 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x1a8
+.debug_aranges  0x00000000      0x1d8
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x38 benchmark.o
  .debug_aranges
-                0x00000038       0x30 debug.o
+                0x00000038       0x38 debug.o
  .debug_aranges
-                0x00000068       0x28 gps.o
+                0x00000070       0x28 gps.o
  .debug_aranges
-                0x00000090       0x38 rx.o
+                0x00000098       0x60 rx.o
  .debug_aranges
-                0x000000c8       0x38 timing.o
+                0x000000f8       0x38 timing.o
  .debug_aranges
-                0x00000100       0x38 usart.o
+                0x00000130       0x38 usart.o
  .debug_aranges
-                0x00000138       0x48 waypoint.o
+                0x00000168       0x48 waypoint.o
  .debug_aranges
-                0x00000180       0x28 waypointNavigator.o
+                0x000001b0       0x28 waypointNavigator.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x173c
+.debug_info     0x00000000     0x19e9
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x693 benchmark.o
- .debug_info    0x00000693      0x341 debug.o
- .debug_info    0x000009d4       0xdb gps.o
- .debug_info    0x00000aaf      0x34a rx.o
- .debug_info    0x00000df9      0x1b0 timing.o
- .debug_info    0x00000fa9      0x193 usart.o
- .debug_info    0x0000113c      0x471 waypoint.o
- .debug_info    0x000015ad      0x18f waypointNavigator.o
+ .debug_info    0x00000693      0x38e debug.o
+ .debug_info    0x00000a21       0xdb gps.o
+ .debug_info    0x00000afc      0x5aa rx.o
+ .debug_info    0x000010a6      0x1b0 timing.o
+ .debug_info    0x00001256      0x193 usart.o
+ .debug_info    0x000013e9      0x471 waypoint.o
+ .debug_info    0x0000185a      0x18f waypointNavigator.o
 
-.debug_abbrev   0x00000000      0x934
+.debug_abbrev   0x00000000      0x982
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x1c9 benchmark.o
  .debug_abbrev  0x000001c9      0x17e debug.o
  .debug_abbrev  0x00000347       0x98 gps.o
- .debug_abbrev  0x000003df      0x117 rx.o
- .debug_abbrev  0x000004f6       0xd5 timing.o
- .debug_abbrev  0x000005cb       0xe9 usart.o
- .debug_abbrev  0x000006b4      0x1aa waypoint.o
- .debug_abbrev  0x0000085e       0xd6 waypointNavigator.o
+ .debug_abbrev  0x000003df      0x165 rx.o
+ .debug_abbrev  0x00000544       0xd5 timing.o
+ .debug_abbrev  0x00000619       0xe9 usart.o
+ .debug_abbrev  0x00000702      0x1aa waypoint.o
+ .debug_abbrev  0x000008ac       0xd6 waypointNavigator.o
 
-.debug_line     0x00000000      0xcbf
+.debug_line     0x00000000      0xe60
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x31e benchmark.o
- .debug_line    0x0000031e      0x10e debug.o
- .debug_line    0x0000042c       0x6e gps.o
- .debug_line    0x0000049a      0x206 rx.o
- .debug_line    0x000006a0      0x199 timing.o
- .debug_line    0x00000839      0x263 usart.o
- .debug_line    0x00000a9c      0x16a waypoint.o
- .debug_line    0x00000c06       0xb9 waypointNavigator.o
+ .debug_line    0x0000031e      0x124 debug.o
+ .debug_line    0x00000442       0x6e gps.o
+ .debug_line    0x000004b0      0x391 rx.o
+ .debug_line    0x00000841      0x199 timing.o
+ .debug_line    0x000009da      0x263 usart.o
+ .debug_line    0x00000c3d      0x16a waypoint.o
+ .debug_line    0x00000da7       0xb9 waypointNavigator.o
 
-.debug_frame    0x00000000      0x4b8
+.debug_frame    0x00000000      0x51c
  *(.debug_frame)
  .debug_frame   0x00000000      0x144 benchmark.o
- .debug_frame   0x00000144       0x70 debug.o
- .debug_frame   0x000001b4       0x68 gps.o
- .debug_frame   0x0000021c       0x9c rx.o
- .debug_frame   0x000002b8       0x7c timing.o
- .debug_frame   0x00000334       0x74 usart.o
- .debug_frame   0x000003a8       0xdc waypoint.o
- .debug_frame   0x00000484       0x34 waypointNavigator.o
+ .debug_frame   0x00000144       0x80 debug.o
+ .debug_frame   0x000001c4       0x68 gps.o
+ .debug_frame   0x0000022c       0xf0 rx.o
+ .debug_frame   0x0000031c       0x7c timing.o
+ .debug_frame   0x00000398       0x74 usart.o
+ .debug_frame   0x0000040c       0xdc waypoint.o
+ .debug_frame   0x000004e8       0x34 waypointNavigator.o
 
-.debug_str      0x00000000      0x982
+.debug_str      0x00000000      0xa46
  *(.debug_str)
  .debug_str     0x00000000      0x3d7 benchmark.o
                                 0x444 (size before relaxing)
- .debug_str     0x000003d7       0xf6 debug.o
-                                0x286 (size before relaxing)
- .debug_str     0x000004cd       0x5e gps.o
+ .debug_str     0x000003d7       0xb9 debug.o
+                                0x29a (size before relaxing)
+ .debug_str     0x00000490       0x5e gps.o
                                 0x1b4 (size before relaxing)
- .debug_str     0x0000052b      0x203 rx.o
-                                0x3c4 (size before relaxing)
- .debug_str     0x0000072e       0x7b timing.o
+ .debug_str     0x000004ee      0x2a4 rx.o
+                                0x484 (size before relaxing)
+ .debug_str     0x00000792       0xdb timing.o
                                 0x232 (size before relaxing)
- .debug_str     0x000007a9       0x97 usart.o
+ .debug_str     0x0000086d       0x97 usart.o
                                 0x257 (size before relaxing)
- .debug_str     0x00000840      0x107 waypoint.o
+ .debug_str     0x00000904      0x107 waypoint.o
                                 0x2d1 (size before relaxing)
- .debug_str     0x00000947       0x3b waypointNavigator.o
-                                0x259 (size before relaxing)
+ .debug_str     0x00000a0b       0x3b waypointNavigator.o
+                                0x25d (size before relaxing)
 
-.debug_loc      0x00000000     0x11ba
+.debug_loc      0x00000000     0x11e2
  *(.debug_loc)
  .debug_loc     0x00000000      0x541 benchmark.o
- .debug_loc     0x00000541      0x158 debug.o
- .debug_loc     0x00000699      0x1d5 gps.o
- .debug_loc     0x0000086e       0xf9 rx.o
- .debug_loc     0x00000967      0x169 timing.o
- .debug_loc     0x00000ad0      0x25c usart.o
- .debug_loc     0x00000d2c      0x48e waypoint.o
+ .debug_loc     0x00000541      0x18e debug.o
+ .debug_loc     0x000006cf      0x1d5 gps.o
+ .debug_loc     0x000008a4       0xeb rx.o
+ .debug_loc     0x0000098f      0x169 timing.o
+ .debug_loc     0x00000af8      0x25c usart.o
+ .debug_loc     0x00000d54      0x48e waypoint.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1023,16 +1044,16 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x128
+.debug_ranges   0x00000000      0x158
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x28 benchmark.o
- .debug_ranges  0x00000028       0x20 debug.o
- .debug_ranges  0x00000048       0x18 gps.o
- .debug_ranges  0x00000060       0x28 rx.o
- .debug_ranges  0x00000088       0x28 timing.o
- .debug_ranges  0x000000b0       0x28 usart.o
- .debug_ranges  0x000000d8       0x38 waypoint.o
- .debug_ranges  0x00000110       0x18 waypointNavigator.o
+ .debug_ranges  0x00000028       0x28 debug.o
+ .debug_ranges  0x00000050       0x18 gps.o
+ .debug_ranges  0x00000068       0x50 rx.o
+ .debug_ranges  0x000000b8       0x28 timing.o
+ .debug_ranges  0x000000e0       0x28 usart.o
+ .debug_ranges  0x00000108       0x38 waypoint.o
+ .debug_ranges  0x00000140       0x18 waypointNavigator.o
 
 .debug_macro
  *(.debug_macro)
