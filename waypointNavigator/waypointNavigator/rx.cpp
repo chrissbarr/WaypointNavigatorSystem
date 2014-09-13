@@ -34,20 +34,30 @@ uint16_t rxInputRudder;
 uint16_t rxInputGear;
 uint16_t rxInputAux;
 
+volatile uint8_t portHistory = 0x00;     // default is low
+
 //Pin Change Interrupt for reading Throttle Value//
 ISR(PCINT0_vect)
 {
-	//debug_print("interrupt!");
+	uint8_t changedBits;
 	
-	//if pin input is attached to is high
-	if(RX_PORT & (1<<THROTTLE_IN_PIN))
+	//determine which pin on RX_PORT changed:
+	changedBits = RX_PORT ^ portHistory;
+	portHistory = RX_PORT;
+	
+	
+	//Now, operate for that pin:
+	if(changedBits & (1 << THROTTLE_IN_PIN))
 	{
-		ulThrottleStart = micros();
-	}
-	else
-	{
-		unThrottleInShared = (uint16_t)(micros()-ulThrottleStart);
-		rxUpdateFlagsShared |= THROTTLE_FLAG;
+		if(RX_PORT & (1<<THROTTLE_IN_PIN))
+		{
+			ulThrottleStart = micros();
+		}
+		else
+		{
+			unThrottleInShared = (uint16_t)(micros()-ulThrottleStart);
+			rxUpdateFlagsShared |= THROTTLE_FLAG;
+		}
 	}
 	
 }
