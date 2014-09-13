@@ -229,7 +229,7 @@ void rx_update()
 	
 }
 
-float rx_get_throttle()
+int rx_get_throttle()
 {
 	return rxInputThrottle;
 }

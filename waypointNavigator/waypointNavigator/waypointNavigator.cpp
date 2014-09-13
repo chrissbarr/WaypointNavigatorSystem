@@ -21,6 +21,7 @@
 #include "waypoint.h"
 #include "benchmark.h"
 #include "gps.h"
+#include "quad_output.h"
 
 //other includes
 #include <avr/io.h>
@@ -45,10 +46,12 @@ int main(void)
 {
 	initialise();
 	debug_println("Starting...");
-
+	quad_output_init();
     while(1)
     {
 		rx_update();
+		quad_output_passthrough(true,true,true,true,true,true);
+		//OCR4A = rx_get_throttle(); //leave servo at min rotation
     }
 }
 

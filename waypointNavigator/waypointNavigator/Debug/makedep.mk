@@ -8,6 +8,8 @@ debug.cpp
 
 gps.cpp
 
+quad_output.cpp
+
 rx.cpp
 
 timing.cpp

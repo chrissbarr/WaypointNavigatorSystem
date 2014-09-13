@@ -18,8 +18,8 @@
 #define RX_PORT PINB	//port RX is connected to, PORTB has Pin Change interrupts
 #define BARO_PORT PINC  //barometer communicates via I2C.
 #define COMP_PORT PIND  //computer connects via USART0 for debugging.
-#define LCD_PORT PORTE
+#define LCD_PORT PORTG
 #define KEY_PORT PINF
-#define FC_PORT PORTG //requires PWM outputs
+#define FC_PORT PORTH //requires PWM outputs
 
 

@@ -146,6 +146,12 @@
     <Compile Include="main.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="quad_output.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="quad_output.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="rx.cpp">
       <SubType>compile</SubType>
     </Compile>

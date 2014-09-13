@@ -31,6 +31,7 @@ float percentage_travelled(float lat1, float long1, float lat2, float long2, flo
 	float distance_total = waypoint_get_distance(lat1,long1,lat3,long3);
 	
 	float percent = distance_travelled/distance_total;
+	return percent;
 }
 
 

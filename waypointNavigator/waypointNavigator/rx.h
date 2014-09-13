@@ -10,13 +10,13 @@
 #include "timing.h"
 #include "debug.h"
 
-#define RX_VERBOSE_OUTPUT false
+#define RX_VERBOSE_OUTPUT true
 
 //--------------RX INPUT FUNCTION PROTOTYPES---------------//
 void rx_init();
 void rx_update();
 
-float rx_get_throttle();
+int rx_get_throttle();
 float rx_get_aileron();
 float rx_get_elevator();
 float rx_get_rudder();

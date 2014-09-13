@@ -39,6 +39,7 @@ C_SRCS +=  \
 ../benchmark.cpp \
 ../debug.cpp \
 ../gps.cpp \
+../quad_output.cpp \
 ../rx.cpp \
 ../timing.cpp \
 ../usart.cpp \
@@ -56,6 +57,7 @@ OBJS +=  \
 benchmark.o \
 debug.o \
 gps.o \
+quad_output.o \
 rx.o \
 timing.o \
 usart.o \
@@ -66,6 +68,7 @@ OBJS_AS_ARGS +=  \
 benchmark.o \
 debug.o \
 gps.o \
+quad_output.o \
 rx.o \
 timing.o \
 usart.o \
@@ -76,6 +79,7 @@ C_DEPS +=  \
 benchmark.d \
 debug.d \
 gps.d \
+quad_output.d \
 rx.d \
 timing.d \
 usart.d \
@@ -86,6 +90,7 @@ C_DEPS_AS_ARGS +=  \
 benchmark.d \
 debug.d \
 gps.d \
+quad_output.d \
 rx.d \
 timing.d \
 usart.d \
@@ -103,6 +108,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
