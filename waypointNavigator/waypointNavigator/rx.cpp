@@ -36,7 +36,7 @@ uint16_t rxInputAux;
 
 volatile uint8_t portHistory = 0x00;     // default is low
 
-//Pin Change Interrupt for reading Throttle Value//
+//Pin Change Interrupt for reading Channel Values
 ISR(PCINT0_vect)
 {
 	uint8_t changedBits;
@@ -48,16 +48,16 @@ ISR(PCINT0_vect)
 	
 	//Now, operate for that pin:
 	
-	if(changedBits & (1 << THROTTLE_IN_PIN))
+	if(changedBits & (1 << THROTTLE_IN_PIN))	//if the pin assigned to throttle has changed (high->low or low->high)
 	{
-		if(RX_PORT & (1<<THROTTLE_IN_PIN))
+		if(RX_PORT & (1<<THROTTLE_IN_PIN))	//if the pin is high
 		{
-			ulThrottleStart = micros();
+			ulThrottleStart = micros();	//note the current time
 		}
-		else
+		else	//if the pin has gone low
 		{
-			unThrottleInShared = (uint16_t)(micros()-ulThrottleStart);
-			rxUpdateFlagsShared |= THROTTLE_FLAG;
+			unThrottleInShared = (uint16_t)(micros()-ulThrottleStart);		//we are interested in how long it was high for
+			rxUpdateFlagsShared |= THROTTLE_FLAG;		//and we need to let our code know that there is new data for the throttle
 		}
 	}
 	
@@ -129,6 +129,7 @@ ISR(PCINT0_vect)
 
 void rx_init()
 {
+	//Enable pin change interrupts
 	PCMSK0 |= (1<<PCINT0);	//enable PCINT0
 	PCMSK0 |= (1<<PCINT1);	//enable PCINT1
 	PCMSK0 |= (1<<PCINT2);	//enable PCINT2
@@ -206,18 +207,21 @@ void rx_update()
 			rxInputGear = unGearIn;
 			rxInputAux = unAuxIn;
 			
-			debug_printf(rx_get_throttle());
-			debug_print("\t");
-			debug_printf(rx_get_aileron());
-			debug_print("\t");
-			debug_printf(rx_get_elevator());
-			debug_print("\t");
-			debug_printf(rx_get_rudder());
-			debug_print("\t");
-			debug_printf(rx_get_gear());
-			debug_print("\t");
-			debug_printf(rx_get_aux());
-			debug_print("\n\r");
+			if(RX_VERBOSE_OUTPUT)
+			{
+				debug_printf(rx_get_throttle());
+				debug_print("\t");
+				debug_printf(rx_get_aileron());
+				debug_print("\t");
+				debug_printf(rx_get_elevator());
+				debug_print("\t");
+				debug_printf(rx_get_rudder());
+				debug_print("\t");
+				debug_printf(rx_get_gear());
+				debug_print("\t");
+				debug_printf(rx_get_aux());
+				debug_print("\n\r");
+			}
 			
 			rxUpdateFlags = 0;
 		}
