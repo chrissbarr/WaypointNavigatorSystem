@@ -10,6 +10,7 @@ static unsigned char timer0_fract = 0;
 long lastIRTime = 0;
 
 
+//This timer is used for the millis() and micros() functions.
 ISR(TIMER0_OVF_vect)
 {
 	// copy these to local variables so they can be stored in registers

@@ -3,6 +3,7 @@
  *
  * Created: 8/09/2014 9:00:36 PM
  *  Author: Stephen John Weatherley
+ *	Modified: Chris Barr
  */ 
 
 #include "waypoint.h"

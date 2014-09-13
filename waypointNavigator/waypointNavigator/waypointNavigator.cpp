@@ -29,10 +29,7 @@
 #include <util/atomic.h>
 #include <stdio.h>
 
-//-------------GPS INPUT FUNCTION PROTOTYPES---------------//
-void gps_init();			//initializes GPS system, begins communication
-bool gps_locked();			//checks if GPS is locked and data is available
-void gps_update_values();	//gets data from GPS and stores relevant data in variables
+void initialise();
 
 //----------BAROMETER INPUT FUNCTION PROTOTYPES------------//
 void baro_init();		//setup barometer and begin communication
@@ -46,9 +43,8 @@ float compass_get_heading();	//returns current heading, formatted as degrees rel
 
 int main(void)
 {
-	USART_init(USART_PC,9600);
-	initTimers();
-	
+	initialise();
+
 	_delay_ms(1000);
 	benchmark_waypoint_get_distance();
 	_delay_ms(10000);
@@ -59,3 +55,9 @@ int main(void)
     }
 }
 
+void initialise()
+{
+	USART_init(USART_PC,9600);
+	initTimers();
+	gps_init();
+}
