@@ -4,6 +4,8 @@
 
 benchmark.cpp
 
+compass.cpp
+
 debug.cpp
 
 gps.cpp

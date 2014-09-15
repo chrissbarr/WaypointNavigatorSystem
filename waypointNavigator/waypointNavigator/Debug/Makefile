@@ -37,6 +37,7 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../benchmark.cpp \
+../compass.cpp \
 ../debug.cpp \
 ../gps.cpp \
 ../quad_output.cpp \
@@ -55,6 +56,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 benchmark.o \
+compass.o \
 debug.o \
 gps.o \
 quad_output.o \
@@ -66,6 +68,7 @@ waypointNavigator.o
 
 OBJS_AS_ARGS +=  \
 benchmark.o \
+compass.o \
 debug.o \
 gps.o \
 quad_output.o \
@@ -77,6 +80,7 @@ waypointNavigator.o
 
 C_DEPS +=  \
 benchmark.d \
+compass.d \
 debug.d \
 gps.d \
 quad_output.d \
@@ -88,6 +92,7 @@ waypointNavigator.d
 
 C_DEPS_AS_ARGS +=  \
 benchmark.d \
+compass.d \
 debug.d \
 gps.d \
 quad_output.d \
@@ -108,6 +113,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
@@ -159,7 +166,7 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR8/GNU Linker : 4.8.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="waypointNavigator.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mrelax -mmcu=atmega2560  
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="waypointNavigator.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,-L"F:\Development\WaypointNavigatorSystem\waypointNavigator\waypointNavigator\i2cmaster"  -Wl,--gc-sections -mrelax -mmcu=atmega2560  
 	@echo Finished building target: $@
 	"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "waypointNavigator.elf" "waypointNavigator.hex"
 	"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "waypointNavigator.elf" "waypointNavigator.eep" || exit 0
