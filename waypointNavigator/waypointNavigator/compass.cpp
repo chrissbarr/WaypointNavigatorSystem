@@ -4,9 +4,7 @@
  * Created: 15/09/2014 7:43:10 PM
  */ 
 
-#include "i2cmaster.h"
-#include "main.h"
-#include <util/delay.h>
+#include "i2cmaster/i2cmaster.h"
 
 #define HMC5883L_WRITE 0x3C
 #define HMC5883L_READ 0x3D

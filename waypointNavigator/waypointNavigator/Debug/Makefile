@@ -36,7 +36,6 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../altimeter.cpp \
 ../benchmark.cpp \
 ../compass.cpp \
 ../debug.cpp \
@@ -49,20 +48,17 @@ C_SRCS +=  \
 ../waypointNavigator.cpp
 
 
-PREPROCESSING_SRCS +=  \
-../i2cmaster.S
+PREPROCESSING_SRCS += 
 
 
 ASM_SRCS += 
 
 
 OBJS +=  \
-altimeter.o \
 benchmark.o \
 compass.o \
 debug.o \
 gps.o \
-i2cmaster.o \
 quad_output.o \
 rx.o \
 timing.o \
@@ -71,12 +67,10 @@ waypoint.o \
 waypointNavigator.o
 
 OBJS_AS_ARGS +=  \
-altimeter.o \
 benchmark.o \
 compass.o \
 debug.o \
 gps.o \
-i2cmaster.o \
 quad_output.o \
 rx.o \
 timing.o \
@@ -85,12 +79,10 @@ waypoint.o \
 waypointNavigator.o
 
 C_DEPS +=  \
-altimeter.d \
 benchmark.d \
 compass.d \
 debug.d \
 gps.d \
-i2cmaster.d \
 quad_output.d \
 rx.d \
 timing.d \
@@ -99,12 +91,10 @@ waypoint.d \
 waypointNavigator.d
 
 C_DEPS_AS_ARGS +=  \
-altimeter.d \
 benchmark.d \
 compass.d \
 debug.d \
 gps.d \
-i2cmaster.d \
 quad_output.d \
 rx.d \
 timing.d \
@@ -144,8 +134,6 @@ LIB_DEP+=
 
 
 
-
-
 ./%.o: .././%.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 4.8.1
@@ -160,20 +148,6 @@ LIB_DEP+=
 
 
 # AVR32/GNU Assembler
-./i2cmaster.o: .././i2cmaster.S
-	@echo Building file: $<
-	@echo Invoking: AVR8/GNU Assembler : 4.8.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atmega2560 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -mrelax -Wa,-g   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-
-./%.o: .././%.S
-	@echo Building file: $<
-	@echo Invoking: AVR8/GNU Assembler : 4.8.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=atmega2560 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -mrelax -Wa,-g   -o "$@" "$<" 
-	@echo Finished building: $<
-	
 
 
 

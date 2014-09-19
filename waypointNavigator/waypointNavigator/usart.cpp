@@ -90,25 +90,6 @@ unsigned char USART_receive(int usartNum){
 	
 }
 
-/*//Receive string through UART
-unsigned char * USART_receive_string(int usartNum)
-{
-	unsigned char string[20], x, i = 0;
-
-	//receive the characters until ENTER is pressed (ASCII for ENTER = 13)
-	while((x = USART_receive(usartNum)) != 13)
-	{
-		//and store the received characters into the array string[] one-by-one
-		string[i++] = x;
-	}
-
-	//insert NULL to terminate the string
-	string[i] = '\0';
-
-	//return the received string
-	return(string);
-}*/
-
 void USART_putstring(int usartNum, const char* StringPtr){
 	
 	while(*StringPtr != 0x00){    //Here we check if there is still more chars to send, this is done checking the actual char and see if it is different from the null char
