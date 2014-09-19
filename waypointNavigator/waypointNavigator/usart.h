@@ -17,4 +17,5 @@
 void USART_init(int usartNum, int baudRate);
 void USART_send(int usartNum, unsigned char data);
 unsigned char USART_receive(int usartNum);
+//unsigned char * USART_receive_string(int usartNum);
 void USART_putstring(int usartNum, const char* StringPtr);

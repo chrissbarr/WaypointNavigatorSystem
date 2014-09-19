@@ -135,6 +135,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="altimeter.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="altimeter.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="benchmark.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -154,6 +160,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="gps.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="i2cmaster.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="i2cmaster.S">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.h">

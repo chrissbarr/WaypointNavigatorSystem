@@ -20,8 +20,9 @@
 #include "rx.h"
 #include "waypoint.h"
 #include "benchmark.h"
-#include "gps.h"
+//#include "gps.h"
 #include "quad_output.h"
+#include "altimeter.h"
 
 //other includes
 #include <avr/io.h>
@@ -45,13 +46,16 @@ float compass_get_heading();	//returns current heading, formatted as degrees rel
 int main(void)
 {
 	initialise();
-	debug_println("Starting...");
-	quad_output_init();
+	
+	debug_printf(mpl_getAlt(altimeter_get_status()));
+	debug_print("\n\r");
     while(1)
     {
-		rx_update();
-		quad_output_passthrough(true,true,true,true,true,true);
-		//OCR4A = rx_get_throttle(); //leave servo at min rotation
+		_delay_ms(2000);
+		debug_printf(mpl_getAlt(altimeter_get_status()));
+		//debug_println("Looping...");
+		//rx_update();
+		//quad_output_passthrough(true,true,true,true,true,true);
     }
 }
 
@@ -59,6 +63,10 @@ void initialise()
 {
 	USART_init(USART_PC,9600);
 	initTimers();
-	gps_init();
-	rx_init();
+	//gps_init();
+	//rx_init();
+	//quad_output_init();
+	altimeter_init();
+	
+	debug_println("Initialization complete!");
 }
