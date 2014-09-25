@@ -71,12 +71,6 @@
 	#define OFF_H      0x2D
 
 	void altimeter_init();
-	void mpl_init (void);
-	void altimeter_set_mode (void);
-	void altimeter_set_eventFlags (void);
-	float mpl_getAlt (uint8_t altStatus);
-	void altimeter_set_active (void);
-	uint8_t altimeter_get_status (void);
 	void altimeter_toggle_oneShot(void);
 	float altimeter_get_metres(void);
 	void setModeAltimeter();
