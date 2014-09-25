@@ -46,14 +46,14 @@ float compass_get_heading();	//returns current heading, formatted as degrees rel
 int main(void)
 {
 	initialise();
-	
+	_delay_ms(1000);
 	debug_printf(mpl_getAlt(altimeter_get_status()));
 	debug_print("\n\r");
     while(1)
     {
 		_delay_ms(2000);
 		debug_printf(mpl_getAlt(altimeter_get_status()));
-		//debug_println("Looping...");
+		debug_println("Looping...");
 		//rx_update();
 		//quad_output_passthrough(true,true,true,true,true,true);
     }

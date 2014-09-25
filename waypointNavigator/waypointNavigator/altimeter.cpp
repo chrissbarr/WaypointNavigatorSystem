@@ -22,14 +22,14 @@ void altimeter_init()
 	debug_println("Altimeter initialized!");
 }
 
-void mpl_init (void) 
+void mpl_init(void) 
 { 
    i2c_init(); 
    altimeter_set_mode();
    altimeter_set_eventFlags(); 
 } 
 
-void altimeter_set_mode (void)
+void altimeter_set_mode(void)
 {
 	i2c_start_wait(MPL3115a2+I2C_WRITE);
 	i2c_write(CTRL_REG1);
@@ -37,7 +37,7 @@ void altimeter_set_mode (void)
 	i2c_stop();
 }
 
-void altimeter_set_eventFlags (void)
+void altimeter_set_eventFlags(void)
 {
 	i2c_start_wait(MPL3115a2+I2C_WRITE);
 	i2c_write(PT_DATA_CFG);
@@ -45,38 +45,52 @@ void altimeter_set_eventFlags (void)
 	i2c_stop();
 }
 
-float mpl_getAlt (uint8_t altStatus) 
+float altimeter_get_metres(void)
+{
+	float altitude = -999;
+	
+	
+	
+	return altitude;
+}
+
+float mpl_getAlt(uint8_t altStatus) 
 {    
-   long temp = 0;
+	debug_println("Starting mpl_getAlt");
+	long temp = 0;
    
-   altimeter_set_active();
+	altimeter_set_active();
     
-   altimeter_get_status(); 
+	altimeter_get_status(); 
+	
+	debug_println("mpl_getAlt active and status complete");
     
-   int8_t msbA,csbA,lsbA,msbT,lsbT = 0x00; 
+	int8_t msbA,csbA,lsbA,msbT,lsbT = 0x00; 
        
-   i2c_start_wait(MPL3115a2+I2C_WRITE); 
-   i2c_write(OUT_P_MSB); 
-   i2c_rep_start(MPL3115a2+I2C_READ); 
-   //_delay_ms(10);
-   msbA = i2c_readAck(); 
-   csbA = i2c_readAck(); 
-   lsbA = i2c_readAck();
-   msbT = i2c_readAck();
-   lsbT = i2c_readNak(); 
-   i2c_stop(); 
+	i2c_start_wait(MPL3115a2+I2C_WRITE); 
+	i2c_write(OUT_P_MSB); 
+	i2c_rep_start(MPL3115a2+I2C_READ); 
+	//_delay_ms(10);
+	msbA = i2c_readAck(); 
+	csbA = i2c_readAck(); 
+	lsbA = i2c_readAck();
+	msbT = i2c_readAck();
+	lsbT = i2c_readNak(); 
+	i2c_stop(); 
+	
+	debug_println("mpl_getAlt i2c stopped");
    
-    if(msbA > 0x7F) 
+	if(msbA > 0x7F) 
 	{
-	    temp = ~((long)msbA << 16 | (long)csbA << 8 | (long)lsbA) + 1; // 2's complement the data
-	    altitude = (float) (temp >> 8) + (float) ((lsbA >> 4)/16.0); // Whole number plus fraction altitude in meters for negative altitude
-	    altitude *= -1.;
-    }
-    else 
+		temp = ~((long)msbA << 16 | (long)csbA << 8 | (long)lsbA) + 1; // 2's complement the data
+		altitude = (float) (temp >> 8) + (float) ((lsbA >> 4)/16.0); // Whole number plus fraction altitude in meters for negative altitude
+		altitude *= -1.;
+	}
+	else 
 	{
-	    temp = ((msbA << 8) | csbA);
-	    altitude = (float) (temp) + (float) ((lsbA >> 4)/16.0);  // Whole number plus fraction altitude in meters
-    }
+		temp = ((msbA << 8) | csbA);
+		altitude = (float) (temp) + (float) ((lsbA >> 4)/16.0);  // Whole number plus fraction altitude in meters
+	}
 	
 	long pressure_whole =  ((long)msbA << 16 | (long)csbA << 8 | (long)lsbA) ; // Construct whole number pressure
 	pressure_whole >>= 6;
@@ -98,15 +112,15 @@ else
 		temperature = (float) (msbT) + (float)((lsbT >> 4)/16.0); // add whole and fractional degrees Centigrade
 	}
     
-   if (temperature < 20) 
-   { 
-       PINB = 0x30;
-   } 
+	if (temperature < 20) 
+	{ 
+		PINB = 0x30;
+	} 
    
-   return altitude;
+	return altitude;
 } 
 
-void altimeter_set_active (void)
+void altimeter_set_active(void)
 {
 	i2c_start_wait(MPL3115a2+I2C_WRITE);
 	i2c_write(CTRL_REG1);
@@ -114,25 +128,25 @@ void altimeter_set_active (void)
 	i2c_stop();
 }
 
-uint8_t altimeter_get_status (void) 
+uint8_t altimeter_get_status(void) 
 { 
-   uint8_t altStatus = 0x00; 
+	uint8_t altStatus = 0x00; 
 	int i = 0;
-   while (((altStatus & 0x08) == 0) || (i <= 10))
-   { 
-      i2c_start_wait(MPL3115a2+I2C_WRITE); 
-      i2c_write(STATUS); 
-      i2c_rep_start(MPL3115a2+I2C_READ); 
-      altStatus = i2c_readNak(); 
-      i2c_stop(); 
-	  _delay_us(100);
-	  i++;
-   } 
-   //DDRB |= 0x30; PORTB |= 0x30;; 
-   return altStatus;
+	while (((altStatus & 0x08) == 0) && (i <= 10))
+	{
+		i2c_start_wait(MPL3115a2+I2C_WRITE);
+		i2c_write(STATUS);
+		i2c_rep_start(MPL3115a2+I2C_READ);
+		altStatus = i2c_readNak();
+		i2c_stop();
+		_delay_us(100);
+		i++;
+	}
+	//DDRB |= 0x30; PORTB |= 0x30;;
+	return altStatus;
 } 
 
-/*void altimeter_toggle_oneShot (void) 
+void altimeter_toggle_oneShot (void) 
 { 
    i2c_start_wait(MPL3115a2+I2C_WRITE); 
    i2c_write(CTRL_REG1); 
@@ -142,4 +156,4 @@ uint8_t altimeter_get_status (void)
    i2c_write(CTRL_REG1); 
    i2c_write(0xBB); 
    i2c_stop(); 
-}*/ 
+}
