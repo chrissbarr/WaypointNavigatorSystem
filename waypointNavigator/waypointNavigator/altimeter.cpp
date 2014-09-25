@@ -18,15 +18,29 @@ float temperature = 0.;
 
 void altimeter_init()
 {
-	mpl_init();
+	i2c_init();
+	
+	if(IIC_Read(WHO_AM_I) == 196)
+	{
+		debug_println("Altimeter connected correctly!");
+	}
+	else
+	{
+		debug_println("Altimeter not connected!");
+	}
+	setModeAltimeter();
+	setOversampleRate(7);
+	enableEventFlags();
 	debug_println("Altimeter initialized!");
 }
 
 void mpl_init(void) 
 { 
    i2c_init(); 
-   altimeter_set_mode();
-   altimeter_set_eventFlags(); 
+   //altimeter_set_mode();
+   setModeAltimeter();
+   setOversampleRate(7);
+   //altimeter_set_eventFlags(); 
 } 
 
 void altimeter_set_mode(void)
@@ -49,7 +63,25 @@ float altimeter_get_metres(void)
 {
 	float altitude = -999;
 	
+	altimeter_toggle_oneShot();
+	_delay_ms(100);
 	
+	i2c_start_wait(MPL3115a2+I2C_WRITE);
+	i2c_write(OUT_P_MSB);
+	i2c_rep_start(MPL3115a2+I2C_READ);
+	
+	int8_t msbA,csbA,lsbA = 0x00; 
+	
+	msbA = i2c_readAck();
+	csbA = i2c_readAck();
+	lsbA = i2c_readNak();	
+	i2c_stop();
+	
+	altimeter_toggle_oneShot();
+	
+	float tempcsb = (lsbA>>4)/16.0;
+	
+	altitude = (float)( (msbA << 8) | csbA) + tempcsb;
 	
 	return altitude;
 }
@@ -75,7 +107,7 @@ float mpl_getAlt(uint8_t altStatus)
 	csbA = i2c_readAck(); 
 	lsbA = i2c_readAck();
 	msbT = i2c_readAck();
-	lsbT = i2c_readNak(); 
+	lsbT = i2c_readNak();
 	i2c_stop(); 
 	
 	debug_println("mpl_getAlt i2c stopped");
@@ -148,12 +180,71 @@ uint8_t altimeter_get_status(void)
 
 void altimeter_toggle_oneShot (void) 
 { 
-   i2c_start_wait(MPL3115a2+I2C_WRITE); 
-   i2c_write(CTRL_REG1); 
-   i2c_write(0xB8); 
-    
-   i2c_start_wait(MPL3115a2+I2C_WRITE); 
-   i2c_write(CTRL_REG1); 
-   i2c_write(0xBB); 
-   i2c_stop(); 
+	//read CTRL_REG1
+	uint8_t tempSetting = IIC_Read(CTRL_REG1);
+	
+	//Clear OST bit
+	tempSetting &= ~(1<<1);
+	IIC_Write(CTRL_REG1,tempSetting);
+	
+	//read CTRL_REG1
+	tempSetting = IIC_Read(CTRL_REG1);
+	
+	//set OST bit
+	tempSetting |= (1<<1);
+	IIC_Write(CTRL_REG1,tempSetting); 
+	
+}
+
+void setModeAltimeter()
+{
+	//read CTRL_REG1
+	uint8_t tempSetting = IIC_Read(CTRL_REG1);
+	
+	tempSetting |= (1<<7);	//set ALT bit
+	
+	IIC_Write(CTRL_REG1,tempSetting);
+}
+
+void setOversampleRate(uint8_t sampleRate)
+{
+	if(sampleRate > 7) sampleRate = 7;	//OS cannot be large than 0b.0111
+	sampleRate <<= 3;
+	
+	//read CTRL_REG1
+	uint8_t tempSetting = IIC_Read(CTRL_REG1);
+	
+	tempSetting &= 0b11000111; //Clear out old OS bits
+	tempSetting |= sampleRate; //Mask in new OS bits
+	
+	IIC_Write(CTRL_REG1,tempSetting);
+	
+}
+
+//Enables the pressure and temp measurement event flags so that we can
+//test against them. This is recommended in datasheet during setup.
+void enableEventFlags()
+{
+	i2c_start_wait(MPL3115a2+I2C_WRITE);
+	i2c_write(PT_DATA_CFG);
+	i2c_write(0x07);
+}
+
+byte IIC_Read(byte regAddr)
+{
+	// This function reads one byte over IIC
+	
+	i2c_rep_start(MPL3115a2+I2C_WRITE);
+	i2c_write(regAddr);
+	
+	i2c_rep_start(MPL3115a2+I2C_READ);
+	return i2c_readNak();
+}
+
+void IIC_Write(byte regAddr, byte value)
+{
+	i2c_start_wait(MPL3115a2+I2C_WRITE);
+	i2c_write(regAddr);
+	i2c_write(value);
+	i2c_stop();
 }

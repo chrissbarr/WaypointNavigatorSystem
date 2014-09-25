@@ -17,6 +17,8 @@
 		#include "i2cmaster.h"
 	}
 
+	#define byte uint8_t
+
 	#define TRUE 1
 	#define FALSE 0
 
@@ -76,6 +78,12 @@
 	void altimeter_set_active (void);
 	uint8_t altimeter_get_status (void);
 	void altimeter_toggle_oneShot(void);
+	float altimeter_get_metres(void);
+	void setModeAltimeter();
+	void setOversampleRate(uint8_t sampleRate);
+	void enableEventFlags();
+	byte IIC_Read(byte regAddr);
+	void IIC_Write(byte regAddr, byte value);
 
 
 #endif /* ALTIMETER_H_ */
