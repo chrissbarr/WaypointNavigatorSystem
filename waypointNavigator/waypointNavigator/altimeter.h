@@ -13,6 +13,7 @@
 	#include <util/delay.h>
 	#include <stdio.h>
 	#include "debug.h"
+	#include "timing.h"
 	extern "C" {
 		#include "i2cmaster.h"
 	}
@@ -70,12 +71,14 @@
 	#define OFF_T      0x2C
 	#define OFF_H      0x2D
 
-	void altimeter_init();
+	bool altimeter_init();
 	void altimeter_toggle_oneShot(void);
+	float altimeter_start_height(void);
 	float altimeter_get_metres(void);
 	void setModeAltimeter();
 	void setOversampleRate(uint8_t sampleRate);
 	void enableEventFlags();
+	float altimeter_get_start_height();
 	byte IIC_Read(byte regAddr);
 	void IIC_Write(byte regAddr, byte value);
 

@@ -7,6 +7,8 @@
 
 #include "quad_output.h"
 
+float throttle_out;
+
 void quad_output_init()
 {
 	DDRH = 0xFF;  //set OC4x to output
@@ -32,6 +34,13 @@ void quad_output_init()
 	RUDDER_OUT = DEFAULT_PWM_OUTPUT; //start at low value so vehicle is not armed
 	GEAR_OUT = DEFAULT_PWM_OUTPUT; //start at low value so vehicle is not armed
 	AUX_OUT = DEFAULT_PWM_OUTPUT; //start at low value so vehicle is not armed
+	
+	quad_output_set_throttle(DEFAULT_PWM_OUTPUT);
+	quad_output_set_aileron(DEFAULT_PWM_OUTPUT);
+	quad_output_set_elevator(DEFAULT_PWM_OUTPUT);
+	quad_output_set_rudder(DEFAULT_PWM_OUTPUT);
+	quad_output_set_gear(DEFAULT_PWM_OUTPUT);
+	quad_output_set_aux(DEFAULT_PWM_OUTPUT);
 }
 
 
@@ -67,6 +76,7 @@ void quad_output_passthrough(bool throttle, bool aileron, bool elevator, bool ru
 void quad_output_set_throttle(int throttle)
 {
 	THROTTLE_OUT = throttle;
+	throttle_out = throttle;
 }
 
 void quad_output_set_aileron(int aileron)
@@ -92,4 +102,11 @@ void quad_output_set_gear(int gear)
 void quad_output_set_aux(int aux)
 {
 	AUX_OUT = aux;
+}
+
+
+//getters for outputs
+float quad_output_get_throttle()
+{
+	return throttle_out;
 }

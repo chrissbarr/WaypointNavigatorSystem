@@ -10,7 +10,7 @@
 #include "timing.h"
 #include "debug.h"
 
-#define RX_VERBOSE_OUTPUT false
+#define RX_VERBOSE_OUTPUT true
 
 //--------------RX INPUT FUNCTION PROTOTYPES---------------//
 void rx_init();
@@ -24,12 +24,13 @@ float rx_get_gear();
 float rx_get_aux();
 
 //-------------RX Input Variables-----------------------//
-#define THROTTLE_IN_PIN PB0		//Which RX channels map to which pins in port
-#define AILERON_IN_PIN PB1
-#define ELEVATOR_IN_PIN PB2
-#define RUDDER_IN_PIN PB3
-#define GEAR_IN_PIN PB4
-#define AUX_IN_PIN PB5
+//Which RX channels map to which pins in port
+#define THROTTLE_IN_PIN PB0		//Digital Pin 53
+#define AILERON_IN_PIN PB1		//Digital Pin 52
+#define ELEVATOR_IN_PIN PB2		//Digital Pin 51
+#define RUDDER_IN_PIN PB3		//Digital Pin 50
+#define GEAR_IN_PIN PB4			//Digital Pin 10
+#define AUX_IN_PIN PB5			//Digital Pin 11
 
 //flags to represent changes in different channels
 #define THROTTLE_FLAG 1

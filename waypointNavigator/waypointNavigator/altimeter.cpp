@@ -4,6 +4,7 @@
  * Created: 17/09/2014 5:15:48 PM
  *  Author: Chris
  * Borrowed from http://www.avrfreaks.net/forum/solved-fleury-i2c-problems-mpl3115a2?skey=MPL3115A2
+ * Also heavily based on the Sparkfun MPL3115A2 Arduino example code.
  */ 
 
 #include "altimeter.h"
@@ -15,10 +16,12 @@ uint8_t altStatus = 0x00;
 float altitude = 0.;
 float pressure = 0.;
 float temperature = 0.;
+float start_height = 0;
 
-void altimeter_init()
+bool altimeter_init()
 {
 	i2c_init();
+	bool success = true;
 	
 	if(IIC_Read(WHO_AM_I) == 196)
 	{
@@ -27,11 +30,50 @@ void altimeter_init()
 	else
 	{
 		debug_println("Altimeter not connected!");
+		success = false;
 	}
-	setModeAltimeter();
-	setOversampleRate(7);
-	enableEventFlags();
-	debug_println("Altimeter initialized!");
+	
+	if(success)
+	{
+		setModeAltimeter();
+		setOversampleRate(7);
+		enableEventFlags();
+	
+		
+		start_height = altimeter_start_height();
+		
+		if(start_height == -999)
+			success = false;
+			
+		if(success)
+			debug_println("Altimeter initialised correctly!");
+		else
+			debug_println("Altimeter failed to initialise!");
+	}
+	
+	return success;	
+}
+
+float altimeter_start_height()
+{
+	float start_height = 0;
+	int start_height_samples = 0;
+	
+	debug_println("Determining Altimeter Start height, sampling for 1s...");
+	//sample the current height for 1 second
+	while(millis()<1000)
+	{
+		start_height += altimeter_get_metres();
+		start_height_samples += 1;
+	}
+	
+	//average the height
+	start_height = start_height / start_height_samples;
+	debug_print("Starting height initialised to: ");
+	debug_printf(start_height);
+	debug_println(" m");
+	
+	return start_height;
 }
 
 float altimeter_get_metres(void)
@@ -110,6 +152,12 @@ void setOversampleRate(uint8_t sampleRate)
 	
 	IIC_Write(CTRL_REG1,tempSetting);
 	
+}
+
+//getter for start height
+float altimeter_get_start_height()
+{
+	return start_height;
 }
 
 //Enables the pressure and temp measurement event flags so that we can
