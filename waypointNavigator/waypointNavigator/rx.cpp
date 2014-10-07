@@ -129,6 +129,8 @@ ISR(PCINT0_vect)
 
 void rx_init()
 {
+	DDRB = 0x00;
+	sbi(DDRB,7);
 	//Enable pin change interrupts
 	PCMSK0 |= (1<<PCINT0);	//enable PCINT0
 	PCMSK0 |= (1<<PCINT1);	//enable PCINT1

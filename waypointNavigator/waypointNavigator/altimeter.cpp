@@ -61,7 +61,7 @@ float altimeter_start_height()
 	
 	debug_println("Determining Altimeter Start height, sampling for 1s...");
 	//sample the current height for 1 second
-	while(millis()<1000)
+	while(millis()<3000)
 	{
 		start_height += altimeter_get_metres();
 		start_height_samples += 1;

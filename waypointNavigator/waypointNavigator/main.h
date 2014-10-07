@@ -11,7 +11,8 @@
 //enable or disable debug features. Debug features are useful but might slow AVR down, best to turn them off when not needed.
 #define DEBUG_ENABLE true
 
-
+#define sbi(a, b) (a) |= (1 << (b))
+#define cbi(a, b) (a) &= ~(1 << (b))
 
 //defining ports different components will use.
 #define GPS_PORT PIND //USART1 is on Port D, needed to communicate with GPS module
