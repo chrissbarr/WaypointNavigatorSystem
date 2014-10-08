@@ -44,3 +44,20 @@ void debug_printf(float debugNum)
 		debug_print(string);
 	}
 }
+
+
+//beep for 50ms, buzzer attached to PORTB.7 (Digital Pin 13, next to GND)
+void debug_beep()
+{
+	sbi(PORTB,7);
+	_delay_ms(50);
+	cbi(PORTB,7);
+}
+
+//beep for 250ms, buzzer attached to PORTB.7 (Digital Pin 13, next to GND)
+void debug_beep_long()
+{
+	sbi(PORTB,7);
+	_delay_ms(250);
+	cbi(PORTB,7);
+}

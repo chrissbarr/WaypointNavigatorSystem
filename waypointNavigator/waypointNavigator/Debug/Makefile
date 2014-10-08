@@ -41,6 +41,7 @@ C_SRCS +=  \
 ../compass.cpp \
 ../debug.cpp \
 ../gps.cpp \
+../quad_control.cpp \
 ../quad_output.cpp \
 ../rx.cpp \
 ../timing.cpp \
@@ -63,6 +64,7 @@ compass.o \
 debug.o \
 gps.o \
 i2cmaster.o \
+quad_control.o \
 quad_output.o \
 rx.o \
 timing.o \
@@ -77,6 +79,7 @@ compass.o \
 debug.o \
 gps.o \
 i2cmaster.o \
+quad_control.o \
 quad_output.o \
 rx.o \
 timing.o \
@@ -91,6 +94,7 @@ compass.d \
 debug.d \
 gps.d \
 i2cmaster.d \
+quad_control.d \
 quad_output.d \
 rx.d \
 timing.d \
@@ -105,6 +109,7 @@ compass.d \
 debug.d \
 gps.d \
 i2cmaster.d \
+quad_control.d \
 quad_output.d \
 rx.d \
 timing.d \
@@ -123,6 +128,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

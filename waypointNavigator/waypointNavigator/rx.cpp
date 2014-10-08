@@ -260,3 +260,15 @@ float rx_get_aux()
 {
 	return rxInputAux;
 }
+
+//return a simplified result from the Aux switch,
+//either position 1 (default), 2 or 3
+int rx_get_aux_position()
+{
+	if(rx_get_aux()<1350)
+		return 1;
+	if(rx_get_aux()>=1350 && rx_get_aux()<=1650)
+		return 2;
+	if(rx_get_aux()>1650)
+		return 3;
+}

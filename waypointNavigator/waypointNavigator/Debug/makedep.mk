@@ -14,6 +14,8 @@ gps.cpp
 
 i2cmaster.S
 
+quad_control.cpp
+
 quad_output.cpp
 
 rx.cpp

@@ -23,6 +23,8 @@ float rx_get_rudder();
 float rx_get_gear();
 float rx_get_aux();
 
+int rx_get_aux_position();
+
 //-------------RX Input Variables-----------------------//
 //Which RX channels map to which pins in port
 #define THROTTLE_IN_PIN PB0		//Digital Pin 53
