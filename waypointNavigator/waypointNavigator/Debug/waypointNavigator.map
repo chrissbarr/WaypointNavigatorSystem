@@ -5,7 +5,7 @@ c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-t
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3x.o)
                               c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3.o) (__addsf3x)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan2.o)
-                              waypoint.o (atan2)
+                              compass.o (atan2)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan.o)
                               c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan2.o) (atan)
 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cmpsf2.o)
@@ -123,6 +123,28 @@ Discarded input sections
  .bss           0x00000000        0x0 altimeter.o
  .text._Z26altimeter_get_start_heightv
                 0x00000000       0x12 altimeter.o
+ .text._Z16enableEventFlagsv
+                0x00000000       0x14 altimeter.o
+ .text._Z8IIC_Readh
+                0x00000000       0x1e altimeter.o
+ .text._Z9IIC_Writehh
+                0x00000000       0x24 altimeter.o
+ .text._Z24altimeter_toggle_oneShotv
+                0x00000000       0x22 altimeter.o
+ .text._Z20altimeter_get_metresv
+                0x00000000       0xec altimeter.o
+ .rodata.str1.1
+                0x00000000       0xd4 altimeter.o
+ .text._Z22altimeter_start_heightv
+                0x00000000       0x8c altimeter.o
+ .text._Z16setModeAltimeterv
+                0x00000000       0x12 altimeter.o
+ .text._Z17setOversampleRateh
+                0x00000000       0x26 altimeter.o
+ .text._Z14altimeter_initv
+                0x00000000       0x6e altimeter.o
+ .bss.start_height
+                0x00000000        0x4 altimeter.o
  .bss.temperature
                 0x00000000        0x4 altimeter.o
  .bss.pressure  0x00000000        0x4 altimeter.o
@@ -143,10 +165,6 @@ Discarded input sections
                 0x00000000       0x82 benchmark.o
  .text          0x00000000        0x0 compass.o
  .bss           0x00000000        0x0 compass.o
- .text._Z12compass_initv
-                0x00000000       0x24 compass.o
- .text._Z12compass_readv
-                0x00000000       0x44 compass.o
  .text          0x00000000        0x0 debug.o
  .bss           0x00000000        0x0 debug.o
  .text._Z12debug_printii
@@ -233,6 +251,8 @@ Discarded input sections
                 0x00000000       0x12 quad_output.o
  .text          0x00000000        0x0 rx.o
  .bss           0x00000000        0x0 rx.o
+ .text._Z9rx_updatev
+                0x00000000      0x100 rx.o
  .text._Z15rx_get_throttlev
                 0x00000000        0xa rx.o
  .text._Z14rx_get_aileronv
@@ -247,8 +267,36 @@ Discarded input sections
                 0x00000000       0x12 rx.o
  .text._Z19rx_get_aux_positionv
                 0x00000000       0x8a rx.o
+ .bss._ZZ9rx_updatevE7unAuxIn
+                0x00000000        0x2 rx.o
+ .bss._ZZ9rx_updatevE8unGearIn
+                0x00000000        0x2 rx.o
+ .bss._ZZ9rx_updatevE10unRudderIn
+                0x00000000        0x2 rx.o
+ .bss._ZZ9rx_updatevE12unElevatorIn
+                0x00000000        0x2 rx.o
+ .bss._ZZ9rx_updatevE11unAileronIn
+                0x00000000        0x2 rx.o
+ .bss._ZZ9rx_updatevE12unThrottleIn
+                0x00000000        0x2 rx.o
+ .bss._ZZ9rx_updatevE13rxUpdateFlags
+                0x00000000        0x1 rx.o
+ .bss.rxInputAux
+                0x00000000        0x2 rx.o
+ .bss.rxInputGear
+                0x00000000        0x2 rx.o
+ .bss.rxInputRudder
+                0x00000000        0x2 rx.o
+ .bss.rxInputElevator
+                0x00000000        0x2 rx.o
+ .bss.rxInputAileron
+                0x00000000        0x2 rx.o
+ .bss.rxInputThrottle
+                0x00000000        0x2 rx.o
  .text          0x00000000        0x0 timing.o
  .bss           0x00000000        0x0 timing.o
+ .text._Z6millisv
+                0x00000000       0x1a timing.o
  .bss.lastIRTime
                 0x00000000        0x4 timing.o
  .text          0x00000000        0x0 usart.o
@@ -277,16 +325,12 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3x.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan2.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan2.o)
- .text.avr-libc.fplib
-                0x00000000       0x74 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan2.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan.o)
- .text.avr-libc.fplib
-                0x00000000       0x50 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan.o)
- .progmem.gcc_fplib
-                0x00000000       0x2d c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cmpsf2.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cmpsf2.o)
+ .text.avr-libc.fplib
+                0x00000000        0x8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cmpsf2.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cos.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cos.o)
  .text.avr-libc.fplib
@@ -307,14 +351,14 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(floatsisf.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_cmp.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_cmp.o)
+ .text.avr-libc.fplib
+                0x00000000       0x48 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_cmp.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_inf.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_inf.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_nan.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_nan.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_powser.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_powser.o)
- .text.avr-libc.fplib
-                0x00000000       0x4a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_powser.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
@@ -341,8 +385,6 @@ Discarded input sections
                 0x00000000        0x8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(gesf2.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(inverse.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(inverse.o)
- .text.avr-libc.fplib
-                0x00000000        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(inverse.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
@@ -357,8 +399,6 @@ Discarded input sections
                 0x00000000       0x84 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(sqrt.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(square.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(square.o)
- .text.avr-libc.fplib
-                0x00000000        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(square.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_mpack.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_mpack.o)
  .text.avr-libc.fplib
@@ -674,50 +714,53 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x157a
+.text           0x00000000     0x14d2
  *(.vectors)
  .vectors       0x00000000       0xe4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vector_default
                 0x00000000                __vectors
  *(.vectors)
  *(.progmem.gcc*)
-                0x000000e4                . = ALIGN (0x2)
-                0x000000e4                __trampolines_start = .
+ .progmem.gcc_fplib
+                0x000000e4       0x2d c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan.o)
+                0x00000112                . = ALIGN (0x2)
+ *fill*         0x00000111        0x1 
+                0x00000112                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x000000e4        0x0 linker stubs
+ .trampolines   0x00000112        0x0 linker stubs
  *(.trampolines*)
-                0x000000e4                __trampolines_end = .
+                0x00000112                __trampolines_end = .
  *(.progmem*)
- .progmem.data  0x000000e4       0xfa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
-                0x000001de                . = ALIGN (0x2)
+ .progmem.data  0x00000112       0xfa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
+                0x0000020c                . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x000001de                __ctors_start = .
+                0x0000020c                __ctors_start = .
  *(.ctors)
-                0x000001de                __ctors_end = .
-                0x000001de                __dtors_start = .
+                0x0000020c                __ctors_end = .
+                0x0000020c                __dtors_start = .
  *(.dtors)
-                0x000001de                __dtors_end = .
+                0x0000020c                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x000001de        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
-                0x000001de                __init
+ .init0         0x0000020c        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
+                0x0000020c                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x000001de       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
+ .init2         0x0000020c       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x000001ee       0x1a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
-                0x000001ee                __do_copy_data
- .init4         0x00000208       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_clear_bss.o)
-                0x00000208                __do_clear_bss
+ .init4         0x0000021c       0x1a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_copy_data.o)
+                0x0000021c                __do_copy_data
+ .init4         0x00000236       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_clear_bss.o)
+                0x00000236                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -728,235 +771,213 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00000218        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
+ .init9         0x00000246        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
  *(.init9)
  *(.text)
- .text          0x0000021e        0x2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
-                0x0000021e                __vector_38
-                0x0000021e                __vector_22
-                0x0000021e                __vector_28
-                0x0000021e                __vector_1
-                0x0000021e                __vector_32
-                0x0000021e                __vector_34
-                0x0000021e                __vector_24
-                0x0000021e                __vector_12
-                0x0000021e                __vector_55
-                0x0000021e                __vector_46
-                0x0000021e                __bad_interrupt
-                0x0000021e                __vector_6
-                0x0000021e                __vector_31
-                0x0000021e                __vector_35
-                0x0000021e                __vector_39
-                0x0000021e                __vector_3
-                0x0000021e                __vector_30
-                0x0000021e                __vector_45
-                0x0000021e                __vector_25
-                0x0000021e                __vector_11
-                0x0000021e                __vector_54
-                0x0000021e                __vector_13
-                0x0000021e                __vector_17
-                0x0000021e                __vector_19
-                0x0000021e                __vector_56
-                0x0000021e                __vector_7
-                0x0000021e                __vector_49
-                0x0000021e                __vector_41
-                0x0000021e                __vector_43
-                0x0000021e                __vector_27
-                0x0000021e                __vector_5
-                0x0000021e                __vector_33
-                0x0000021e                __vector_47
-                0x0000021e                __vector_52
-                0x0000021e                __vector_37
-                0x0000021e                __vector_4
-                0x0000021e                __vector_44
-                0x0000021e                __vector_51
-                0x0000021e                __vector_2
-                0x0000021e                __vector_21
-                0x0000021e                __vector_15
-                0x0000021e                __vector_36
-                0x0000021e                __vector_29
-                0x0000021e                __vector_40
-                0x0000021e                __vector_8
-                0x0000021e                __vector_26
-                0x0000021e                __vector_48
-                0x0000021e                __vector_14
-                0x0000021e                __vector_53
-                0x0000021e                __vector_10
-                0x0000021e                __vector_50
-                0x0000021e                __vector_16
-                0x0000021e                __vector_18
-                0x0000021e                __vector_20
-                0x0000021e                __vector_42
- .text          0x00000220       0xce i2cmaster.o
-                0x00000230                i2c_init
-                0x0000023a                i2c_start
-                0x00000242                i2c_rep_start
-                0x00000256                i2c_start_wait
-                0x0000026a                i2c_stop
-                0x0000027a                i2c_write
-                0x000002b2                i2c_readNak
-                0x000002b6                i2c_readAck
-                0x000002b8                i2c_read
-                0x000002ee                . = ALIGN (0x2)
+ .text          0x0000024c        0x2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
+                0x0000024c                __vector_38
+                0x0000024c                __vector_22
+                0x0000024c                __vector_28
+                0x0000024c                __vector_1
+                0x0000024c                __vector_32
+                0x0000024c                __vector_34
+                0x0000024c                __vector_24
+                0x0000024c                __vector_12
+                0x0000024c                __vector_55
+                0x0000024c                __vector_46
+                0x0000024c                __bad_interrupt
+                0x0000024c                __vector_6
+                0x0000024c                __vector_31
+                0x0000024c                __vector_35
+                0x0000024c                __vector_39
+                0x0000024c                __vector_3
+                0x0000024c                __vector_30
+                0x0000024c                __vector_45
+                0x0000024c                __vector_25
+                0x0000024c                __vector_11
+                0x0000024c                __vector_54
+                0x0000024c                __vector_13
+                0x0000024c                __vector_17
+                0x0000024c                __vector_19
+                0x0000024c                __vector_56
+                0x0000024c                __vector_7
+                0x0000024c                __vector_49
+                0x0000024c                __vector_41
+                0x0000024c                __vector_43
+                0x0000024c                __vector_27
+                0x0000024c                __vector_5
+                0x0000024c                __vector_33
+                0x0000024c                __vector_47
+                0x0000024c                __vector_52
+                0x0000024c                __vector_37
+                0x0000024c                __vector_4
+                0x0000024c                __vector_44
+                0x0000024c                __vector_51
+                0x0000024c                __vector_2
+                0x0000024c                __vector_21
+                0x0000024c                __vector_15
+                0x0000024c                __vector_36
+                0x0000024c                __vector_29
+                0x0000024c                __vector_40
+                0x0000024c                __vector_8
+                0x0000024c                __vector_26
+                0x0000024c                __vector_48
+                0x0000024c                __vector_14
+                0x0000024c                __vector_53
+                0x0000024c                __vector_10
+                0x0000024c                __vector_50
+                0x0000024c                __vector_16
+                0x0000024c                __vector_18
+                0x0000024c                __vector_20
+                0x0000024c                __vector_42
+ .text          0x0000024e       0xce i2cmaster.o
+                0x0000025e                i2c_init
+                0x00000268                i2c_start
+                0x00000270                i2c_rep_start
+                0x00000284                i2c_start_wait
+                0x00000298                i2c_stop
+                0x000002a8                i2c_write
+                0x000002e0                i2c_readNak
+                0x000002e4                i2c_readAck
+                0x000002e6                i2c_read
+                0x0000031c                . = ALIGN (0x2)
  *(.text.*)
- .text._Z16enableEventFlagsv
-                0x000002ee        0xe altimeter.o
-                0x000002ee                _Z16enableEventFlagsv
- .text._Z8IIC_Readh
-                0x000002fc       0x16 altimeter.o
-                0x000002fc                _Z8IIC_Readh
- .text._Z9IIC_Writehh
-                0x00000312       0x1c altimeter.o
-                0x00000312                _Z9IIC_Writehh
- .text._Z24altimeter_toggle_oneShotv
-                0x0000032e       0x1a altimeter.o
-                0x0000032e                _Z24altimeter_toggle_oneShotv
- .text._Z20altimeter_get_metresv
-                0x00000348       0xd0 altimeter.o
-                0x00000348                _Z20altimeter_get_metresv
- .text._Z22altimeter_start_heightv
-                0x00000418       0x7a altimeter.o
-                0x00000418                _Z22altimeter_start_heightv
- .text._Z16setModeAltimeterv
-                0x00000492        0xe altimeter.o
-                0x00000492                _Z16setModeAltimeterv
- .text._Z17setOversampleRateh
-                0x000004a0       0x22 altimeter.o
-                0x000004a0                _Z17setOversampleRateh
- .text._Z14altimeter_initv
-                0x000004c2       0x58 altimeter.o
-                0x000004c2                _Z14altimeter_initv
+ .text._Z13init_HMC5883Lv
+                0x0000031c       0x2c compass.o
+                0x0000031c                _Z13init_HMC5883Lv
+ .text._Z10getHeadingv
+                0x00000348      0x184 compass.o
+                0x00000348                _Z10getHeadingv
  .text._Z11debug_printPKc
-                0x0000051a        0xa debug.o
-                0x0000051a                _Z11debug_printPKc
+                0x000004cc        0xa debug.o
+                0x000004cc                _Z11debug_printPKc
  .text._Z13debug_printlnPKc
-                0x00000524       0x14 debug.o
-                0x00000524                _Z13debug_printlnPKc
+                0x000004d6       0x14 debug.o
+                0x000004d6                _Z13debug_printlnPKc
  .text._Z12debug_printff
-                0x00000538       0x3e debug.o
-                0x00000538                _Z12debug_printff
+                0x000004ea       0x3e debug.o
+                0x000004ea                _Z12debug_printff
  .text._Z10debug_beepv
-                0x00000576       0x18 debug.o
-                0x00000576                _Z10debug_beepv
+                0x00000528       0x18 debug.o
+                0x00000528                _Z10debug_beepv
  .text._Z15debug_beep_longv
-                0x0000058e       0x18 debug.o
-                0x0000058e                _Z15debug_beep_longv
+                0x00000540       0x18 debug.o
+                0x00000540                _Z15debug_beep_longv
  .text._Z24quad_output_set_throttlei
-                0x000005a6       0x26 quad_output.o
-                0x000005a6                _Z24quad_output_set_throttlei
+                0x00000558       0x26 quad_output.o
+                0x00000558                _Z24quad_output_set_throttlei
  .text._Z16quad_output_initv
-                0x000005cc       0xdc quad_output.o
-                0x000005cc                _Z16quad_output_initv
+                0x0000057e       0xdc quad_output.o
+                0x0000057e                _Z16quad_output_initv
  .text.__vector_9
-                0x000006a8      0x1c6 rx.o
-                0x000006a8                __vector_9
+                0x0000065a      0x1c6 rx.o
+                0x0000065a                __vector_9
  .text._Z7rx_initv
-                0x0000086e       0x3a rx.o
-                0x0000086e                _Z7rx_initv
- .text._Z9rx_updatev
-                0x000008a8      0x100 rx.o
-                0x000008a8                _Z9rx_updatev
+                0x00000820       0x3a rx.o
+                0x00000820                _Z7rx_initv
  .text.__vector_23
-                0x000009a8       0x94 timing.o
-                0x000009a8                __vector_23
- .text._Z6millisv
-                0x00000a3c       0x1a timing.o
-                0x00000a3c                _Z6millisv
+                0x0000085a       0x94 timing.o
+                0x0000085a                __vector_23
  .text._Z6microsv
-                0x00000a56       0x50 timing.o
-                0x00000a56                _Z6microsv
+                0x000008ee       0x50 timing.o
+                0x000008ee                _Z6microsv
  .text._Z10initTimersv
-                0x00000aa6        0xe timing.o
-                0x00000aa6                _Z10initTimersv
+                0x0000093e        0xe timing.o
+                0x0000093e                _Z10initTimersv
  .text._Z10USART_initii
-                0x00000ab4       0xb2 usart.o
-                0x00000ab4                _Z10USART_initii
+                0x0000094c       0xb2 usart.o
+                0x0000094c                _Z10USART_initii
  .text._Z10USART_sendih
-                0x00000b66       0x54 usart.o
-                0x00000b66                _Z10USART_sendih
+                0x000009fe       0x54 usart.o
+                0x000009fe                _Z10USART_sendih
  .text._Z15USART_putstringiPKc
-                0x00000bba       0x28 usart.o
-                0x00000bba                _Z15USART_putstringiPKc
+                0x00000a52       0x28 usart.o
+                0x00000a52                _Z15USART_putstringiPKc
  .text._Z10initialisev
-                0x00000be2       0x94 waypointNavigator.o
-                0x00000be2                _Z10initialisev
- .text.main     0x00000c76        0x6 waypointNavigator.o
-                0x00000c76                main
+                0x00000a7a       0x70 waypointNavigator.o
+                0x00000a7a                _Z10initialisev
+ .text.main     0x00000aea       0x18 waypointNavigator.o
+                0x00000aea                main
  .text.avr-libc.fplib
-                0x00000c7c        0xa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3.o)
-                0x00000c7c                __subsf3
-                0x00000c7e                __addsf3
+                0x00000b02        0xa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3.o)
+                0x00000b02                __subsf3
+                0x00000b04                __addsf3
  .text.avr-libc.fplib
-                0x00000c86       0xc0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3x.o)
-                0x00000ca0                __addsf3x
+                0x00000b0c       0xc0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(addsf3x.o)
+                0x00000b26                __addsf3x
  .text.avr-libc.fplib
-                0x00000d46        0x8 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(cmpsf2.o)
-                0x00000d46                __nesf2
-                0x00000d46                __eqsf2
-                0x00000d46                __cmpsf2
-                0x00000d46                __ltsf2
-                0x00000d46                __lesf2
+                0x00000bcc       0x74 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan2.o)
+                0x00000bea                atan2
  .text.avr-libc.fplib
-                0x00000d4e        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(divsf3.o)
-                0x00000d4e                __divsf3
+                0x00000c40       0x50 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(atan.o)
+                0x00000c40                atan
  .text.avr-libc.fplib
-                0x00000d52       0xcc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(divsf3x.o)
-                0x00000d68                __divsf3x
-                0x00000d6c                __divsf3_pse
+                0x00000c90        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(divsf3.o)
+                0x00000c90                __divsf3
  .text.avr-libc.fplib
-                0x00000e1e       0x7a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(floatsisf.o)
-                0x00000e1e                __floatunsisf
-                0x00000e22                __floatsisf
+                0x00000c94       0xcc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(divsf3x.o)
+                0x00000caa                __divsf3x
+                0x00000cae                __divsf3_pse
  .text.avr-libc.fplib
-                0x00000e98       0x48 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_cmp.o)
-                0x00000e98                __fp_cmp
+                0x00000d60       0x7a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(floatsisf.o)
+                0x00000d60                __floatunsisf
+                0x00000d64                __floatsisf
  .text.avr-libc.fplib
-                0x00000ee0        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_inf.o)
-                0x00000ee0                __fp_inf
+                0x00000dda        0xc c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_inf.o)
+                0x00000dda                __fp_inf
  .text.avr-libc.fplib
-                0x00000eec        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_nan.o)
-                0x00000eec                __fp_nan
+                0x00000de6        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_nan.o)
+                0x00000de6                __fp_nan
  .text.avr-libc.fplib
-                0x00000ef2        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
-                0x00000ef2                __fp_pscA
+                0x00000dec       0x4a c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_powser.o)
+                0x00000dec                __fp_powser
  .text.avr-libc.fplib
-                0x00000f00        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
-                0x00000f00                __fp_pscB
+                0x00000e36        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
+                0x00000e36                __fp_pscA
  .text.avr-libc.fplib
-                0x00000f0e       0x22 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_round.o)
-                0x00000f0e                __fp_round
+                0x00000e44        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
+                0x00000e44                __fp_pscB
  .text.avr-libc.fplib
-                0x00000f30       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_split3.o)
-                0x00000f30                __fp_split3
-                0x00000f40                __fp_splitA
+                0x00000e52       0x22 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_round.o)
+                0x00000e52                __fp_round
  .text.avr-libc.fplib
-                0x00000f74        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_zero.o)
-                0x00000f74                __fp_zero
-                0x00000f76                __fp_szero
+                0x00000e74       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_split3.o)
+                0x00000e74                __fp_split3
+                0x00000e84                __fp_splitA
  .text.avr-libc.fplib
-                0x00000f82        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3.o)
-                0x00000f82                __mulsf3
+                0x00000eb8        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(fp_zero.o)
+                0x00000eb8                __fp_zero
+                0x00000eba                __fp_szero
  .text.avr-libc.fplib
-                0x00000f86       0xc2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
-                0x00000f9a                __mulsf3x
-                0x00000f9e                __mulsf3_pse
+                0x00000ec6        0xe c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(inverse.o)
+                0x00000ec6                inverse
+ .text.avr-libc.fplib
+                0x00000ed4        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3.o)
+                0x00000ed4                __mulsf3
+ .text.avr-libc.fplib
+                0x00000ed8       0xc2 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
+                0x00000eec                __mulsf3x
+                0x00000ef0                __mulsf3_pse
+ .text.avr-libc.fplib
+                0x00000f9a        0x6 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libm.a(square.o)
+                0x00000f9a                square
  .text.libgcc.div
-                0x00001048       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_udivmodsi4.o)
-                0x00001048                __udivmodsi4
+                0x00000fa0       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_udivmodsi4.o)
+                0x00000fa0                __udivmodsi4
  .text.avr-libc
-                0x0000108c       0x40 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtostrf.o)
-                0x0000108c                dtostrf
+                0x00000fe4       0x40 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtostrf.o)
+                0x00000fe4                dtostrf
  .text.avr-libc
-                0x000010cc      0x2fa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtoa_prf.o)
-                0x000010cc                dtoa_prf
+                0x00001024      0x2fa c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(dtoa_prf.o)
+                0x00001024                dtoa_prf
  .text.avr-libc
-                0x000013c6      0x1b0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
-                0x000013c6                __ftoa_engine
-                0x00001576                . = ALIGN (0x2)
+                0x0000131e      0x1b0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
+                0x0000131e                __ftoa_engine
+                0x000014ce                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001576        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
-                0x00001576                _exit
-                0x00001576                exit
+ .fini9         0x000014ce        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+                0x000014ce                _exit
+                0x000014ce                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -975,11 +996,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001576        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+ .fini0         0x000014ce        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000157a                _etext = .
+                0x000014d2                _etext = .
 
-.data           0x00800200      0x108 load address 0x0000157a
+.data           0x00800200       0x6e load address 0x000014d2
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1056/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
@@ -1055,119 +1076,92 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800200       0xd4 altimeter.o
+                0x00800200       0x50 compass.o
+                                 0x51 (size before relaxing)
  .rodata.str1.1
-                0x008002d4        0x3 debug.o
+                0x00800250        0x3 debug.o
  .rodata.str1.1
-                0x008002d7       0x31 waypointNavigator.o
+                0x00800253       0x1a waypointNavigator.o
  *(.gnu.linkonce.d*)
-                0x00800308                . = ALIGN (0x2)
-                0x00800308                _edata = .
-                0x00800308                PROVIDE (__data_end, .)
+                0x0080026e                . = ALIGN (0x2)
+ *fill*         0x0080026d        0x1 
+                0x0080026e                _edata = .
+                0x0080026e                PROVIDE (__data_end, .)
 
-.bss            0x00800308       0x50
-                0x00800308                PROVIDE (__bss_start, .)
+.bss            0x0080026e       0x39
+                0x0080026e                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.start_height
-                0x00800308        0x4 altimeter.o
-                0x00800308                start_height
+ .bss.raw_z     0x0080026e        0x2 compass.o
+                0x0080026e                raw_z
+ .bss.raw_y     0x00800270        0x2 compass.o
+                0x00800270                raw_y
+ .bss.raw_x     0x00800272        0x2 compass.o
+                0x00800272                raw_x
  .bss.throttle_out
-                0x0080030c        0x4 quad_output.o
-                0x0080030c                throttle_out
- .bss._ZZ9rx_updatevE7unAuxIn
-                0x00800310        0x2 rx.o
- .bss._ZZ9rx_updatevE8unGearIn
-                0x00800312        0x2 rx.o
- .bss._ZZ9rx_updatevE10unRudderIn
-                0x00800314        0x2 rx.o
- .bss._ZZ9rx_updatevE12unElevatorIn
-                0x00800316        0x2 rx.o
- .bss._ZZ9rx_updatevE11unAileronIn
-                0x00800318        0x2 rx.o
- .bss._ZZ9rx_updatevE12unThrottleIn
-                0x0080031a        0x2 rx.o
- .bss._ZZ9rx_updatevE13rxUpdateFlags
-                0x0080031c        0x1 rx.o
+                0x00800274        0x4 quad_output.o
+                0x00800274                throttle_out
  .bss.portHistory
-                0x0080031d        0x1 rx.o
-                0x0080031d                portHistory
- .bss.rxInputAux
-                0x0080031e        0x2 rx.o
-                0x0080031e                rxInputAux
- .bss.rxInputGear
-                0x00800320        0x2 rx.o
-                0x00800320                rxInputGear
- .bss.rxInputRudder
-                0x00800322        0x2 rx.o
-                0x00800322                rxInputRudder
- .bss.rxInputElevator
-                0x00800324        0x2 rx.o
-                0x00800324                rxInputElevator
- .bss.rxInputAileron
-                0x00800326        0x2 rx.o
-                0x00800326                rxInputAileron
- .bss.rxInputThrottle
-                0x00800328        0x2 rx.o
-                0x00800328                rxInputThrottle
+                0x00800278        0x1 rx.o
+                0x00800278                portHistory
  .bss.ulAuxStart
-                0x0080032a        0x4 rx.o
-                0x0080032a                ulAuxStart
+                0x00800279        0x4 rx.o
+                0x00800279                ulAuxStart
  .bss.ulGearStart
-                0x0080032e        0x4 rx.o
-                0x0080032e                ulGearStart
+                0x0080027d        0x4 rx.o
+                0x0080027d                ulGearStart
  .bss.ulRudderStart
-                0x00800332        0x4 rx.o
-                0x00800332                ulRudderStart
+                0x00800281        0x4 rx.o
+                0x00800281                ulRudderStart
  .bss.ulElevatorStart
-                0x00800336        0x4 rx.o
-                0x00800336                ulElevatorStart
+                0x00800285        0x4 rx.o
+                0x00800285                ulElevatorStart
  .bss.ulAileronStart
-                0x0080033a        0x4 rx.o
-                0x0080033a                ulAileronStart
+                0x00800289        0x4 rx.o
+                0x00800289                ulAileronStart
  .bss.ulThrottleStart
-                0x0080033e        0x4 rx.o
-                0x0080033e                ulThrottleStart
+                0x0080028d        0x4 rx.o
+                0x0080028d                ulThrottleStart
  .bss.rxUpdateFlagsShared
-                0x00800342        0x1 rx.o
-                0x00800342                rxUpdateFlagsShared
+                0x00800291        0x1 rx.o
+                0x00800291                rxUpdateFlagsShared
  .bss.unAuxInShared
-                0x00800343        0x2 rx.o
-                0x00800343                unAuxInShared
+                0x00800292        0x2 rx.o
+                0x00800292                unAuxInShared
  .bss.unGearInShared
-                0x00800345        0x2 rx.o
-                0x00800345                unGearInShared
+                0x00800294        0x2 rx.o
+                0x00800294                unGearInShared
  .bss.unRudderInShared
-                0x00800347        0x2 rx.o
-                0x00800347                unRudderInShared
+                0x00800296        0x2 rx.o
+                0x00800296                unRudderInShared
  .bss.unElevatorInShared
-                0x00800349        0x2 rx.o
-                0x00800349                unElevatorInShared
+                0x00800298        0x2 rx.o
+                0x00800298                unElevatorInShared
  .bss.unAileronInShared
-                0x0080034b        0x2 rx.o
-                0x0080034b                unAileronInShared
+                0x0080029a        0x2 rx.o
+                0x0080029a                unAileronInShared
  .bss.unThrottleInShared
-                0x0080034d        0x2 rx.o
-                0x0080034d                unThrottleInShared
+                0x0080029c        0x2 rx.o
+                0x0080029c                unThrottleInShared
  .bss._ZL12timer0_fract
-                0x0080034f        0x1 timing.o
+                0x0080029e        0x1 timing.o
  .bss.timer0_millis
-                0x00800350        0x4 timing.o
-                0x00800350                timer0_millis
+                0x0080029f        0x4 timing.o
+                0x0080029f                timer0_millis
  .bss.timer0_overflow_count
-                0x00800354        0x4 timing.o
-                0x00800354                timer0_overflow_count
+                0x008002a3        0x4 timing.o
+                0x008002a3                timer0_overflow_count
  *(COMMON)
-                0x00800358                PROVIDE (__bss_end, .)
-                0x0000157a                __data_load_start = LOADADDR (.data)
-                0x00001682                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008002a7                PROVIDE (__bss_end, .)
+                0x000014d2                __data_load_start = LOADADDR (.data)
+                0x00001540                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800358        0x0
-                0x00800358                PROVIDE (__noinit_start, .)
+.noinit         0x008002a7        0x0
+                0x008002a7                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800358                PROVIDE (__noinit_end, .)
-                0x00800358                _end = .
-                0x00800358                PROVIDE (__heap_start, .)
+                0x008002a7                PROVIDE (__noinit_end, .)
+                0x008002a7                _end = .
+                0x008002a7                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -1276,109 +1270,109 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3a40
+.debug_info     0x00000000     0x3bc1
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x7c6 altimeter.o
  .debug_info    0x000007c6      0x693 benchmark.o
- .debug_info    0x00000e59      0x2f0 compass.o
- .debug_info    0x00001149      0x48e debug.o
- .debug_info    0x000015d7      0x978 gps.o
- .debug_info    0x00001f4f       0x88 i2cmaster.o
- .debug_info    0x00001fd7      0x567 quad_control.o
- .debug_info    0x0000253e      0x47b quad_output.o
- .debug_info    0x000029b9      0x453 rx.o
- .debug_info    0x00002e0c      0x1b0 timing.o
- .debug_info    0x00002fbc      0x193 usart.o
- .debug_info    0x0000314f      0x53d waypoint.o
- .debug_info    0x0000368c      0x3b4 waypointNavigator.o
+ .debug_info    0x00000e59      0x47e compass.o
+ .debug_info    0x000012d7      0x48e debug.o
+ .debug_info    0x00001765      0x978 gps.o
+ .debug_info    0x000020dd       0x88 i2cmaster.o
+ .debug_info    0x00002165      0x567 quad_control.o
+ .debug_info    0x000026cc      0x47b quad_output.o
+ .debug_info    0x00002b47      0x453 rx.o
+ .debug_info    0x00002f9a      0x1b0 timing.o
+ .debug_info    0x0000314a      0x193 usart.o
+ .debug_info    0x000032dd      0x53d waypoint.o
+ .debug_info    0x0000381a      0x3a7 waypointNavigator.o
 
-.debug_abbrev   0x00000000     0x12ca
+.debug_abbrev   0x00000000     0x12b0
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x236 altimeter.o
  .debug_abbrev  0x00000236      0x1c9 benchmark.o
- .debug_abbrev  0x000003ff      0x174 compass.o
- .debug_abbrev  0x00000573      0x1da debug.o
- .debug_abbrev  0x0000074d      0x1d2 gps.o
- .debug_abbrev  0x0000091f       0x14 i2cmaster.o
- .debug_abbrev  0x00000933      0x1e8 quad_control.o
- .debug_abbrev  0x00000b1b      0x169 quad_output.o
- .debug_abbrev  0x00000c84      0x169 rx.o
- .debug_abbrev  0x00000ded       0xd5 timing.o
- .debug_abbrev  0x00000ec2       0xe9 usart.o
- .debug_abbrev  0x00000fab      0x19c waypoint.o
- .debug_abbrev  0x00001147      0x183 waypointNavigator.o
+ .debug_abbrev  0x000003ff      0x15d compass.o
+ .debug_abbrev  0x0000055c      0x1da debug.o
+ .debug_abbrev  0x00000736      0x1d2 gps.o
+ .debug_abbrev  0x00000908       0x14 i2cmaster.o
+ .debug_abbrev  0x0000091c      0x1e8 quad_control.o
+ .debug_abbrev  0x00000b04      0x169 quad_output.o
+ .debug_abbrev  0x00000c6d      0x169 rx.o
+ .debug_abbrev  0x00000dd6       0xd5 timing.o
+ .debug_abbrev  0x00000eab       0xe9 usart.o
+ .debug_abbrev  0x00000f94      0x19c waypoint.o
+ .debug_abbrev  0x00001130      0x180 waypointNavigator.o
 
-.debug_line     0x00000000     0x1f4c
+.debug_line     0x00000000     0x1f55
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x3ae altimeter.o
  .debug_line    0x000003ae      0x31e benchmark.o
- .debug_line    0x000006cc      0x1bb compass.o
- .debug_line    0x00000887      0x1f5 debug.o
- .debug_line    0x00000a7c      0x2c4 gps.o
- .debug_line    0x00000d40      0x2a3 i2cmaster.o
- .debug_line    0x00000fe3      0x25d quad_control.o
- .debug_line    0x00001240      0x1f1 quad_output.o
- .debug_line    0x00001431      0x36d rx.o
- .debug_line    0x0000179e      0x199 timing.o
- .debug_line    0x00001937      0x263 usart.o
- .debug_line    0x00001b9a      0x17c waypoint.o
- .debug_line    0x00001d16      0x236 waypointNavigator.o
+ .debug_line    0x000006cc      0x1c7 compass.o
+ .debug_line    0x00000893      0x1f5 debug.o
+ .debug_line    0x00000a88      0x2c4 gps.o
+ .debug_line    0x00000d4c      0x2a3 i2cmaster.o
+ .debug_line    0x00000fef      0x25d quad_control.o
+ .debug_line    0x0000124c      0x1f1 quad_output.o
+ .debug_line    0x0000143d      0x36d rx.o
+ .debug_line    0x000017aa      0x199 timing.o
+ .debug_line    0x00001943      0x263 usart.o
+ .debug_line    0x00001ba6      0x17c waypoint.o
+ .debug_line    0x00001d22      0x233 waypointNavigator.o
 
-.debug_frame    0x00000000      0x994
+.debug_frame    0x00000000      0x9a0
  *(.debug_frame)
  .debug_frame   0x00000000      0x110 altimeter.o
  .debug_frame   0x00000110      0x144 benchmark.o
- .debug_frame   0x00000254       0x34 compass.o
- .debug_frame   0x00000288       0xa0 debug.o
- .debug_frame   0x00000328      0x17c gps.o
- .debug_frame   0x000004a4       0x9c quad_control.o
- .debug_frame   0x00000540       0xfc quad_output.o
- .debug_frame   0x0000063c      0x114 rx.o
- .debug_frame   0x00000750       0x7c timing.o
- .debug_frame   0x000007cc       0x74 usart.o
- .debug_frame   0x00000840      0x118 waypoint.o
- .debug_frame   0x00000958       0x3c waypointNavigator.o
+ .debug_frame   0x00000254       0x48 compass.o
+ .debug_frame   0x0000029c       0xa0 debug.o
+ .debug_frame   0x0000033c      0x17c gps.o
+ .debug_frame   0x000004b8       0x9c quad_control.o
+ .debug_frame   0x00000554       0xfc quad_output.o
+ .debug_frame   0x00000650      0x114 rx.o
+ .debug_frame   0x00000764       0x7c timing.o
+ .debug_frame   0x000007e0       0x74 usart.o
+ .debug_frame   0x00000854      0x118 waypoint.o
+ .debug_frame   0x0000096c       0x34 waypointNavigator.o
 
-.debug_str      0x00000000     0x12f7
+.debug_str      0x00000000     0x1268
  *(.debug_str)
- .debug_str     0x00000000      0x491 altimeter.o
-                                0x4f0 (size before relaxing)
- .debug_str     0x00000491      0x1f0 benchmark.o
-                                0x444 (size before relaxing)
- .debug_str     0x00000681      0x13f compass.o
-                                0x2f4 (size before relaxing)
- .debug_str     0x000007c0       0xd6 debug.o
-                                0x31e (size before relaxing)
- .debug_str     0x00000896      0x253 gps.o
-                                0x42c (size before relaxing)
- .debug_str     0x00000ae9      0x24d quad_control.o
-                                0x4ea (size before relaxing)
- .debug_str     0x00000d36      0x1aa quad_output.o
-                                0x464 (size before relaxing)
- .debug_str     0x00000ee0      0x1d6 rx.o
+ .debug_str     0x00000000      0x4a0 altimeter.o
+                                0x4ff (size before relaxing)
+ .debug_str     0x000004a0      0x1f0 benchmark.o
+                                0x453 (size before relaxing)
+ .debug_str     0x00000690       0xa7 compass.o
+                                0x2fd (size before relaxing)
+ .debug_str     0x00000737       0xd6 debug.o
+                                0x32d (size before relaxing)
+ .debug_str     0x0000080d      0x253 gps.o
+                                0x43b (size before relaxing)
+ .debug_str     0x00000a60      0x24d quad_control.o
+                                0x4f9 (size before relaxing)
+ .debug_str     0x00000cad      0x1aa quad_output.o
                                 0x473 (size before relaxing)
- .debug_str     0x000010b6       0x7b timing.o
+ .debug_str     0x00000e57      0x1d6 rx.o
+                                0x482 (size before relaxing)
+ .debug_str     0x0000102d       0x7b timing.o
                                 0x232 (size before relaxing)
- .debug_str     0x00001131       0x5a usart.o
+ .debug_str     0x000010a8       0x5a usart.o
                                 0x257 (size before relaxing)
- .debug_str     0x0000118b      0x131 waypoint.o
-                                0x2fb (size before relaxing)
- .debug_str     0x000012bc       0x3b waypointNavigator.o
-                                0x324 (size before relaxing)
+ .debug_str     0x00001102      0x12b waypoint.o
+                                0x30a (size before relaxing)
+ .debug_str     0x0000122d       0x3b waypointNavigator.o
+                                0x343 (size before relaxing)
 
-.debug_loc      0x00000000     0x2140
+.debug_loc      0x00000000     0x2185
  *(.debug_loc)
  .debug_loc     0x00000000      0x467 altimeter.o
  .debug_loc     0x00000467      0x541 benchmark.o
- .debug_loc     0x000009a8      0x18e debug.o
- .debug_loc     0x00000b36      0x5aa gps.o
- .debug_loc     0x000010e0      0x207 quad_control.o
- .debug_loc     0x000012e7      0x296 quad_output.o
- .debug_loc     0x0000157d      0x134 rx.o
- .debug_loc     0x000016b1      0x169 timing.o
- .debug_loc     0x0000181a      0x25c usart.o
- .debug_loc     0x00001a76      0x636 waypoint.o
- .debug_loc     0x000020ac       0x94 waypointNavigator.o
+ .debug_loc     0x000009a8       0xd9 compass.o
+ .debug_loc     0x00000a81      0x18e debug.o
+ .debug_loc     0x00000c0f      0x5aa gps.o
+ .debug_loc     0x000011b9      0x207 quad_control.o
+ .debug_loc     0x000013c0      0x296 quad_output.o
+ .debug_loc     0x00001656      0x134 rx.o
+ .debug_loc     0x0000178a      0x169 timing.o
+ .debug_loc     0x000018f3      0x25c usart.o
+ .debug_loc     0x00001b4f      0x636 waypoint.o
 
 .debug_macinfo
  *(.debug_macinfo)

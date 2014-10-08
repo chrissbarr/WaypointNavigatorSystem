@@ -1,58 +1,83 @@
 /*
- * compass.cpp
+ * COMPLASSZ.cpp
  *
- * Created: 15/09/2014 7:43:10 PM
+ * Created: 3/10/2014 10:26:05 AM
+ *  Author: axzqy008
  */ 
 
-#include "i2cmaster.h"
-#include "main.h"
-#include <util/delay.h>
+#include "compass.h"
 
-#define HMC5883L_WRITE 0x3C
-#define HMC5883L_READ 0x3D
+int16_t raw_x = 0;
+int16_t raw_y = 0;
+int16_t raw_z = 0;
 
-bool compass_init()
-{
-	i2c_init();                             // initialize I2C library
-	
-	i2c_start_wait(HMC5883L_WRITE+I2C_WRITE);     // set device address and write mode
-	
-	//first line (send 0x3C 0x00 0x70), 0x3C is already sent by library when we define i2c_start_wait above
-	i2c_write(0x00);                        // write address = register0
-	i2c_write(0x70);                        // write value 0x70 to register
-	
-	//second line (send 0x3C 0x01 0xA0)
-	i2c_write(0x01);                        // write address = register1
-	i2c_write(0xA0);                        // write value 0xA0 to register
+void init_HMC5883L(void){
+
+	i2c_start(HMC5883L_WRITE);
+	i2c_write(0x00); // set pointer to CRA
+	i2c_write(0x70); // write 0x70 to CRA
+	i2c_stop();
+
+	i2c_start(HMC5883L_WRITE);
+	i2c_write(0x01); // set pointer to CRB
+	i2c_write(0xA0);
+	i2c_stop();
+
+	i2c_start(HMC5883L_WRITE);
+	i2c_write(0x02); // set pointer to measurement mode
+	i2c_write(0x00); // continuous measurement
+	i2c_stop();
 }
 
-void compass_read()
-{
+float getHeading(void){
+
+	i2c_start_wait(HMC5883L_WRITE);
+	i2c_write(0x03); //set pointer to X-axis MSB
+	i2c_stop();
+
+	i2c_rep_start(HMC5883L_READ);
+
+	raw_x = ((uint8_t)i2c_readAck())<<8;
+	raw_x |= i2c_readAck();
+
+	raw_z = ((uint8_t)i2c_readAck())<<8;
+	raw_z |= i2c_readAck();
+
+	raw_y = ((uint8_t)i2c_readAck())<<8;
+	raw_y |= i2c_readNak();
+
+	i2c_stop();
 	
-	i2c_start_wait(HMC5883L_WRITE+I2C_WRITE);     // set device address and write mode
-	i2c_write(0x02);                        // write address = register2
-	i2c_write(0x01);                        // write value 0x01 to register
+	float heading = atan2(raw_y,raw_x)/2;
+	float heading_dec = heading+DECLINATION;
 	
-	//we've told the compass we want a reading. It takes 6ms to respond (from the datasheet), so let's wait 6ms to be safe.
-	_delay_ms(6);
+	/*
+	if(heading < 0)
+		heading += 2*PI;
 	
-	//now, set where we are reading from (register 0x06)
-	i2c_write(0x06);  
+	if(heading>2*PI)
+		heading-=2*PI;
+		
+	if(heading_dec < 0)
+	heading_dec += 2*PI;
 	
-	//Now we need to read the value back. Let's change from writing to reading:
-	i2c_start_wait(HMC5883L_READ+I2C_READ);     // set device address and read mode
+	if(heading_dec>2*PI)
+	heading_dec-=2*PI;
+	*/
+		
+	float heading_degrees = heading * 180 / PI;
+	float heading_dec_degrees = heading_dec * 180 / PI;
 	
-	//and read the value. From the datasheet, the information comes in 6 bytes, representing X, Y and Z values. So, we need two variables for each:
-	int x_highbyte, x_lowbyte, y_highbyte, y_lowbyte, z_highbyte, z_lowbyte;
+	debug_print("Raw x: ");
+	debug_printf(raw_x);
+	debug_print("\t Heading (radians): ");
+	debug_printf(heading);
+	debug_print("\t Heading (degrees): ");
+	debug_printf(heading_degrees);
+	debug_print("\t Heading (w/Declination): ");
+	debug_printf(heading_dec_degrees);
+	debug_println("");
 	
-	//this reads one byte
-	x_highbyte = i2c_readAck();                    // read one byte from compass
-	x_lowbyte = i2c_readAck();                    // read one byte from compass
 	
-	y_highbyte = i2c_readAck();                    // read one byte from compass
-	y_lowbyte = i2c_readAck();                    // read one byte from compass
-	
-	z_highbyte = i2c_readAck();                    // read one byte from compass
-	z_lowbyte = i2c_readNak();                    // read one byte from compass, stop reading (NAK)
-	
+	return (atan2((double)raw_y,(double)raw_x)* 180) / 3.14159265 + 180 + DECLINATION;
 }

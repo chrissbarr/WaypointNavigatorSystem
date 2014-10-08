@@ -24,6 +24,7 @@
 #include "quad_output.h"
 #include "altimeter.h"
 #include "quad_control.h"
+#include "compass.h"
 
 //other includes
 #include <avr/io.h>
@@ -41,7 +42,10 @@ int main(void)
 	
 	while(1)
 	{
-		rx_update();
+		//rx_update();
+		_delay_ms(500);
+		//debug_printf(getHeading());
+		getHeading();
 		
 		
 	}
@@ -55,11 +59,14 @@ bool initialise()
 	initTimers();
 	rx_init();
 	
+	/*
 	if(altimeter_init()==false)
 		success=false;
+		*/
 
 	quad_output_init();
 	
+	/*
 	if(success==false)
 	{
 		debug_println("Initialization failed!");
@@ -70,6 +77,11 @@ bool initialise()
 			_delay_ms(200);
 		}
 	}
+	*/
+	
+	i2c_init();
+	
+	init_HMC5883L();
 	
 	debug_println("Initialization succeeded!");
 	

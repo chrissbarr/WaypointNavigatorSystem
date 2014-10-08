@@ -24,7 +24,7 @@ waypointNavigator.d waypointNavigator.o: .././waypointNavigator.cpp \
  .././rx.h .././waypoint.h .././gps.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\string.h \
  .././benchmark.h .././quad_output.h .././altimeter.h .././i2cmaster.h \
- .././quad_control.h \
+ .././quad_control.h .././compass.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\atomic.h
 
 .././main.h:
@@ -92,5 +92,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-g
 .././i2cmaster.h:
 
 .././quad_control.h:
+
+.././compass.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\atomic.h:

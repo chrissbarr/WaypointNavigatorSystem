@@ -150,6 +150,9 @@
     <Compile Include="compass.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="compass.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="debug.cpp">
       <SubType>compile</SubType>
     </Compile>

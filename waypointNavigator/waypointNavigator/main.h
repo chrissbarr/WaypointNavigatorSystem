@@ -7,6 +7,7 @@
 
 
 #define F_CPU  16000000L		//16MHz clock rate, needed for timing functions
+#define PI 3.1415926535
 
 //enable or disable debug features. Debug features are useful but might slow AVR down, best to turn them off when not needed.
 #define DEBUG_ENABLE true
