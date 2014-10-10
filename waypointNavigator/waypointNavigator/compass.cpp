@@ -11,6 +11,16 @@ int16_t raw_x = 0;
 int16_t raw_y = 0;
 int16_t raw_z = 0;
 
+int16_t fixed_x = 0;
+int16_t fixed_y = 0;
+int16_t fixed_z = 0;
+
+int16_t k1x = 1;
+int16_t k2x = 13.52;
+
+int16_t k1y = 1;
+int16_t k2y = -137.703532;
+
 void init_HMC5883L(void){
 
 	i2c_start(HMC5883L_WRITE);
@@ -46,12 +56,15 @@ float getHeading(void){
 	raw_y = ((uint8_t)i2c_readAck())<<8;
 	raw_y |= i2c_readNak();
 
+	fixed_x = k1x * (raw_x - k2x);
+	fixed_y = k1y * (raw_y - k2y);
+	
 	i2c_stop();
 	
-	float heading = atan2(raw_y,raw_x)/2;
+	float heading = atan2(fixed_y,fixed_x);
 	float heading_dec = heading+DECLINATION;
 	
-	/*
+	
 	if(heading < 0)
 		heading += 2*PI;
 	
@@ -63,7 +76,7 @@ float getHeading(void){
 	
 	if(heading_dec>2*PI)
 	heading_dec-=2*PI;
-	*/
+	
 		
 	float heading_degrees = heading * 180 / PI;
 	float heading_dec_degrees = heading_dec * 180 / PI;
