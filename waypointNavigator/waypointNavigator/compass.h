@@ -24,3 +24,9 @@ extern "C" {
 
 void init_HMC5883L(void);
 float getHeading(void);
+int16_t getHeadingTiltCompensated(void);
+
+int16_t iHundredAtan2Deg(int16_t val1, int16_t val2);
+int16_t iHundredAtanDeg(int16_t val1, int16_t val2);
+int16_t iTrig(int16_t val1, int16_t val2);
+int16_t iDivide(int16_t iy, int16_t ix);

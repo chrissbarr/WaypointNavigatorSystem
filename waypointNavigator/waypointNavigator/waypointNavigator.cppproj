@@ -135,6 +135,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="accelerometer.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="accelerometer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="altimeter.cpp">
       <SubType>compile</SubType>
     </Compile>

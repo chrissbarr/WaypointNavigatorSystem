@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+accelerometer.cpp
+
 altimeter.cpp
 
 benchmark.cpp

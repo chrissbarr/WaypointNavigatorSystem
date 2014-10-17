@@ -25,6 +25,7 @@
 #include "altimeter.h"
 #include "quad_control.h"
 #include "compass.h"
+#include "accelerometer.h"
 
 //other includes
 #include <avr/io.h>
@@ -39,13 +40,28 @@ int main(void)
 {
 	initialise();
 	
+	adxl345_init();
 	
 	while(1)
 	{
 		//rx_update();
 		_delay_ms(500);
-		//debug_printf(getHeading());
-		getHeading();
+		double accel_x, accel_y, accel_z;
+	
+		
+		adxl345_getdata(&accel_x,&accel_y,&accel_z);
+		debug_printf(accel_x);
+		debug_print("\t");
+		debug_printf(accel_y);
+		debug_print("\t");
+		debug_printf(accel_z);
+		debug_print("\t");
+		debug_printf(getHeading());
+		debug_println("");
+		
+		//debug_printi(getHeadingTiltCompensated());
+		//debug_println("");
+		//getHeading();
 		
 		
 	}

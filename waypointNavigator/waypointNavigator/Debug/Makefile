@@ -36,6 +36,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../accelerometer.cpp \
 ../altimeter.cpp \
 ../benchmark.cpp \
 ../compass.cpp \
@@ -58,6 +59,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+accelerometer.o \
 altimeter.o \
 benchmark.o \
 compass.o \
@@ -73,6 +75,7 @@ waypoint.o \
 waypointNavigator.o
 
 OBJS_AS_ARGS +=  \
+accelerometer.o \
 altimeter.o \
 benchmark.o \
 compass.o \
@@ -88,6 +91,7 @@ waypoint.o \
 waypointNavigator.o
 
 C_DEPS +=  \
+accelerometer.d \
 altimeter.d \
 benchmark.d \
 compass.d \
@@ -103,6 +107,7 @@ waypoint.d \
 waypointNavigator.d
 
 C_DEPS_AS_ARGS +=  \
+accelerometer.d \
 altimeter.d \
 benchmark.d \
 compass.d \
@@ -128,6 +133,8 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
