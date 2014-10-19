@@ -8,6 +8,7 @@ Please refer to LICENSE file for licensing information.
 */
 
 
+#include "main.h"
 #include <stdlib.h>
 #include <avr/io.h>
 #include <util/delay.h>

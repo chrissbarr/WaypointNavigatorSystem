@@ -35,6 +35,16 @@ void debug_printi(int debugNum)
 	}
 }
 
+void debug_printi16(int16_t debugNum)
+{
+	if(DEBUG_ENABLE == true)	//only print debug messages if debugging is enabled.
+	{
+		char string[16];
+		itoa(debugNum,string,16);
+		debug_print(string);
+	}
+}
+
 void debug_printf(float debugNum)
 {
 	if(DEBUG_ENABLE == true)

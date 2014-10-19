@@ -288,11 +288,11 @@ int16_t iHundredAtanDeg(int16_t iy, int16_t ix)
 	}
 	
 	/* first, third and fifth order polynomial approximation */
-	iAngle = (int16_t) K1 * (int16_t) iRatio;
-	iTmp = ((int16_t) iRatio >> 5) * ((int16_t) iRatio >> 5) * ((int16_t) iRatio >> 5);
-	iAngle += (iTmp >> 15) * (int16_t) K2;
-	iTmp = (iTmp >> 20) * ((int16_t) iRatio >> 5) * ((int16_t) iRatio >> 5);
-	iAngle += (iTmp >> 15) * (int16_t) K3;
+	iAngle = (int32_t) K1 * (int32_t) iRatio;
+	iTmp = ((int32_t) iRatio >> 5) * ((int32_t) iRatio >> 5) * ((int32_t) iRatio >> 5);
+	iAngle += (iTmp >> 15) * (int32_t) K2;
+	iTmp = (iTmp >> 20) * ((int32_t) iRatio >> 5) * ((int32_t) iRatio >> 5);
+	iAngle += (iTmp >> 15) * (int32_t) K3;
 	iAngle = iAngle >> 15;
 	
 	/* check if above 45 degrees */

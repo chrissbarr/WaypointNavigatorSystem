@@ -57,9 +57,11 @@ int main(void)
 		debug_printf(accel_z);
 		debug_print("\t");
 		debug_printf(getHeading());
+		debug_print("\t");
+		debug_printi16(getHeadingTiltCompensated());
 		debug_println("");
 		
-		//debug_printi(getHeadingTiltCompensated());
+		
 		//debug_println("");
 		//getHeading();
 		
