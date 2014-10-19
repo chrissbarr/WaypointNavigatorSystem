@@ -21,10 +21,9 @@ waypointNavigator.d waypointNavigator.o: .././waypointNavigator.cpp \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\math.h \
- .././rx.h .././waypoint.h .././gps.h \
- c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\string.h \
- .././benchmark.h .././quad_output.h .././altimeter.h .././i2cmaster.h \
- .././quad_control.h .././compass.h .././accelerometer.h \
+ .././rx.h .././waypoint.h .././gps.h .././benchmark.h .././quad_output.h \
+ .././altimeter.h .././i2cmaster.h .././quad_control.h .././compass.h \
+ .././accelerometer.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\util\atomic.h
 
 .././main.h:
@@ -80,8 +79,6 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-g
 .././waypoint.h:
 
 .././gps.h:
-
-c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1056\avr8-gnu-toolchain\avr\include\string.h:
 
 .././benchmark.h:
 

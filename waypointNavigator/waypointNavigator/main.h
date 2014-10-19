@@ -15,6 +15,8 @@
 #define sbi(a, b) (a) |= (1 << (b))
 #define cbi(a, b) (a) &= ~(1 << (b))
 
+#define byte uint8_t
+
 //defining ports different components will use.
 #define GPS_PORT PIND //USART1 is on Port D, needed to communicate with GPS module
 #define RX_PORT PINB	//port RX is connected to, PORTB has Pin Change interrupts

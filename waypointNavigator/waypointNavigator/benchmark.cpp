@@ -52,6 +52,7 @@ void benchmark_waypoint_get_distance()
 	
 }
 
+/*
 void benchmark_gps_conv_coords()
 {
 	debug_print("Coordinates in DDMM.MMMM format:");
@@ -68,6 +69,7 @@ void benchmark_gps_conv_coords()
 	debug_printf(lat_in_dec_degrees);
 	debug_printf(long_in_dec_degrees);
 }
+*/
 
 void benchmark_millis()
 {
