@@ -60,7 +60,7 @@
 
 
 	void init_HMC5883L(void);
-	float getHeading(void);
+	float compass_get_heading(void);
 	void setMagGain(hmc5883MagGain);
 	int16_t getHeadingTiltCompensated(void);
 

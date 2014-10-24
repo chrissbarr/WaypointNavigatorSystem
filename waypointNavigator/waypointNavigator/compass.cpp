@@ -8,14 +8,14 @@
 #include "compass.h"
 
 //compass raw data
-int8_t mag_raw_xhi = 0;
-int8_t mag_raw_xlo = 0;
+uint8_t mag_raw_xhi = 0;
+uint8_t mag_raw_xlo = 0;
 
-int8_t mag_raw_zhi = 0;
-int8_t mag_raw_zlo = 0;
+uint8_t mag_raw_zhi = 0;
+uint8_t mag_raw_zlo = 0;
 
-int8_t mag_raw_yhi = 0;
-int8_t mag_raw_ylo = 0;
+uint8_t mag_raw_yhi = 0;
+uint8_t mag_raw_ylo = 0;
 
 //compass data
 int16_t mag_data_x, mag_data_y, mag_data_z;
@@ -37,7 +37,7 @@ void init_HMC5883L(void){
 	setMagGain(HMC5883_MAGGAIN_1_3);
 }
 
-float getHeading(void){
+float compass_get_heading(void){
 
 	i2c_start_wait(HMC5883L_WRITE);
 	i2c_write(0x03); //set pointer to X-axis MSB
@@ -65,9 +65,9 @@ float getHeading(void){
 	mag_proc_y = mag_data_y / _hmc5883_Gauss_LSB_XY * GAUSS_TO_MICROTESLA;
 	mag_proc_z = mag_data_z / _hmc5883_Gauss_LSB_Z * GAUSS_TO_MICROTESLA;
 	
-	debug_print("X: ");debug_printf(mag_proc_x);debug_print(" ");
-	debug_print("Y: ");debug_printf(mag_proc_y);debug_print(" ");
-	debug_print("Z: ");debug_printf(mag_proc_z);debug_print(" ");debug_println("uT");
+	//debug_print("X: ");debug_printf(mag_proc_x);debug_print(" ");
+	//debug_print("Y: ");debug_printf(mag_proc_y);debug_print(" ");
+	//debug_print("Z: ");debug_printf(mag_proc_z);debug_print(" ");debug_println("uT");
 	
 	//calculate heading
 	float heading = atan2(mag_proc_y,mag_proc_x);
@@ -82,7 +82,7 @@ float getHeading(void){
 		
 	float heading_degrees = heading * 180 / PI;
 	
-	debug_print("Heading (degrees): "); debug_printf(heading_degrees);debug_println("");
+	//debug_print("Heading (degrees): "); debug_printf(heading_degrees);debug_println("");
 	
 	return heading_degrees;
 }

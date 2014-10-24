@@ -42,7 +42,25 @@ int main(void)
 	
 	while(1)
 	{
-		getHeading();
+		gps_update();
+		
+		
+		debug_print("H");
+		debug_print(",");
+		debug_printf(gps_get_latitude());
+		debug_print(",");
+		debug_printf(gps_get_longitude());
+		debug_print(",");
+		debug_printi(gps_get_sats());
+		debug_print(",");
+		debug_printf(15);//debug_printf(altimeter_get_metres());
+		debug_print(",");
+		debug_printf(waypoint_get_heading());	//target heading
+		debug_print(",");
+		debug_printf(90.1234);//debug_printf(compass_get_heading());
+		debug_print(",");
+		debug_printf(90.1234-waypoint_get_heading());
+		debug_println(",");
 		
 		_delay_ms(500);	
 	}
@@ -50,18 +68,21 @@ int main(void)
 
 bool initialise()
 {
+	
 	bool success = true;
 	
 	USART_init(USART_PC,9600);
+	debug_println("Begininning Initialisation...");
+	
 	initTimers();
-	rx_init();
+	//rx_init();
 	
 	/*
 	if(altimeter_init()==false)
 		success=false;
 		*/
 
-	quad_output_init();
+	//quad_output_init();
 	
 	/*
 	if(success==false)
@@ -76,9 +97,11 @@ bool initialise()
 	}
 	*/
 	
-	i2c_init();
+	//i2c_init();
 	
-	init_HMC5883L();
+	//init_HMC5883L();
+	
+	gps_init();
 	
 	debug_println("Initialization succeeded!");
 	
