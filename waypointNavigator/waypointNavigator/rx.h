@@ -10,7 +10,7 @@
 #include "timing.h"
 #include "debug.h"
 
-#define RX_VERBOSE_OUTPUT false
+#define RX_VERBOSE_OUTPUT true
 
 //--------------RX INPUT FUNCTION PROTOTYPES---------------//
 void rx_init();
