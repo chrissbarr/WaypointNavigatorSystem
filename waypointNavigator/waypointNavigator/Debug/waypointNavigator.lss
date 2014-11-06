@@ -3760,7 +3760,7 @@ void chris_waypoint_init()
     188c:	7a 83       	std	Y+2, r23	; 0x02
     188e:	8b 83       	std	Y+3, r24	; 0x03
     1890:	9c 83       	std	Y+4, r25	; 0x04
-	float circle_scale = 6000;	//100 = radius of ~1000m, 1000 = radius of ~100m, 4000 = radius of ~ 25m
+	float circle_scale = 10000;	//100 = radius of ~1000m, 1000 = radius of ~100m, 4000 = radius of ~ 25m
 	
 	debug_print("Generating circle of waypoints around center latitude ");
     1892:	8a e4       	ldi	r24, 0x4A	; 74
@@ -3809,9 +3809,9 @@ void chris_waypoint_init()
     18d6:	7c 01       	movw	r14, r24
     18d8:	8d d2       	rcall	.+1306   	; 0x1df4 <cos>
     18da:	20 e0       	ldi	r18, 0x00	; 0
-    18dc:	30 e8       	ldi	r19, 0x80	; 128
-    18de:	4b eb       	ldi	r20, 0xBB	; 187
-    18e0:	55 e4       	ldi	r21, 0x45	; 69
+    18dc:	30 e4       	ldi	r19, 0x40	; 64
+    18de:	4c e1       	ldi	r20, 0x1C	; 28
+    18e0:	56 e4       	ldi	r21, 0x46	; 70
     18e2:	8b d2       	rcall	.+1302   	; 0x1dfa <__divsf3>
     18e4:	9b 01       	movw	r18, r22
     18e6:	ac 01       	movw	r20, r24
@@ -3825,9 +3825,9 @@ void chris_waypoint_init()
     18f4:	b6 01       	movw	r22, r12
     18f6:	eb d4       	rcall	.+2518   	; 0x22ce <sin>
     18f8:	20 e0       	ldi	r18, 0x00	; 0
-    18fa:	30 e8       	ldi	r19, 0x80	; 128
-    18fc:	4b eb       	ldi	r20, 0xBB	; 187
-    18fe:	55 e4       	ldi	r21, 0x45	; 69
+    18fa:	30 e4       	ldi	r19, 0x40	; 64
+    18fc:	4c e1       	ldi	r20, 0x1C	; 28
+    18fe:	56 e4       	ldi	r21, 0x46	; 70
     1900:	7c d2       	rcall	.+1272   	; 0x1dfa <__divsf3>
     1902:	29 81       	ldd	r18, Y+1	; 0x01
     1904:	3a 81       	ldd	r19, Y+2	; 0x02
@@ -4041,12 +4041,12 @@ float chris_waypoint_current_distance()
 //check if we're at the waypoint, if so, move on
 void chris_waypoint_update()
 {
-	if(chris_waypoint_current_distance()<2)
+	if(chris_waypoint_current_distance()<1)
     1a5c:	b7 df       	rcall	.-146    	; 0x19cc <_Z31chris_waypoint_current_distancev>
     1a5e:	20 e0       	ldi	r18, 0x00	; 0
     1a60:	30 e0       	ldi	r19, 0x00	; 0
-    1a62:	40 e0       	ldi	r20, 0x00	; 0
-    1a64:	50 e4       	ldi	r21, 0x40	; 64
+    1a62:	40 e8       	ldi	r20, 0x80	; 128
+    1a64:	5f e3       	ldi	r21, 0x3F	; 63
     1a66:	c2 d1       	rcall	.+900    	; 0x1dec <__cmpsf2>
     1a68:	88 23       	and	r24, r24
     1a6a:	4c f4       	brge	.+18     	; 0x1a7e <_Z21chris_waypoint_updatev+0x22>

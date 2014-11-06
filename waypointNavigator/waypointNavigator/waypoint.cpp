@@ -378,7 +378,7 @@ void chris_waypoint_init()
 	
 	float center_lat = gps_get_latitude();
 	float center_long = gps_get_longitude();
-	float circle_scale = 6000;	//100 = radius of ~1000m, 1000 = radius of ~100m, 4000 = radius of ~ 25m
+	float circle_scale = 10000;	//100 = radius of ~1000m, 1000 = radius of ~100m, 4000 = radius of ~ 25m
 	
 	debug_print("Generating circle of waypoints around center latitude ");
 	debug_printf(center_lat);
@@ -399,7 +399,7 @@ void chris_waypoint_init()
 	}
 	
 	chris_array_index=0;
-	
+
 }
 void chris_waypoint_add(float lat, float lon)
 {
@@ -411,7 +411,7 @@ void chris_waypoint_add(float lat, float lon)
 //check if we're at the waypoint, if so, move on
 void chris_waypoint_update()
 {
-	if(chris_waypoint_current_distance()<2)
+	if(chris_waypoint_current_distance()<1)
 		chris_array_index++;
 	
 	if(chris_waypoint_current_index()>NUM_WAYPOINTS)
