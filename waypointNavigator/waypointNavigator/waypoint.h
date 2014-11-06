@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include "gps.h"
 
 #define MAX_WAYPOINTS 100
 #define NAME_STRING_LENGTH 5
@@ -23,6 +24,10 @@
 #define PI 3.1415926535 //pi
 #define EARTH_R 6371000 //Earth radius in metres
 //#define EARTH_R_DIST 63.72795
+
+//last minute stuff
+#define NUM_WAYPOINTS 16
+
 
 // waypoint array
 typedef struct {
@@ -73,4 +78,23 @@ int slow_flight (float, int);
 //getter for external functions
 float waypoint_get_heading();
 
+
+
+//Chris's last minute demo stuff
+void chris_waypoint_init();
+void chris_waypoint_add(float, float);
+void chris_waypoint_update();
+
+//return the bearing to the next waypoint
+float chris_waypoint_current_bearing();
+
+//return the distance to the next waypoint
+float chris_waypoint_current_distance();
+
+int chris_waypoint_current_index();
+void chris_set_waypoint_current_index(int);
+int chris_get_max_waypoints();
+float array_get_lat(int index);
+
+float array_get_lon(int index);
 #endif

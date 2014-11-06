@@ -28,6 +28,8 @@ hmc5883MagGain _magGain;
 static float _hmc5883_Gauss_LSB_XY = 1100.0F;
 static float _hmc5883_Gauss_LSB_Z = 980.0F;
 
+//bool working;
+
 void init_HMC5883L(void){
 
 	i2c_start(HMC5883L_WRITE);

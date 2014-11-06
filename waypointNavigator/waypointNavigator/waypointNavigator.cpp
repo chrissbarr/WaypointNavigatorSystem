@@ -39,30 +39,50 @@ bool initialise();
 int main(void)
 {
 	initialise();
+	uint16_t last_changed = millis();
 	
 	while(1)
 	{
-		gps_update();
+
+		if(gps_update())
+		{
+			chris_waypoint_update();
+			debug_print("H");
+			debug_print(",");
+			debug_printf(gps_get_latitude());
+			debug_print(",");
+			debug_printf(gps_get_longitude());
+			debug_print(",");
+			debug_printi(gps_get_sats());
+			debug_print(",");
+			debug_printf(altimeter_get_metres());
+			debug_print(",");
+			debug_printf(chris_waypoint_current_bearing());	//target heading
+			debug_print(",");
+			float current_heading = compass_get_heading();
+			debug_printf(current_heading);
+			debug_print(",");
+			debug_printf(current_heading-chris_waypoint_current_bearing());
+			debug_print(",");
+			debug_printi(chris_waypoint_current_index());
+			debug_print(",");
+			debug_printf(chris_waypoint_current_distance());
+			debug_print(",");
+			debug_printf(array_get_lat(chris_waypoint_current_index()));
+			debug_print(",");
+			debug_printf(array_get_lon(chris_waypoint_current_index()));
+			debug_println(",");
+		}
 		
+		//automatic testing, every 3 seconds change to the next waypoint
+		if(millis()-last_changed>3000 && 1==2)
+		{
+			chris_set_waypoint_current_index(chris_waypoint_current_index()+1);
+			last_changed=millis();
+		}
 		
-		debug_print("H");
-		debug_print(",");
-		debug_printf(gps_get_latitude());
-		debug_print(",");
-		debug_printf(gps_get_longitude());
-		debug_print(",");
-		debug_printi(gps_get_sats());
-		debug_print(",");
-		debug_printf(15);//debug_printf(altimeter_get_metres());
-		debug_print(",");
-		debug_printf(waypoint_get_heading());	//target heading
-		debug_print(",");
-		debug_printf(90.1234);//debug_printf(compass_get_heading());
-		debug_print(",");
-		debug_printf(90.1234-waypoint_get_heading());
-		debug_println(",");
-		
-		_delay_ms(500);	
+		if(chris_waypoint_current_index()>chris_get_max_waypoints())
+		chris_set_waypoint_current_index(0);
 	}
 }
 
@@ -75,33 +95,17 @@ bool initialise()
 	debug_println("Begininning Initialisation...");
 	
 	initTimers();
-	//rx_init();
 	
-	/*
-	if(altimeter_init()==false)
-		success=false;
-		*/
-
-	//quad_output_init();
+	altimeter_init();
 	
-	/*
-	if(success==false)
-	{
-		debug_println("Initialization failed!");
-		//if something is broken, we can't proceed
-		while(1)
-		{
-			debug_beep_long();
-			_delay_ms(200);
-		}
-	}
-	*/
+	init_HMC5883L();
 	
-	//i2c_init();
-	
-	//init_HMC5883L();
 	
 	gps_init();
+	
+	//Initialise a series of waypoints in a circle around the current coordinates..
+	_delay_ms(1000);
+	chris_waypoint_init();
 	
 	debug_println("Initialization succeeded!");
 	

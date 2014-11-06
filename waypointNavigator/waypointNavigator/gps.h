@@ -18,7 +18,7 @@ int gps_get_sats();
 
 //mian functions
 bool gps_init();
-void gps_update();
+bool gps_update();
 float get_time(char*, int*);
 float get_lat_dist(char*);
 float get_lat_deg(char*);

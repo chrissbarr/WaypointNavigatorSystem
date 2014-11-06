@@ -17,6 +17,7 @@ float altitude = 0.;
 float pressure = 0.;
 float temperature = 0.;
 float start_height = 0;
+bool working;
 
 bool altimeter_init()
 {
@@ -51,20 +52,28 @@ bool altimeter_init()
 			debug_println("Altimeter failed to initialise!");
 	}
 	
+	working = success;
 	return success;	
 }
 
 float altimeter_start_height()
 {
 	float start_height = 0;
-	int start_height_samples = 0;
+	float start_height_samples = 0;
 	
-	debug_println("Determining Altimeter Start height, sampling for 1s...");
+	debug_println("Determining Altimeter Start height, sampling for 2s...");
 	//sample the current height for 1 second
-	while(millis()<3000)
+	while(millis()<2000)
 	{
-		start_height += altimeter_get_metres();
-		start_height_samples += 1;
+		float temp_height = altimeter_get_metres();
+		
+		//make sure recorded value isn't in error
+		if(temp_height!=-999)
+		{
+			start_height += temp_height;
+			start_height_samples += 1;
+		}
+		
 	}
 	
 	//average the height
@@ -79,34 +88,39 @@ float altimeter_start_height()
 float altimeter_get_metres(void)
 {
 	float altitude = -999;
-	
-	altimeter_toggle_oneShot();
-	
-	int counter = 0;
-	
-	while((IIC_Read(STATUS) & (1<<1)) == 0)
-	{
-		if(++counter > 600) return (-999);
-		_delay_ms(1);
-	}
-	//_delay_ms(100);
-	
-	i2c_start_wait(MPL3115a2+I2C_WRITE);
-	i2c_write(OUT_P_MSB);
-	i2c_rep_start(MPL3115a2+I2C_READ);
-	
-	int8_t msbA,csbA,lsbA = 0x00; 
-	
-	msbA = i2c_readAck();
-	csbA = i2c_readAck();
-	lsbA = i2c_readNak();	
-	i2c_stop();
-	
-	altimeter_toggle_oneShot();
-	
-	float tempcsb = (lsbA>>4)/16.0;
-	
-	altitude = (float)( (msbA << 8) | csbA) + tempcsb;
+			
+	//if(working)
+	//{
+		altimeter_toggle_oneShot();
+		
+		int counter = 0;
+		
+		while((IIC_Read(STATUS) & (1<<1)) == 0)
+		{
+			_delay_ms(1);
+			if(counter++>600) return (-999);
+		}
+		
+		//if(counter >= 600) return (-999);
+		//_delay_ms(100);
+		
+		i2c_start_wait(MPL3115a2+I2C_WRITE);
+		i2c_write(OUT_P_MSB);
+		i2c_rep_start(MPL3115a2+I2C_READ);
+		
+		int8_t msbA,csbA,lsbA = 0x00;
+		
+		msbA = i2c_readAck();
+		csbA = i2c_readAck();
+		lsbA = i2c_readNak();
+		i2c_stop();
+		
+		altimeter_toggle_oneShot();
+		
+		float tempcsb = (lsbA>>4)/16.0;
+		
+		altitude = (float)( (msbA << 8) | csbA) + tempcsb;
+	//}
 	
 	return altitude;
 }

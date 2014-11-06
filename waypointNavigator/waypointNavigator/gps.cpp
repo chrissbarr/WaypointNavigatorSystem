@@ -82,62 +82,84 @@ bool gps_init()
 	
 	USART_init(USART_GPS,9600);
 	debug_println("GPS Init...");
-	//Now, we wait until we have more than 3 satellites!
+	//Now, we wait until we have more than x satellites!
+	int consecutive_sats = 0;
 	
 	do {
+		gps_update();
 		debug_print("Waiting for satellites...(");
 		debug_printi(gps_get_sats());
 		debug_println(")");
-		gps_update();
-	} while (sats < 5);
-	
-	
+		if(gps_get_sats()!=0)
+			consecutive_sats+=1;
+		else
+			consecutive_sats=0;
+			
+	} while (gps_get_sats() < 5 && consecutive_sats>10);
 	
 	return true;
 }
 
-void gps_update()
+bool gps_update()
 {
-	gpsd = USART_receive(USART_GPS);
-	//USART_send(USART_PC,gpsd);
-	if(gpsd == ccmpr) {
-
-		for (i = 0; i < SENTENCE_TYPE; i++) {
-			header[i] = USART_receive(USART_GPS);
-		}
-		chk = strcmp(ptr_gpgga,ptr_header);
-		if(chk == 0) {
-			for (i = 0; i < EVERYTHING; i++) {
-				every[i] = USART_receive(USART_GPS);
+	bool success = false;
+	//debug_println("gps_update start");
+	do
+	{
+		gpsd = USART_receive(USART_GPS);
+		if(gpsd == ccmpr) {
+			for (i = 0; i < SENTENCE_TYPE; i++) {
+				header[i] = USART_receive(USART_GPS);
+				//debug_println("$ found!");
 			}
-			//--------------------------------------------------------------------
-			i = 0;
-			while(every[i] != ccmpr2) {
-				nevery[i] = every[i];
-				i++;
+			
+			
+			/*for (int l = 0; l < 5; l++)
+			{
+				USART_send(USART_PC,header[l]);
+			}*/
+			
+			chk = strcmp("GPGGA",ptr_header);
+			if(chk == 0) {
+				
+				for (i = 0; i < EVERYTHING; i++) {
+					every[i] = USART_receive(USART_GPS);
+				}
+				debug_println("GPGGA Header found, reading data...");
+				//--------------------------------------------------------------------
+				i = 0;
+				while(every[i] != ccmpr2) {
+					nevery[i] = every[i];
+					i++;
+				}
+				nevery[i] = chop;
+				len = strlen(nevery);
+				i = 0; j = i+1;
+				timeUTC = get_time(ptr_nevery, ptr_j);
+				float lat2_dist = get_lat_dist(ptr_nevery);
+				float lon2_dist = get_lon_dist(ptr_nevery);
+				lat2_deg = get_lat_deg(ptr_nevery);
+				lon2_deg = get_lon_deg(ptr_nevery);
+				lat2 = get_lat(ptr_nevery, ptr_j);
+				lon2 = get_lon(ptr_nevery, ptr_j);
+				fix = get_fix(ptr_nevery, ptr_j);
+				sats = get_sats(ptr_nevery, ptr_j);
+				success = true;
+				debug_println("GPS values saved!");
 			}
-			nevery[i] = chop;
-			len = strlen(nevery);
-			i = 0; j = i+1;
-			timeUTC = get_time(ptr_nevery, ptr_j);
-			lat2_deg = get_lat_deg(ptr_nevery);
-			lon2_deg = get_lon_deg(ptr_nevery);
-			lat2 = get_lat(ptr_nevery, ptr_j);
-			lon2 = get_lon(ptr_nevery, ptr_j);
-			fix = get_fix(ptr_nevery, ptr_j);
-			sats = get_sats(ptr_nevery, ptr_j);
 		}
-	}
+	} while (chk!=0);
+	
+	return success;
 }
 
 
 float get_time(char* nev, int* p_j) {
-	int i;
 	float tf;
 	char t[TIME_TYPE];
 	char *ptr_t = t;
 
-	for(i=0; i<TIME_TYPE;i++) {
+	for(int i = 0; i<TIME_TYPE; i++) {
 		t[i] = nev[*p_j];
 		*p_j = *p_j + 1;
 	}

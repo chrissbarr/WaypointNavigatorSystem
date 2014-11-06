@@ -10,6 +10,10 @@
 #include "debug.h"
 #include "main.h"
 
+int chris_array_index = 0;
+float c_lat_array[NUM_WAYPOINTS];
+float c_long_array[NUM_WAYPOINTS];
+
 /////////////////////////////////////////////////////////////////////////////////
 // function definitions
 int user_waypoint_test (WayPoint wps[],int numwps) {
@@ -361,4 +365,93 @@ float waypoint_get_heading()
 {
 	//waypoint_get_bearing(gps_get_latitude(),gps_get_longitude(),)
 	return 999;
+}
+
+
+//Chris's last minute demo stuff
+void chris_waypoint_init()
+{
+	do 
+	{
+		gps_update();
+	} while (gps_get_latitude()==0 || gps_get_longitude()==0);
+	
+	float center_lat = gps_get_latitude();
+	float center_long = gps_get_longitude();
+	float circle_scale = 6000;	//100 = radius of ~1000m, 1000 = radius of ~100m, 4000 = radius of ~ 25m
+	
+	debug_print("Generating circle of waypoints around center latitude ");
+	debug_printf(center_lat);
+	debug_print(", longitude ");
+	debug_printf(center_lat);
+	debug_println("...");
+	for(int i = 0; i < NUM_WAYPOINTS; i++)
+	{
+		float temp_lat, temp_long;
+		
+		temp_lat = center_lat-cos((2*PI*i)/NUM_WAYPOINTS)/circle_scale;
+		temp_long = center_long+sin((2*PI*i)/NUM_WAYPOINTS)/circle_scale;
+		chris_waypoint_add(temp_lat,temp_long);
+		debug_printf(temp_lat);
+		debug_print(", ");
+		debug_printf(temp_long);
+		debug_println("");
+	}
+	
+	chris_array_index=0;
+	
+}
+void chris_waypoint_add(float lat, float lon)
+{
+	c_lat_array[chris_array_index] = lat;
+	c_long_array[chris_array_index] = lon;
+	chris_array_index++;
+}
+
+//check if we're at the waypoint, if so, move on
+void chris_waypoint_update()
+{
+	if(chris_waypoint_current_distance()<2)
+		chris_array_index++;
+	
+	if(chris_waypoint_current_index()>NUM_WAYPOINTS)
+		chris_set_waypoint_current_index(0);
+}
+
+//return the bearing to the next waypoint
+float chris_waypoint_current_bearing()
+{
+	//return waypoint_get_bearing(gps_get_latitude(),gps_get_longitude(),c_lat_array[chris_array_index],c_long_array[chris_array_index]);
+	return waypoint_get_bearing(c_lat_array[chris_array_index],c_long_array[chris_array_index],gps_get_latitude(),gps_get_longitude());
+}
+
+//return the distance to the next waypoint
+float chris_waypoint_current_distance()
+{
+	return waypoint_get_distance(gps_get_latitude(),gps_get_longitude(),c_lat_array[chris_array_index],c_long_array[chris_array_index]);
+}
+
+int chris_waypoint_current_index()
+{
+	return chris_array_index;
+}
+
+void chris_set_waypoint_current_index(int new_index)
+{
+	chris_array_index = new_index;
+}
+
+int chris_get_max_waypoints()
+{
+	return NUM_WAYPOINTS;
+}
+
+float array_get_lat(int index)
+{
+	return c_lat_array[index];
+}
+
+float array_get_lon(int index)
+{
+	return c_long_array[index];
 }
